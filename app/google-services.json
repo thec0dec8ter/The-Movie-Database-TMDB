@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "708435791377",
+    "project_id": "tmdb-39765",
+    "storage_bucket": "tmdb-39765.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708435791377:android:681d31951d18e4d364abb0",
+        "android_client_info": {
+          "package_name": "dev.thec0dec8ter.tmdb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "708435791377-36ukr6da5ap69u6lf6s1utv988dnqdsb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.thec0dec8ter.tmdb",
+            "certificate_hash": "8c6463239fad9496978dfc42403eaa06fd51629d"
+          }
+        },
+        {
+          "client_id": "708435791377-s9aml7n7cui5scate6c0alinh82inpt3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOptrzQcchUcfrE1Ie8uByk5gSCf4PExU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "708435791377-s9aml7n7cui5scate6c0alinh82inpt3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

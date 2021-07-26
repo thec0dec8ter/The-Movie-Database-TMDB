@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array
+        name="tmdb_rating">
+        <item>9+</item>
+        <item>8+</item>
+        <item>7+</item>
+        <item>6+</item>
+        <item>5+</item>
+        <item>4+</item>
+        <item>3+</item>
+    </string-array>
+
+    <string-array
+        name="genres">
+        <item>Action</item>
+        <item>Adventure</item>
+        <item>Comedy</item>
+        <item>Crime</item>
+        <item>Documentary</item>
+        <item>Drama</item>
+        <item>Fantasy</item>
+        <item>Horror</item>
+        <item>Romance</item>
+    </string-array>
+
+    <string-array
+        name="decades">
+        <item>2020s</item>
+        <item>2010s</item>
+        <item>2000s</item>
+        <item>1990s</item>
+        <item>1980s</item>
+    </string-array>
+
+    <string-array
+        name="keywords">
+        <item>1,000+</item>
+        <item>10,000+</item>
+        <item>100,000+</item>
+        <item>1,000,000+</item>
+    </string-array>
+
+    <string-array
+        name="total_votes">
+        <item>1,000+</item>
+        <item>10,000+</item>
+        <item>100,000+</item>
+        <item>1,000,000+</item>
+    </string-array>
+
+</resources>

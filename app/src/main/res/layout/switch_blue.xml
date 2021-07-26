@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="160dp"
+    android:layout_height="30dp"
+    android:layout_margin="5dp"
+    android:padding="2dp"
+    android:background="@drawable/custom_switch">
+
+    <TextView
+        android:id="@+id/left_track"
+        android:text="On TV"
+        android:textSize="12sp"
+        android:textColor="@color/dark_blue"
+        android:textStyle="bold"
+        android:layout_width="78dp"
+        android:layout_height="match_parent"
+        android:maxLines="1"
+        android:gravity="center"
+        android:layout_gravity="start"/>
+
+    <TextView
+        android:id="@+id/right_track"
+        android:text="In Theaters"
+        android:textSize="12sp"
+        android:textColor="@color/dark_blue"
+        android:textStyle="bold"
+        android:layout_width="78dp"
+        android:layout_height="match_parent"
+        android:maxLines="1"
+        android:gravity="center"
+        android:layout_gravity="end"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/thumb"
+        android:layout_width="78dp"
+        android:layout_height="28dp"
+        android:background="@android:color/transparent"
+        app:cardCornerRadius="14dp"
+        app:cardBackgroundColor="@color/dark_blue">
+
+        <TextView
+            android:id="@+id/thumb_text"
+            android:text="On TV"
+            android:textSize="12sp"
+            android:textColor="@color/light_green"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:maxLines="1"
+            android:gravity="center"
+            android:padding="5dp" />
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>
