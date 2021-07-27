@@ -58,13 +58,6 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        String movieExtra = getIntent().getStringExtra("movie_id");
-        String tvExtra = getIntent().getStringExtra("tv_id");
-
-        if( movieExtra== null && tvExtra == null){
-            finish();
-        }
-
         tagLine = findViewById(R.id.tagline);
         title = findViewById(R.id.title);
         year = findViewById(R.id.year);
@@ -80,7 +73,6 @@ public class DetailActivity extends AppCompatActivity {
         keywordRecycler = findViewById(R.id.keyword_recycler);
         similarRecycler = findViewById(R.id.similar_recycler);
 
-
         mediaAdapter = new MediaAdapter();
         mediaRecycler.setAdapter(mediaAdapter);
         keywordAdapter = new KeywordAdapter();
@@ -88,10 +80,15 @@ public class DetailActivity extends AppCompatActivity {
         celebrityAdapter = new CelebrityAdapter();
         castRecycler.setAdapter(celebrityAdapter);
 
-        if(getIntent().getStringExtra("movie_id") != null) {
-            getMovieDetails(getIntent().getStringExtra("movie_id"));
-        }else if(getIntent().getStringExtra("tv_id") != null) {
-            getTvShowDetails(getIntent().getStringExtra("tv_id"));
+        String movieExtra = getIntent().getStringExtra("movie_id");
+        String tvExtra = getIntent().getStringExtra("tv_id");
+
+        if(movieExtra != null) {
+            getMovieDetails(movieExtra);
+        }else if(tvExtra != null) {
+            getTvShowDetails(tvExtra);
+        }else {
+            finish();
         }
 
     }

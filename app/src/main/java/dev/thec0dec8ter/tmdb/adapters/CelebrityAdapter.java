@@ -12,19 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 
-import dev.thec0dec8ter.tmdb.DetailActivity;
+import dev.thec0dec8ter.tmdb.CelebDetailActivity;
 import dev.thec0dec8ter.tmdb.R;
 import dev.thec0dec8ter.tmdb.network.CelebrityResponse;
 import dev.thec0dec8ter.tmdb.network.NetworkUtils;
 
 public class CelebrityAdapter extends RecyclerView.Adapter<CelebrityAdapter.CelebrityViewHolder> {
 
-    private final ArrayList<CelebrityResponse> celebrities = new ArrayList<>();
+    private final ArrayList<CelebrityResponse> celebList = new ArrayList<>();
 
     @NonNull
     @Override
@@ -35,12 +32,12 @@ public class CelebrityAdapter extends RecyclerView.Adapter<CelebrityAdapter.Cele
 
     @Override
     public void onBindViewHolder(@NonNull CelebrityViewHolder holder, int position) {
-        holder.bind(celebrities.get(position));
+        holder.bind(celebList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return celebrities.size();
+        return celebList.size();
     }
 
     public class CelebrityViewHolder extends RecyclerView.ViewHolder{
@@ -57,9 +54,9 @@ public class CelebrityAdapter extends RecyclerView.Adapter<CelebrityAdapter.Cele
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    Intent intent = new Intent(view.getContext(), DetailActivity.class);
-//                    intent.putExtra("movie_id", moviesList.get(getAdapterPosition()).getId());
-//                    view.getContext().startActivity(intent);
+                    Intent intent = new Intent(view.getContext(), CelebDetailActivity.class);
+                    intent.putExtra("celeb_id", celebList.get(getAdapterPosition()).getId());
+                    view.getContext().startActivity(intent);
                 }
             });
         }
@@ -78,7 +75,7 @@ public class CelebrityAdapter extends RecyclerView.Adapter<CelebrityAdapter.Cele
     }
 
     public void addCelebrities(ArrayList<CelebrityResponse> celebrities){
-        this.celebrities.addAll(celebrities);
+        this.celebList.addAll(celebrities);
         notifyDataSetChanged();
     }
 }

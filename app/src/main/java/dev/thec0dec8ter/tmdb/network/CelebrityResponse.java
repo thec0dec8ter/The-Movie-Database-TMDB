@@ -13,9 +13,15 @@ public class CelebrityResponse {
     @SerializedName("name")
     @Expose
     private String name;
+    @SerializedName("original_name")
+    @Expose
+    private String original_name;
     @SerializedName("profile_path")
     @Expose
     private String profile_path;
+    @SerializedName("biography")
+    @Expose
+    private String biography;
     @SerializedName("character")
     @Expose
     private String character_name;
@@ -25,9 +31,6 @@ public class CelebrityResponse {
     @SerializedName("job")
     @Expose
     private String job;
-    @SerializedName("original_name")
-    @Expose
-    private String original_name;
     @SerializedName("gender")
     @Expose
     private int gender;
@@ -206,5 +209,13 @@ public class CelebrityResponse {
 
     public void setKnown_for(ArrayList<CelebrityResponse> known_for) {
         this.known_for = known_for;
+    }
+
+    public String getBiography() {
+        return biography;
+    }
+
+    public void setBiography(String biography) {
+        this.biography = biography;
     }
 }

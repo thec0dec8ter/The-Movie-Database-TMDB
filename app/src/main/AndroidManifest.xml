@@ -10,28 +10,24 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TMDb">
-        <activity android:name=".CelebDetailActivity"></activity>
+        android:theme="@style/Theme.TMDb.NoActionBar">
+        <activity android:name=".CelebDetailActivity"/>
         <activity android:name=".ProfileActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".SigninActivity" />
         <activity android:name=".SignupActivity" />
         <activity
-            android:name=".WelcomeActivity"
-            android:theme="@style/Theme.TMDb.NoActionBar">
+            android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".DetailActivity"
-            android:theme="@style/Theme.TMDb.NoActionBar" />
+        <activity android:name=".DetailActivity"/>
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.TMDb.NoActionBar" />
+            android:label="@string/app_name"/>
     </application>
 
 </manifest>
