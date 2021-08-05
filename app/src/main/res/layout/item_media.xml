@@ -8,10 +8,9 @@
     android:layout_margin="5dp">
 
     <ImageView
-        android:id="@+id/media_img"
+        android:id="@+id/img_media"
         android:layout_width="240dp"
-        android:layout_height="200dp"
-        android:background="@drawable/curved_corners" />
+        android:layout_height="200dp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/play_btn_card"
@@ -23,7 +22,7 @@
         app:cardCornerRadius="20dp">
 
         <ImageView
-            android:src="@drawable/ic_play_arrow_24"
+            android:src="@drawable/ic_play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"

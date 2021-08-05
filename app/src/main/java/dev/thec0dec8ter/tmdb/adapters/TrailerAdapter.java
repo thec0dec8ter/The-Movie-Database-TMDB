@@ -26,7 +26,7 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.TrailerV
     @NonNull
     @Override
     public TrailerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_trailer_home, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_trailer, parent, false);
         return new TrailerViewHolder(view);
     }
 
@@ -51,7 +51,6 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.TrailerV
             poster = itemView.findViewById(R.id.poster);
             play = itemView.findViewById(R.id.play_btn_card);
             title = itemView.findViewById(R.id.title);
-            trailerName = itemView.findViewById(R.id.trailer_name);
 
             play.setOnClickListener(new View.OnClickListener() {
                 @Override

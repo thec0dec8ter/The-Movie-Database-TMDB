@@ -9,13 +9,14 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import org.jetbrains.annotations.NotNull;
 
+import dev.thec0dec8ter.tmdb.ui.main.CelebritiesFragment;
 import dev.thec0dec8ter.tmdb.ui.main.HomeFragment;
 import dev.thec0dec8ter.tmdb.ui.main.MoviesFragment;
 import dev.thec0dec8ter.tmdb.ui.main.TvShowsFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
 
-    private final int NUM_PAGES = 3;
+    private final int NUM_PAGES = 4;
 
     public ViewPagerAdapter(@NonNull @NotNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
@@ -40,6 +41,8 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
                 return new MoviesFragment();
             case 2:
                 return new TvShowsFragment();
+            case 3:
+                return new CelebritiesFragment();
             default:
                 return null;
         }

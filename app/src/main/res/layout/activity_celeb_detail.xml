@@ -59,17 +59,17 @@
                         android:maxLines="1"
                         android:layout_margin="5dp"/>
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <TextView
                         android:id="@+id/rating_count"
-                        android:text="0"
-                        android:textSize="12sp"
-                        android:textColor="@color/white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:maxLength="3"
-                        android:maxLines="1"/>
+                        android:maxLines="1"
+                        android:text="0"
+                        android:textSize="12sp"
+                        android:textColor="@color/white"/>
 
                 </androidx.cardview.widget.CardView>
 
@@ -77,44 +77,28 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/celeb_name"
-                android:text="Name"
-                android:textSize="22sp"
-                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="4dp"
                 android:maxLines="2"
-                android:padding="5dp"/>
+                android:text="Name: Brad Pitt"
+                android:textSize="18sp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/age"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:padding="4dp"
+                android:text="Age: 34"
+                android:textSize="16sp"/>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/year"
-                    android:text="2020"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:layout_margin="5dp"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/genre_name"
-                    android:text="PG-13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:layout_margin="5dp"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/runtime"
-                    android:text="1h 35m"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:layout_margin="5dp"/>
-
-            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/place_of_birth"
+                android:text="Born in: Shawnee, Oklahoma, USA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:textSize="16sp" />
 
             <View
                 android:layout_width="match_parent"
@@ -125,9 +109,11 @@
                 android:id="@+id/biography"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_margin="4dp"
+                android:padding="4dp"
                 android:maxLines="12"
-                android:ellipsize="end" />
+                android:ellipsize="end"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt gravida ligula vitae dignissim. Duis vehicula suscipit ante, a condimentum elit pulvinar at. Nulla tincidunt metus sit amet massa pulvinar molestie. Vivamus placerat diam quis purus finibus laoreet. Phasellus nec pulvinar diam. Mauris quis bibendum lorem."/>
 
             <View
                 android:layout_width="match_parent"
@@ -180,7 +166,7 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/cast_recycler"
+                android:id="@+id/related_movie_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -247,7 +233,7 @@
                 android:gravity="center">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:text="Related TV Shows"
+                    android:text="Related Tv Shows"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_width="0dp"
@@ -262,7 +248,7 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/similar_recycler"
+                android:id="@+id/related_tv_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"

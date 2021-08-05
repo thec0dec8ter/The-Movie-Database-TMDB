@@ -13,7 +13,13 @@ public interface CelebrityService {
     @GET("person/{person_id}")
     Call<CelebrityResponse> getCelebDetails(@Path("person_id")String personId, @Query("api_key") String apiKey);
 
-    @GET("person/{person_id}/images")
-    Call<CelebrityResponse> getCelebImages(@Path("person_id")String personId, @Query("api_key") String apiKey);
+    @GET("person/{person_id}/movie_credits")
+    Call<CelebrityResponse> getMovieCredits(@Path("person_id")String personId, @Query("api_key") String apiKey);
+
+    @GET("person/{person_id}/tv_credits")
+    Call<CelebrityResponse> getTvCredits(@Path("person_id")String personId, @Query("api_key") String apiKey);
+
+    @GET("person/{person_id}/tagged_images")
+    Call<CelebrityResponse> getTaggedImages(@Path("person_id")String personId, @Query("api_key") String apiKey);
 
 }

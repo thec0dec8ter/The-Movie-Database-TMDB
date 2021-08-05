@@ -14,15 +14,12 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/Theme.TMDb.AppBarOverlay">
+            android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:title="@null"
-                app:popupTheme="@style/Theme.TMDb.PopupOverlay">
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:src="@drawable/ic_main_logo"

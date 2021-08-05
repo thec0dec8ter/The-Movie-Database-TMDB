@@ -51,7 +51,10 @@ public class MainActivity extends AppCompatActivity {
                     tab.setText("Movies");
                     break;
                 case 2:
-                    tab.setText("TV Shows");
+                    tab.setText("Tv Shows");
+                    break;
+                case 3:
+                    tab.setText("Celebrities");
                     break;
             }
 

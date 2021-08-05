@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/off_white"
-                app:tabGravity="center"/>
+                app:tabGravity="center" />
 
         </com.google.android.material.appbar.AppBarLayout>
 

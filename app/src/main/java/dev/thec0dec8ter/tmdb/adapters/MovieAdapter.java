@@ -50,35 +50,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         TextView rating;
         TextView title;
         TextView year;
-        ImageView info;
-
-        View bottomSheet;
-        ImageView bottomSheetPoster;
-        TextView bottomSheetTitle;
-        TextView bottomSheetYear;
-        TextView bottomSheetGenre;
-        TextView bottomSheetRuntime;
-        TextView bottomSheetOverview;
 
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            Context context = itemView.getContext();
-
             poster = itemView.findViewById(R.id.poster);
             ratingCard = itemView.findViewById(R.id.rating_card);
             rating = itemView.findViewById(R.id.rating);
             title = itemView.findViewById(R.id.title);
             year = itemView.findViewById(R.id.year);
-            info = itemView.findViewById(R.id.info);
-
-            bottomSheet = LayoutInflater.from(context).inflate(R.layout.bottom_sheet, null);
-            bottomSheetPoster = bottomSheet.findViewById(R.id.poster);
-            bottomSheetTitle = bottomSheet.findViewById(R.id.title);
-            bottomSheetYear = bottomSheet.findViewById(R.id.year);
-            bottomSheetGenre = bottomSheet.findViewById(R.id.genre);
-            bottomSheetRuntime = bottomSheet.findViewById(R.id.runtime);
-            bottomSheetOverview = bottomSheet.findViewById(R.id.overview);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -89,20 +68,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
                 }
             });
 
-            info.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    MovieResponse movieResponse = moviesList.get(getAdapterPosition());
-                    Picasso.get().load(IMAGE_BASE_URL + movieResponse.getPoster_path()).fit().into(bottomSheetPoster);
-                    bottomSheetTitle.setText(movieResponse.getTitle());
-                    bottomSheetYear.setText(movieResponse.getRelease_date().split("-")[0]);
-                    bottomSheetOverview.setText(movieResponse.getOverview());
-
-                    BottomSheetDialog dialog = new BottomSheetDialog(context);
-                    dialog.setContentView(bottomSheet);
-                    dialog.show();
-                }
-            });
         }
 
         public void bind (MovieResponse movieResponse){
@@ -120,6 +85,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             year.setText(movieResponse.getRelease_date().split("-")[0]);
         }
 
+    }
+
+    public void addMovie(MovieResponse movieResponse){
+        this.moviesList.add(movieResponse);
+        notifyDataSetChanged();
     }
 
     public void addMovies(ArrayList<MovieResponse> movieResponses){

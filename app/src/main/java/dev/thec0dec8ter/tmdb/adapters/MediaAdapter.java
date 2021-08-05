@@ -44,12 +44,12 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
     }
 
     public class MediaViewHolder extends RecyclerView.ViewHolder {
-        ImageView mediaImg;
+        ImageView imgMedia;
         CardView playBtnCard;
 
         public MediaViewHolder(@NonNull View itemView) {
             super(itemView);
-            mediaImg = itemView.findViewById(R.id.media_img);
+            imgMedia = itemView.findViewById(R.id.img_media);
             playBtnCard = itemView.findViewById(R.id.play_btn_card);
         }
 
@@ -57,13 +57,16 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
             if(!isVideo){
                 playBtnCard.setVisibility(View.GONE);
             }
-            Picasso.get().load(NetworkUtils.IMAGE_BASE_URL+imagePath).fit().into(mediaImg);
+            Picasso.get().load(NetworkUtils.IMAGE_BASE_URL+imagePath).fit().into(imgMedia);
         }
     }
 
-    public void addMedia(ArrayList<String> media, boolean isVideo) {
+    public void addMedia(String media) {
+        this.media.add(media);
+        notifyDataSetChanged();
+    }
+    public void addMedias(ArrayList<String> media) {
         this.media.addAll(media);
-        this.isVideo = isVideo;
         notifyDataSetChanged();
     }
 }

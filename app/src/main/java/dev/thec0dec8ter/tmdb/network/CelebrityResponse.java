@@ -1,9 +1,14 @@
 package dev.thec0dec8ter.tmdb.network;
 
+import com.google.gson.JsonArray;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.json.JSONArray;
+
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CelebrityResponse {
 
@@ -22,50 +27,30 @@ public class CelebrityResponse {
     @SerializedName("biography")
     @Expose
     private String biography;
-    @SerializedName("character")
-    @Expose
-    private String character_name;
     @SerializedName("birthday")
     @Expose
     private String birthday;
-    @SerializedName("job")
-    @Expose
-    private String job;
-    @SerializedName("gender")
-    @Expose
-    private int gender;
-
-    @SerializedName("adult")
-    @Expose
-    private boolean adult_content;
     @SerializedName("popularity")
     @Expose
     private float popularity;
-    @SerializedName("known_for_department")
+    @SerializedName("place_of_birth")
     @Expose
-    private String known_for_department;
-    @SerializedName("known_for")
-    @Expose
-    private ArrayList<CelebrityResponse> known_for;
+    private String place_of_birth;
     @SerializedName("cast")
     @Expose
-    private ArrayList<CelebrityResponse> cast;
-    @SerializedName("crew")
+    private JsonArray credits;
+    @SerializedName("file_path")
     @Expose
-    private ArrayList<CelebrityResponse> crew;
-
+    private String file_path;
+    @SerializedName("title")
+    @Expose
+    private String title;
     @SerializedName("page")
     @Expose
     private int page;
     @SerializedName("results")
     @Expose
     private ArrayList<CelebrityResponse> results;
-    @SerializedName("total_pages")
-    @Expose
-    private int total_pages;
-    @SerializedName("total_results")
-    @Expose
-    private int total_results;
 
     public String getId() {
         return id;
@@ -73,30 +58,6 @@ public class CelebrityResponse {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getProfile_path() {
-        return profile_path;
-    }
-
-    public void setProfile_path(String profile_path) {
-        this.profile_path = profile_path;
-    }
-
-    public String getCharacter_name() {
-        return character_name;
-    }
-
-    public void setCharacter_name(String character_name) {
-        this.character_name = character_name;
-    }
-
-    public String getJob() {
-        return job;
-    }
-
-    public void setJob(String job) {
-        this.job = job;
     }
 
     public String getName() {
@@ -115,20 +76,28 @@ public class CelebrityResponse {
         this.original_name = original_name;
     }
 
-    public int getGender() {
-        return gender;
+    public String getProfile_path() {
+        return profile_path;
     }
 
-    public void setGender(int gender) {
-        this.gender = gender;
+    public void setProfile_path(String profile_path) {
+        this.profile_path = profile_path;
     }
 
-    public boolean isAdult_content() {
-        return adult_content;
+    public String getBiography() {
+        return biography;
     }
 
-    public void setAdult_content(boolean adult_content) {
-        this.adult_content = adult_content;
+    public void setBiography(String biography) {
+        this.biography = biography;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
     public float getPopularity() {
@@ -139,28 +108,28 @@ public class CelebrityResponse {
         this.popularity = popularity;
     }
 
-    public String getKnown_for_department() {
-        return known_for_department;
+    public JsonArray getCredits() {
+        return credits;
     }
 
-    public void setKnown_for_department(String known_for_department) {
-        this.known_for_department = known_for_department;
+    public void setCredits(JsonArray credits) {
+        this.credits = credits;
     }
 
-    public ArrayList<CelebrityResponse> getCast() {
-        return cast;
+    public String getFile_path() {
+        return file_path;
     }
 
-    public void setCast(ArrayList<CelebrityResponse> cast) {
-        this.cast = cast;
+    public void setFile_path(String file_path) {
+        this.file_path = file_path;
     }
 
-    public ArrayList<CelebrityResponse> getCrew() {
-        return crew;
+    public String getTitle() {
+        return title;
     }
 
-    public void setCrew(ArrayList<CelebrityResponse> crew) {
-        this.crew = crew;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getPage() {
@@ -179,43 +148,11 @@ public class CelebrityResponse {
         this.results = results;
     }
 
-    public int getTotal_pages() {
-        return total_pages;
+    public String getPlace_of_birth() {
+        return place_of_birth;
     }
 
-    public void setTotal_pages(int total_pages) {
-        this.total_pages = total_pages;
-    }
-
-    public int getTotal_results() {
-        return total_results;
-    }
-
-    public void setTotal_results(int total_results) {
-        this.total_results = total_results;
-    }
-
-    public String getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
-
-    public ArrayList<CelebrityResponse> getKnown_for() {
-        return known_for;
-    }
-
-    public void setKnown_for(ArrayList<CelebrityResponse> known_for) {
-        this.known_for = known_for;
-    }
-
-    public String getBiography() {
-        return biography;
-    }
-
-    public void setBiography(String biography) {
-        this.biography = biography;
+    public void setPlace_of_birth(String place_of_birth) {
+        this.place_of_birth = place_of_birth;
     }
 }
