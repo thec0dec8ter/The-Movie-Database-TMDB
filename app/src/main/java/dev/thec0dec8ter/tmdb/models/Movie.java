@@ -1,4 +1,4 @@
-package dev.thec0dec8ter.tmdb.network;
+package dev.thec0dec8ter.tmdb.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class MovieResponse implements Parcelable {
+public class Movie{
 
     @SerializedName("id")
     @Expose
@@ -36,13 +36,13 @@ public class MovieResponse implements Parcelable {
     private String backdrop_path;
     @SerializedName("belongs_to_collection")
     @Expose
-    private MovieResponse collection;
+    private Movie collection;
     @SerializedName("homepage")
     @Expose
     private String homepage;
     @SerializedName("genres")
     @Expose
-    private ArrayList<MovieResponse> genres;
+    private ArrayList<Movie> genres;
     @SerializedName("original_language")
     @Expose
     private String original_language;
@@ -69,7 +69,7 @@ public class MovieResponse implements Parcelable {
     private String logo_path;
     @SerializedName("production_companies")
     @Expose
-    private ArrayList<MovieResponse> production_companies;
+    private ArrayList<Movie> production_companies;
     @SerializedName("iso_3166_1")
     @Expose
     private String iso_3166_1;
@@ -84,7 +84,7 @@ public class MovieResponse implements Parcelable {
     private int runtime;
     @SerializedName("spoken_languages")
     @Expose
-    private ArrayList<MovieResponse> spoken_languages;
+    private ArrayList<Movie> spoken_languages;
     @SerializedName("english_name")
     @Expose
     private String english_name;
@@ -103,16 +103,13 @@ public class MovieResponse implements Parcelable {
 
     @SerializedName("keywords")
     @Expose
-    private ArrayList<MovieResponse> keywords;
+    private ArrayList<Movie> keywords;
     @SerializedName("backdrops")
     @Expose
-    private ArrayList<MovieResponse> backdrops;
+    private ArrayList<Movie> backdrops;
     @SerializedName("posters")
     @Expose
-    private ArrayList<MovieResponse> posters;
-
-
-
+    private ArrayList<Movie> posters;
 
     @SerializedName("file_path")
     @Expose
@@ -131,13 +128,17 @@ public class MovieResponse implements Parcelable {
     private String page;
     @SerializedName("results")
     @Expose
-    private ArrayList<MovieResponse> results;
+    private ArrayList<Movie> results;
     @SerializedName("total_pages")
     @Expose
     private String total_pages;
     @SerializedName("total_results")
     @Expose
     private String total_results;
+
+    public Movie(){
+
+    }
 
     public String getId() {
         return id;
@@ -203,11 +204,11 @@ public class MovieResponse implements Parcelable {
         this.backdrop_path = backdrop_path;
     }
 
-    public MovieResponse getCollection() {
+    public Movie getCollection() {
         return collection;
     }
 
-    public void setCollection(MovieResponse collection) {
+    public void setCollection(Movie collection) {
         this.collection = collection;
     }
 
@@ -219,11 +220,11 @@ public class MovieResponse implements Parcelable {
         this.homepage = homepage;
     }
 
-    public ArrayList<MovieResponse> getGenres() {
+    public ArrayList<Movie> getGenres() {
         return genres;
     }
 
-    public void setGenres(ArrayList<MovieResponse> genres) {
+    public void setGenres(ArrayList<Movie> genres) {
         this.genres = genres;
     }
 
@@ -291,11 +292,11 @@ public class MovieResponse implements Parcelable {
         this.logo_path = logo_path;
     }
 
-    public ArrayList<MovieResponse> getProduction_companies() {
+    public ArrayList<Movie> getProduction_companies() {
         return production_companies;
     }
 
-    public void setProduction_companies(ArrayList<MovieResponse> production_companies) {
+    public void setProduction_companies(ArrayList<Movie> production_companies) {
         this.production_companies = production_companies;
     }
 
@@ -331,11 +332,11 @@ public class MovieResponse implements Parcelable {
         this.runtime = runtime;
     }
 
-    public ArrayList<MovieResponse> getSpoken_languages() {
+    public ArrayList<Movie> getSpoken_languages() {
         return spoken_languages;
     }
 
-    public void setSpoken_languages(ArrayList<MovieResponse> spoken_languages) {
+    public void setSpoken_languages(ArrayList<Movie> spoken_languages) {
         this.spoken_languages = spoken_languages;
     }
 
@@ -371,27 +372,27 @@ public class MovieResponse implements Parcelable {
         this.tagline = tagline;
     }
 
-    public ArrayList<MovieResponse> getKeywords() {
+    public ArrayList<Movie> getKeywords() {
         return keywords;
     }
 
-    public void setKeywords(ArrayList<MovieResponse> keywords) {
+    public void setKeywords(ArrayList<Movie> keywords) {
         this.keywords = keywords;
     }
 
-    public ArrayList<MovieResponse> getBackdrops() {
+    public ArrayList<Movie> getBackdrops() {
         return backdrops;
     }
 
-    public void setBackdrops(ArrayList<MovieResponse> backdrops) {
+    public void setBackdrops(ArrayList<Movie> backdrops) {
         this.backdrops = backdrops;
     }
 
-    public ArrayList<MovieResponse> getPosters() {
+    public ArrayList<Movie> getPosters() {
         return posters;
     }
 
-    public void setPosters(ArrayList<MovieResponse> posters) {
+    public void setPosters(ArrayList<Movie> posters) {
         this.posters = posters;
     }
 
@@ -435,11 +436,11 @@ public class MovieResponse implements Parcelable {
         this.page = page;
     }
 
-    public ArrayList<MovieResponse> getResults() {
+    public ArrayList<Movie> getResults() {
         return results;
     }
 
-    public void setResults(ArrayList<MovieResponse> results) {
+    public void setResults(ArrayList<Movie> results) {
         this.results = results;
     }
 
@@ -460,37 +461,4 @@ public class MovieResponse implements Parcelable {
     }
 
 
-
-
-
-
-    public MovieResponse(){
-
-    }
-
-    public MovieResponse(Parcel parcel){
-
-    }
-
-
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public MovieResponse createFromParcel(Parcel in) {
-            return new MovieResponse(in);
-        }
-
-        public MovieResponse[] newArray(int size) {
-            return new MovieResponse[size];
-        }
-    };
-
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-
-    }
 }

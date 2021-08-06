@@ -1,20 +1,23 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.TMDb.NoActionBar" parent="Theme.AppCompat.NoActionBar">
+    <style name="Theme.TMDb" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/dark_blue</item>
         <item name="colorPrimaryDark">@color/dark_blue</item>
         <item name="colorAccent">@color/light_blue</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="textAllCaps">false</item>
 
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 
     <style name="ShapeAppearance.Circle" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="Theme.TMDb.tabTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/light_blue</item>
     </style>
 
 </resources>

@@ -40,8 +40,8 @@
                         android:id="@+id/edit_query"
                         android:hint="Search TMDb"
                         android:inputType="text"
-                        android:textColorHint="@color/white"
                         android:textColor="@color/white"
+                        android:textColorHint="@android:color/darker_gray"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -52,13 +52,12 @@
 
             </androidx.appcompat.widget.Toolbar>
 
-
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/off_white"
-                app:tabGravity="center" />
+                app:tabGravity="center"
+                app:tabTextAppearance="@style/Theme.TMDb.tabTextAppearance"/>
 
         </com.google.android.material.appbar.AppBarLayout>
 

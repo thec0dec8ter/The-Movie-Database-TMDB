@@ -16,8 +16,8 @@ import dev.thec0dec8ter.tmdb.BuildConfig;
 import dev.thec0dec8ter.tmdb.R;
 import dev.thec0dec8ter.tmdb.adapters.GenreAdapter;
 import dev.thec0dec8ter.tmdb.adapters.TvAdapter;
+import dev.thec0dec8ter.tmdb.models.TvShow;
 import dev.thec0dec8ter.tmdb.network.RetrofitClientInstance;
-import dev.thec0dec8ter.tmdb.network.TvResponse;
 import dev.thec0dec8ter.tmdb.network.TvService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +27,7 @@ import retrofit2.Response;
 public class TvShowsFragment extends Fragment {
 
 
-    private Call<TvResponse> call;
+    private Call<TvShow> call;
 
     private CardView seeAllTopRated;
     private RecyclerView topRatedRecycler;
@@ -85,14 +85,14 @@ public class TvShowsFragment extends Fragment {
 
     private void getTvAiringToday(String page){
         call = tvService.getTvShowAiringToday(BuildConfig.KEY,page);
-        call.enqueue(new Callback<TvResponse>() {
+        call.enqueue(new Callback<TvShow>() {
             @Override
-            public void onResponse(Call<TvResponse> call, Response<TvResponse> response) {
+            public void onResponse(Call<TvShow> call, Response<TvShow> response) {
                 topRatedAdapter.addTvShows(response.body().getResults());
             }
 
             @Override
-            public void onFailure(Call<TvResponse> call, Throwable t) {
+            public void onFailure(Call<TvShow> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -100,14 +100,14 @@ public class TvShowsFragment extends Fragment {
 
     private void getTopRatedTvShows(String page){
         call = tvService.getTopRatedTvShows(BuildConfig.KEY,page);
-        call.enqueue(new Callback<TvResponse>() {
+        call.enqueue(new Callback<TvShow>() {
             @Override
-            public void onResponse(Call<TvResponse> call, Response<TvResponse> response) {
+            public void onResponse(Call<TvShow> call, Response<TvShow> response) {
                 topRatedAdapter.addTvShows(response.body().getResults());
             }
 
             @Override
-            public void onFailure(Call<TvResponse> call, Throwable t) {
+            public void onFailure(Call<TvShow> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -115,16 +115,16 @@ public class TvShowsFragment extends Fragment {
 
     private void getTvGenres(){
         call = tvService.getTvShowGenres(BuildConfig.KEY);
-        call.enqueue(new Callback<TvResponse>() {
+        call.enqueue(new Callback<TvShow>() {
             @Override
-            public void onResponse(Call<TvResponse> call, Response<TvResponse> response) {
-                for (TvResponse tvResponse:response.body().getGenres()){
-                    genreAdapter.addGenre(tvResponse.getId(),tvResponse.getName());
+            public void onResponse(Call<TvShow> call, Response<TvShow> response) {
+                for (TvShow tvShow :response.body().getGenres()){
+                    genreAdapter.addGenre(tvShow.getId(), tvShow.getName());
                 }
             }
 
             @Override
-            public void onFailure(Call<TvResponse> call, Throwable t) {
+            public void onFailure(Call<TvShow> call, Throwable t) {
 
             }
         });
@@ -132,14 +132,14 @@ public class TvShowsFragment extends Fragment {
 
     private void getPopularTvShows(String page){
         call = tvService.getPopularTvShows(BuildConfig.KEY, page);
-        call.enqueue(new Callback<TvResponse>() {
+        call.enqueue(new Callback<TvShow>() {
             @Override
-            public void onResponse(Call<TvResponse> call, Response<TvResponse> response) {
+            public void onResponse(Call<TvShow> call, Response<TvShow> response) {
                 popularTvShowsAdapter.addTvShows(response.body().getResults());
             }
 
             @Override
-            public void onFailure(Call<TvResponse> call, Throwable t) {
+            public void onFailure(Call<TvShow> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

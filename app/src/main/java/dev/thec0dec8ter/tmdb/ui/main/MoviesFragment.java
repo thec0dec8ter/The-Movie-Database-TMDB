@@ -17,7 +17,7 @@ import dev.thec0dec8ter.tmdb.BuildConfig;
 import dev.thec0dec8ter.tmdb.R;
 import dev.thec0dec8ter.tmdb.adapters.GenreAdapter;
 import dev.thec0dec8ter.tmdb.adapters.MovieAdapter;
-import dev.thec0dec8ter.tmdb.network.MovieResponse;
+import dev.thec0dec8ter.tmdb.models.Movie;
 import dev.thec0dec8ter.tmdb.network.MovieService;
 import dev.thec0dec8ter.tmdb.network.RetrofitClientInstance;
 import retrofit2.Call;
@@ -40,7 +40,7 @@ public class MoviesFragment extends Fragment {
     private MovieAdapter upcomingAdapter;
 
     private MovieService movieService;
-    private Call<MovieResponse> call;
+    private Call<Movie> call;
 
 
     public MoviesFragment(){
@@ -86,14 +86,14 @@ public class MoviesFragment extends Fragment {
 
     private void getTopRatedMovies(String page){
         call = movieService.getTopRatedMovies(BuildConfig.KEY, page);
-        call.enqueue(new Callback<MovieResponse>() {
+        call.enqueue(new Callback<Movie>() {
             @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+            public void onResponse(Call<Movie> call, Response<Movie> response) {
                 topRatedAdapter.addMovies(response.body().getResults());
             }
 
             @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
+            public void onFailure(Call<Movie> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -101,16 +101,16 @@ public class MoviesFragment extends Fragment {
 
     private void getMovieGenres(){
         call = movieService.getMovieGenres(BuildConfig.KEY);
-        call.enqueue(new Callback<MovieResponse>() {
+        call.enqueue(new Callback<Movie>() {
             @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                for (MovieResponse movieResponse:response.body().getGenres()){
-                    genreAdapter.addGenre(movieResponse.getId(),movieResponse.getName());
+            public void onResponse(Call<Movie> call, Response<Movie> response) {
+                for (Movie movie :response.body().getGenres()){
+                    genreAdapter.addGenre(movie.getId(), movie.getName());
                 }
             }
 
             @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
+            public void onFailure(Call<Movie> call, Throwable t) {
 
             }
         });
@@ -118,14 +118,14 @@ public class MoviesFragment extends Fragment {
 
     private void getPopularMovies(String page){
         call = movieService.getPopularMovies(BuildConfig.KEY, page);
-        call.enqueue(new Callback<MovieResponse>() {
+        call.enqueue(new Callback<Movie>() {
             @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+            public void onResponse(Call<Movie> call, Response<Movie> response) {
                 popularMoviesAdapter.addMovies(response.body().getResults());
             }
 
             @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
+            public void onFailure(Call<Movie> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -133,14 +133,14 @@ public class MoviesFragment extends Fragment {
 
     private void getUpcomingMovies(String page){
         call = movieService.getUpcomingMovies(BuildConfig.KEY, page);
-        call.enqueue(new Callback<MovieResponse>() {
+        call.enqueue(new Callback<Movie>() {
             @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+            public void onResponse(Call<Movie> call, Response<Movie> response) {
                 upcomingAdapter.addMovies(response.body().getResults());
             }
 
             @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
+            public void onFailure(Call<Movie> call, Throwable t) {
                 Log.e("KKKKKKK",t.getMessage());
 
             }

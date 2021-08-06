@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:padding="4dp"
                 android:maxLines="2"
-                android:text="Name: Brad Pitt"
+                android:text="Name:"
                 android:textSize="18sp"/>
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -89,12 +89,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                android:text="Age: 34"
+                android:text="Age:"
                 android:textSize="16sp"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/place_of_birth"
-                android:text="Born in: Shawnee, Oklahoma, USA"
+                android:text="Born in:"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
@@ -112,8 +112,7 @@
                 android:layout_margin="4dp"
                 android:padding="4dp"
                 android:maxLines="12"
-                android:ellipsize="end"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt gravida ligula vitae dignissim. Duis vehicula suscipit ante, a condimentum elit pulvinar at. Nulla tincidunt metus sit amet massa pulvinar molestie. Vivamus placerat diam quis purus finibus laoreet. Phasellus nec pulvinar diam. Mauris quis bibendum lorem."/>
+                android:ellipsize="end" />
 
             <View
                 android:layout_width="match_parent"
@@ -128,8 +127,8 @@
                 android:layout_height="48dp"
                 android:background="@drawable/curved_corners"
                 android:backgroundTint="@color/dark_blue"
-                android:drawableStart="@drawable/ic_add"
-                android:padding="10dp"
+                android:drawableStart="@drawable/ic_favorite_border"
+                android:padding="8dp"
                 android:layout_margin="10dp"/>
 
         </LinearLayout>

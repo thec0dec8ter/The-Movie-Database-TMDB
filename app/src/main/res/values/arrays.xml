@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array
+        name="runtime">
+        <item>30mins</item>
+        <item>1+ hours</item>
+        <item>2+ hours</item>
+        <item>3+ hours</item>
+        <item>4+ hours</item>
+    </string-array>
+
+    <string-array
         name="tmdb_rating">
         <item>9+</item>
         <item>8+</item>
@@ -47,6 +56,17 @@
         <item>10,000+</item>
         <item>100,000+</item>
         <item>1,000,000+</item>
+    </string-array>
+
+    <string-array
+        name="languages">
+        <item>en - US</item>
+        <item>fr - CA</item>
+        <item>ge - DE</item>
+        <item>fr - FR</item>
+        <item>ma - NZ</item>
+        <item>en - AU</item>
+        <item>hi - IN</item>
     </string-array>
 
 </resources>

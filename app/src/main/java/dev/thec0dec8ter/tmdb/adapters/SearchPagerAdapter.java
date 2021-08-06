@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import dev.thec0dec8ter.tmdb.ui.search.FindTrendingFragment;
+import dev.thec0dec8ter.tmdb.ui.search.FindFragment;
 import dev.thec0dec8ter.tmdb.ui.search.RecentFragment;
 
 public class SearchPagerAdapter extends FragmentStateAdapter {
@@ -34,7 +34,7 @@ public class SearchPagerAdapter extends FragmentStateAdapter {
             case 0:
                 return new RecentFragment();
             case 1:
-                return new FindTrendingFragment();
+                return new FindFragment();
             default:
                 return null;
         }

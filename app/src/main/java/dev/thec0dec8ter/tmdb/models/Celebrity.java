@@ -1,16 +1,11 @@
-package dev.thec0dec8ter.tmdb.network;
+package dev.thec0dec8ter.tmdb.models;
 
-import com.google.gson.JsonArray;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import org.json.JSONArray;
-
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.List;
 
-public class CelebrityResponse {
+public class Celebrity {
 
     @SerializedName("id")
     @Expose
@@ -38,7 +33,8 @@ public class CelebrityResponse {
     private String place_of_birth;
     @SerializedName("cast")
     @Expose
-    private JsonArray credits;
+    private ArrayList<?> credits;
+
     @SerializedName("file_path")
     @Expose
     private String file_path;
@@ -50,7 +46,7 @@ public class CelebrityResponse {
     private int page;
     @SerializedName("results")
     @Expose
-    private ArrayList<CelebrityResponse> results;
+    private ArrayList<Celebrity> results;
 
     public String getId() {
         return id;
@@ -108,13 +104,7 @@ public class CelebrityResponse {
         this.popularity = popularity;
     }
 
-    public JsonArray getCredits() {
-        return credits;
-    }
 
-    public void setCredits(JsonArray credits) {
-        this.credits = credits;
-    }
 
     public String getFile_path() {
         return file_path;
@@ -140,11 +130,11 @@ public class CelebrityResponse {
         this.page = page;
     }
 
-    public ArrayList<CelebrityResponse> getResults() {
+    public ArrayList<Celebrity> getResults() {
         return results;
     }
 
-    public void setResults(ArrayList<CelebrityResponse> results) {
+    public void setResults(ArrayList<Celebrity> results) {
         this.results = results;
     }
 
@@ -154,5 +144,14 @@ public class CelebrityResponse {
 
     public void setPlace_of_birth(String place_of_birth) {
         this.place_of_birth = place_of_birth;
+    }
+
+
+    public ArrayList<?> getCredits() {
+        return credits;
+    }
+
+    public void setCredits(ArrayList<?> credits) {
+        this.credits = credits;
     }
 }

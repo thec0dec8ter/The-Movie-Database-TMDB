@@ -1,6 +1,5 @@
 package dev.thec0dec8ter.tmdb.adapters;
 
-import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,20 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import dev.thec0dec8ter.tmdb.DetailActivity;
 import dev.thec0dec8ter.tmdb.R;
-import dev.thec0dec8ter.tmdb.network.MovieResponse;
+import dev.thec0dec8ter.tmdb.models.Movie;
 
-import static dev.thec0dec8ter.tmdb.network.NetworkUtils.IMAGE_BASE_URL;
+import static dev.thec0dec8ter.tmdb.network.RetrofitClientInstance.IMAGE_BASE_URL;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder>{
 
-    private final ArrayList<MovieResponse> moviesList = new ArrayList<>();
+    private final ArrayList<Movie> moviesList = new ArrayList<>();
 
     @NonNull
     @Override
@@ -70,34 +68,34 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
         }
 
-        public void bind (MovieResponse movieResponse){
+        public void bind (Movie movie){
             Picasso.get()
-                    .load(IMAGE_BASE_URL+movieResponse.getPoster_path())
+                    .load(IMAGE_BASE_URL+ movie.getPoster_path())
                     .fit()
                     .into(poster);
-            if(Math.round(movieResponse.getVote_average()) < 1){
+            if(Math.round(movie.getVote_average()) < 1){
                 ratingCard.setVisibility(View.INVISIBLE);
             }else {
-                int ratePercent = Math.round(movieResponse.getVote_average())*10;
+                int ratePercent = Math.round(movie.getVote_average())*10;
                 rating.setText(String.valueOf(ratePercent));
             }
-            title.setText(movieResponse.getTitle());
-            year.setText(movieResponse.getRelease_date().split("-")[0]);
+            title.setText(movie.getTitle());
+            year.setText(movie.getRelease_date().split("-")[0]);
         }
 
     }
 
-    public void addMovie(MovieResponse movieResponse){
-        this.moviesList.add(movieResponse);
+    public void addMovie(Movie movie){
+        this.moviesList.add(movie);
         notifyDataSetChanged();
     }
 
-    public void addMovies(ArrayList<MovieResponse> movieResponses){
-        this.moviesList.addAll(movieResponses);
+    public void addMovies(ArrayList<Movie> movieRespons){
+        this.moviesList.addAll(movieRespons);
         notifyDataSetChanged();
     }
 
-    public ArrayList<MovieResponse> getMoviesList() {
+    public ArrayList<Movie> getMoviesList() {
         return moviesList;
     }
 }

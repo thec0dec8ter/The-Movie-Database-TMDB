@@ -14,15 +14,16 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import dev.thec0dec8ter.tmdb.R;
-import dev.thec0dec8ter.tmdb.network.NetworkUtils;
 
-public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHolder> {
+import static dev.thec0dec8ter.tmdb.network.RetrofitClientInstance.IMAGE_BASE_URL;
 
-    private final ArrayList<String> media = new ArrayList<>();
+public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MediaViewHolder> {
+
+    private final ArrayList<String> images = new ArrayList<>();
 
     private boolean isVideo = false;
 
-    public MediaAdapter() {
+    public ImageAdapter() {
 
     }
 
@@ -35,12 +36,12 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
 
     @Override
     public void onBindViewHolder(@NonNull MediaViewHolder holder, int position) {
-        holder.bind(media.get(position));
+        holder.bind(images.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return media.size();
+        return images.size();
     }
 
     public class MediaViewHolder extends RecyclerView.ViewHolder {
@@ -57,16 +58,16 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
             if(!isVideo){
                 playBtnCard.setVisibility(View.GONE);
             }
-            Picasso.get().load(NetworkUtils.IMAGE_BASE_URL+imagePath).fit().into(imgMedia);
+            Picasso.get().load(IMAGE_BASE_URL+imagePath).fit().into(imgMedia);
         }
     }
 
-    public void addMedia(String media) {
-        this.media.add(media);
+    public void addImage(String image) {
+        this.images.add(image);
         notifyDataSetChanged();
     }
-    public void addMedias(ArrayList<String> media) {
-        this.media.addAll(media);
+    public void addImages(ArrayList<String> images) {
+        this.images.addAll(images);
         notifyDataSetChanged();
     }
 }

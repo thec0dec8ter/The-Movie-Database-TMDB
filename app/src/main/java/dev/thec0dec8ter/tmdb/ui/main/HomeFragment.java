@@ -20,10 +20,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import dev.thec0dec8ter.tmdb.R;
 import dev.thec0dec8ter.tmdb.adapters.MovieAdapter;
 import dev.thec0dec8ter.tmdb.adapters.TvAdapter;
-import dev.thec0dec8ter.tmdb.network.MovieResponse;
+import dev.thec0dec8ter.tmdb.models.Movie;
+import dev.thec0dec8ter.tmdb.models.TvShow;
 import dev.thec0dec8ter.tmdb.network.MovieService;
 import dev.thec0dec8ter.tmdb.network.RetrofitClientInstance;
-import dev.thec0dec8ter.tmdb.network.TvResponse;
 import dev.thec0dec8ter.tmdb.network.TvService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -188,15 +188,15 @@ public class HomeFragment extends Fragment{
     private void getPopularTvShows(String page){
         popularRecycler.setAdapter(popularTvAdapter);
         TvService tvService = RetrofitClientInstance.getRetrofitInstance().create(TvService.class);
-        Call<TvResponse> call = tvService.getPopularTvShows(KEY, page);
-        call.enqueue(new Callback<TvResponse>() {
+        Call<TvShow> call = tvService.getPopularTvShows(KEY, page);
+        call.enqueue(new Callback<TvShow>() {
             @Override
-            public void onResponse(Call<TvResponse> call, Response<TvResponse> response) {
+            public void onResponse(Call<TvShow> call, Response<TvShow> response) {
                 popularTvAdapter.addTvShows(response.body().getResults());
             }
 
             @Override
-            public void onFailure(Call<TvResponse> call, Throwable t) {
+            public void onFailure(Call<TvShow> call, Throwable t) {
                 Toast.makeText(getContext(), "An error occurred.", Toast.LENGTH_SHORT).show();
             }
         });
@@ -205,15 +205,15 @@ public class HomeFragment extends Fragment{
     private void getTvShowAiringToday(String page){
         nowPlayingRecycler.setAdapter(nowPlayingTv);
         TvService tvService = RetrofitClientInstance.getRetrofitInstance().create(TvService.class);
-        Call<TvResponse> call = tvService.getTvShowAiringToday(KEY, page);
-        call.enqueue(new Callback<TvResponse>() {
+        Call<TvShow> call = tvService.getTvShowAiringToday(KEY, page);
+        call.enqueue(new Callback<TvShow>() {
             @Override
-            public void onResponse(Call<TvResponse> call, Response<TvResponse> response) {
+            public void onResponse(Call<TvShow> call, Response<TvShow> response) {
                 nowPlayingTv.addTvShows(response.body().getResults());
             }
 
             @Override
-            public void onFailure(Call<TvResponse> call, Throwable t) {
+            public void onFailure(Call<TvShow> call, Throwable t) {
                 Toast.makeText(getContext(), "An error occurred.", Toast.LENGTH_SHORT).show();
             }
         });
@@ -222,15 +222,15 @@ public class HomeFragment extends Fragment{
     private void getTrendingTvShows(String page){
         trendingRecycler.setAdapter(trendingTvAdapter);
         TvService tvService = RetrofitClientInstance.getRetrofitInstance().create(TvService.class);
-        Call<TvResponse>call = tvService.getTvShowsTrendingThisWeek(KEY, page);
-        call.enqueue(new Callback<TvResponse>() {
+        Call<TvShow>call = tvService.getTvShowsTrendingThisWeek(KEY, page);
+        call.enqueue(new Callback<TvShow>() {
             @Override
-            public void onResponse(Call<TvResponse> call, Response<TvResponse> response) {
+            public void onResponse(Call<TvShow> call, Response<TvShow> response) {
                 trendingTvAdapter.addTvShows(response.body().getResults());
             }
 
             @Override
-            public void onFailure(Call<TvResponse> call, Throwable t) {
+            public void onFailure(Call<TvShow> call, Throwable t) {
                 Toast.makeText(getContext(), "An error occurred.", Toast.LENGTH_SHORT).show();
             }
         });
@@ -239,15 +239,15 @@ public class HomeFragment extends Fragment{
     private void getPopularMovies(String page){
         popularRecycler.setAdapter(popularMovieAdapter);
         MovieService movieService = RetrofitClientInstance.getRetrofitInstance().create(MovieService.class);
-        Call<MovieResponse>call = movieService.getPopularMovies(KEY, page);
-        call.enqueue(new Callback<MovieResponse>() {
+        Call<Movie>call = movieService.getPopularMovies(KEY, page);
+        call.enqueue(new Callback<Movie>() {
             @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+            public void onResponse(Call<Movie> call, Response<Movie> response) {
                 popularMovieAdapter.addMovies(response.body().getResults());
             }
 
             @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
+            public void onFailure(Call<Movie> call, Throwable t) {
 
             }
         });
@@ -256,16 +256,16 @@ public class HomeFragment extends Fragment{
     private void getNowPlayingMovies(String page){
         nowPlayingRecycler.setAdapter(nowPlayingMovie);
         MovieService movieService = RetrofitClientInstance.getRetrofitInstance().create(MovieService.class);
-        Call<MovieResponse>call = movieService.getNowPlayingMovies(KEY,"en-US", page);
-        call.enqueue(new Callback<MovieResponse>() {
+        Call<Movie>call = movieService.getNowPlayingMovies(KEY,"en-US", page);
+        call.enqueue(new Callback<Movie>() {
             @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+            public void onResponse(Call<Movie> call, Response<Movie> response) {
                 nowPlayingMovie.addMovies(response.body().getResults());
 
             }
 
             @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
+            public void onFailure(Call<Movie> call, Throwable t) {
 
             }
         });
@@ -274,16 +274,16 @@ public class HomeFragment extends Fragment{
     private void getTrendingMovies(String page){
         trendingRecycler.setAdapter(trendingMovieAdapter);
         MovieService movieService = RetrofitClientInstance.getRetrofitInstance().create(MovieService.class);
-        Call<MovieResponse>call = movieService.getMoviesTrendingThisWeek(KEY, page);
-        call.enqueue(new Callback<MovieResponse>() {
+        Call<Movie>call = movieService.getMoviesTrendingThisWeek(KEY, page);
+        call.enqueue(new Callback<Movie>() {
             @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+            public void onResponse(Call<Movie> call, Response<Movie> response) {
                 trendingMovieAdapter.addMovies(response.body().getResults());
 
             }
 
             @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
+            public void onFailure(Call<Movie> call, Throwable t) {
 
             }
         });

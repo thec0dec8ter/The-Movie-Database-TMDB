@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import dev.thec0dec8ter.tmdb.BuildConfig;
 import dev.thec0dec8ter.tmdb.R;
 import dev.thec0dec8ter.tmdb.adapters.CelebrityAdapter;
-import dev.thec0dec8ter.tmdb.network.CelebrityResponse;
+import dev.thec0dec8ter.tmdb.models.Celebrity;
 import dev.thec0dec8ter.tmdb.network.CelebrityService;
 import dev.thec0dec8ter.tmdb.network.RetrofitClientInstance;
 import retrofit2.Call;
@@ -30,7 +30,7 @@ public class CelebritiesFragment extends Fragment {
     private CelebrityAdapter celebrityAdapter;
 
     private CelebrityService celebrityService;
-    private Call<CelebrityResponse> call;
+    private Call<Celebrity> call;
 
     public CelebritiesFragment() {
         // Required empty public constructor
@@ -63,14 +63,14 @@ public class CelebritiesFragment extends Fragment {
 
     private void getPopularCelebrities(String page){
         call = celebrityService.getPopularCelebrities(BuildConfig.KEY, page);
-        call.enqueue(new Callback<CelebrityResponse>() {
+        call.enqueue(new Callback<Celebrity>() {
             @Override
-            public void onResponse(Call<CelebrityResponse> call, Response<CelebrityResponse> response) {
+            public void onResponse(Call<Celebrity> call, Response<Celebrity> response) {
                 celebrityAdapter.addCelebrities(response.body().getResults());
             }
 
             @Override
-            public void onFailure(Call<CelebrityResponse> call, Throwable t) {
+            public void onFailure(Call<Celebrity> call, Throwable t) {
                 Log.e("Error",t.getMessage());
             }
         });

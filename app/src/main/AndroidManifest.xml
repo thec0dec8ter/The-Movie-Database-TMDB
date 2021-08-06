@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TMDb.NoActionBar">
+        android:theme="@style/Theme.TMDb">
 
             <activity android:name=".CelebDetailActivity"/>
             <activity android:name=".ProfileActivity" />

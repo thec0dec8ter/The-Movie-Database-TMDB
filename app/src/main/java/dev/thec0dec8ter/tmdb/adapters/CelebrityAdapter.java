@@ -16,12 +16,13 @@ import java.util.ArrayList;
 
 import dev.thec0dec8ter.tmdb.CelebDetailActivity;
 import dev.thec0dec8ter.tmdb.R;
-import dev.thec0dec8ter.tmdb.network.CelebrityResponse;
-import dev.thec0dec8ter.tmdb.network.NetworkUtils;
+import dev.thec0dec8ter.tmdb.models.Celebrity;
+
+import static dev.thec0dec8ter.tmdb.network.RetrofitClientInstance.IMAGE_BASE_URL;
 
 public class CelebrityAdapter extends RecyclerView.Adapter<CelebrityAdapter.CelebrityViewHolder> {
 
-    private final ArrayList<CelebrityResponse> celebList = new ArrayList<>();
+    private final ArrayList<Celebrity> celebList = new ArrayList<>();
 
     @NonNull
     @Override
@@ -61,9 +62,9 @@ public class CelebrityAdapter extends RecyclerView.Adapter<CelebrityAdapter.Cele
             });
         }
 
-        public  void bind(CelebrityResponse celebrity){
+        public  void bind(Celebrity celebrity){
             Picasso.get()
-                    .load(NetworkUtils.IMAGE_BASE_URL + celebrity.getProfile_path())
+                    .load(IMAGE_BASE_URL + celebrity.getProfile_path())
                     .fit()
                     .into(poster);
             if(celebrity.getOriginal_name() == null){
@@ -74,7 +75,7 @@ public class CelebrityAdapter extends RecyclerView.Adapter<CelebrityAdapter.Cele
         }
     }
 
-    public void addCelebrities(ArrayList<CelebrityResponse> celebrities){
+    public void addCelebrities(ArrayList<Celebrity> celebrities){
         this.celebList.addAll(celebrities);
         notifyDataSetChanged();
     }

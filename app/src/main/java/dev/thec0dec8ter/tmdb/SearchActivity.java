@@ -17,9 +17,10 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 import dev.thec0dec8ter.tmdb.adapters.MovieAdapter;
 import dev.thec0dec8ter.tmdb.adapters.SearchPagerAdapter;
-import dev.thec0dec8ter.tmdb.network.MovieResponse;
+import dev.thec0dec8ter.tmdb.models.Movie;
 import dev.thec0dec8ter.tmdb.network.MovieService;
 import dev.thec0dec8ter.tmdb.network.RetrofitClientInstance;
+import dev.thec0dec8ter.tmdb.network.SearchService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -80,7 +81,7 @@ public class SearchActivity extends AppCompatActivity {
                     viewPager.setCurrentItem(position);
                     break;
                 case 1:
-                    tab.setText("Find Movies & TV Shows");
+                    tab.setText("Find Movies & Tv Shows");
                     break;
             }
 
@@ -91,16 +92,16 @@ public class SearchActivity extends AppCompatActivity {
 
     private void searchForMovies(String query){
         MovieAdapter movieAdapter = new MovieAdapter();
-        MovieService movieService = RetrofitClientInstance.getRetrofitInstance().create(MovieService.class);
-        Call<MovieResponse> call = movieService.searchForMovies(KEY, query, "1");
-        call.enqueue(new Callback<MovieResponse>() {
+        SearchService searchService = RetrofitClientInstance.getRetrofitInstance().create(SearchService.class);
+        Call<Movie> call = searchService.searchForMovies(KEY, query, "1");
+        call.enqueue(new Callback<Movie>() {
             @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+            public void onResponse(Call<Movie> call, Response<Movie> response) {
                 movieAdapter.addMovies(response.body().getResults());
             }
 
             @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
+            public void onFailure(Call<Movie> call, Throwable t) {
 
             }
         });

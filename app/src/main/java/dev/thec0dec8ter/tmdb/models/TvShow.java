@@ -1,4 +1,4 @@
-package dev.thec0dec8ter.tmdb.network;
+package dev.thec0dec8ter.tmdb.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class TvResponse {
+public class TvShow {
 
     @SerializedName("id")
     @Expose
@@ -40,10 +40,10 @@ public class TvResponse {
     private String last_air_date;
     @SerializedName("last_episode_to_air")
     @Expose
-    private TvResponse last_episode_to_air;
+    private TvShow last_episode_to_air;
     @SerializedName("next_episode_to_air")
     @Expose
-    private TvResponse next_episode_to_air;
+    private TvShow next_episode_to_air;
     @SerializedName("air_date")
     @Expose
     private String air_date;
@@ -96,26 +96,26 @@ public class TvResponse {
 
     @SerializedName("posters")
     @Expose
-    private ArrayList<TvResponse> posters;
+    private ArrayList<TvShow> posters;
     @SerializedName("backdrops")
     @Expose
-    private ArrayList<TvResponse> backdrops;
+    private ArrayList<TvShow> backdrops;
     @SerializedName("genres")
     @Expose
-    private ArrayList<TvResponse> genres;
+    private ArrayList<TvShow> genres;
     @SerializedName("keywords")
     @Expose
-    private ArrayList<TvResponse> keywords;
+    private ArrayList<TvShow> keywords;
     @SerializedName("seasons")
     @Expose
-    private ArrayList<TvResponse> seasons;
+    private ArrayList<TvShow> seasons;
 
     @SerializedName("page")
     @Expose
     private int page;
     @SerializedName("results")
     @Expose
-    private ArrayList<TvResponse> results;
+    private ArrayList<TvShow> results;
     @SerializedName("total_results")
     @Expose
     private int total_results;
@@ -187,19 +187,19 @@ public class TvResponse {
         this.last_air_date = last_air_date;
     }
 
-    public TvResponse getLast_episode_to_air() {
+    public TvShow getLast_episode_to_air() {
         return last_episode_to_air;
     }
 
-    public void setLast_episode_to_air(TvResponse last_episode_to_air) {
+    public void setLast_episode_to_air(TvShow last_episode_to_air) {
         this.last_episode_to_air = last_episode_to_air;
     }
 
-    public TvResponse getNext_episode_to_air() {
+    public TvShow getNext_episode_to_air() {
         return next_episode_to_air;
     }
 
-    public void setNext_episode_to_air(TvResponse next_episode_to_air) {
+    public void setNext_episode_to_air(TvShow next_episode_to_air) {
         this.next_episode_to_air = next_episode_to_air;
     }
 
@@ -331,35 +331,35 @@ public class TvResponse {
         this.popularity = popularity;
     }
 
-    public ArrayList<TvResponse> getBackdrops() {
+    public ArrayList<TvShow> getBackdrops() {
         return backdrops;
     }
 
-    public void setBackdrops(ArrayList<TvResponse> backdrops) {
+    public void setBackdrops(ArrayList<TvShow> backdrops) {
         this.backdrops = backdrops;
     }
 
-    public ArrayList<TvResponse> getPosters() {
+    public ArrayList<TvShow> getPosters() {
         return posters;
     }
 
-    public void setPosters(ArrayList<TvResponse> posters) {
+    public void setPosters(ArrayList<TvShow> posters) {
         this.posters = posters;
     }
 
-    public ArrayList<TvResponse> getGenres() {
+    public ArrayList<TvShow> getGenres() {
         return genres;
     }
 
-    public void setGenres(ArrayList<TvResponse> genres) {
+    public void setGenres(ArrayList<TvShow> genres) {
         this.genres = genres;
     }
 
-    public ArrayList<TvResponse> getSeasons() {
+    public ArrayList<TvShow> getSeasons() {
         return seasons;
     }
 
-    public void setSeasons(ArrayList<TvResponse> seasons) {
+    public void setSeasons(ArrayList<TvShow> seasons) {
         this.seasons = seasons;
     }
 
@@ -371,11 +371,11 @@ public class TvResponse {
         this.page = page;
     }
 
-    public ArrayList<TvResponse> getResults() {
+    public ArrayList<TvShow> getResults() {
         return results;
     }
 
-    public void setResults(ArrayList<TvResponse> results) {
+    public void setResults(ArrayList<TvShow> results) {
         this.results = results;
     }
 
@@ -403,19 +403,19 @@ public class TvResponse {
         this.file_path = file_path;
     }
 
-    public ArrayList<TvResponse> getKeywords() {
+    public ArrayList<TvShow> getKeywords() {
         return keywords;
     }
 
-    public void setKeywords(ArrayList<TvResponse> keywords) {
+    public void setKeywords(ArrayList<TvShow> keywords) {
         this.keywords = keywords;
     }
 
 
-    public static class SortByYear implements Comparator<TvResponse> {
+    public static class SortByYear implements Comparator<TvShow> {
 
         @Override
-        public int compare(TvResponse result1, TvResponse result2) {
+        public int compare(TvShow result1, TvShow result2) {
             int comparison = result1.getFirst_air_date().split("-")[0].compareTo(result2.getFirst_air_date().split("-")[0]);
             return comparison;
         }

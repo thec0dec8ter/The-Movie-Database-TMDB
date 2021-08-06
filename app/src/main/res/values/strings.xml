@@ -1,21 +1,5 @@
 <resources>
     <string name="app_name">TMDb</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
-    <string name="api_key">277678e1146bec8f3ba8245faff14f16</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="on_tv">On TV</string>
-    <string name="summary">
-        After leaving their cave, the Croods encounter their biggest threat since leaving: another family called the Bettermans, who claim
-        and show to be better and evolved. Grug grows suspicious of the Betterman parents, Phil and Hope, as they secretly plan to break up
-        his daughter Eep with her loving boyfriend Guy to ensure that their daughter Dawn has a loving and smart partner to protect her.</string>
 </resources>

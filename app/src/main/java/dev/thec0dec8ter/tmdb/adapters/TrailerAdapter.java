@@ -16,12 +16,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import dev.thec0dec8ter.tmdb.R;
-import dev.thec0dec8ter.tmdb.network.MovieResponse;
-import dev.thec0dec8ter.tmdb.network.NetworkUtils;
+import dev.thec0dec8ter.tmdb.models.Movie;
+
+import static dev.thec0dec8ter.tmdb.network.RetrofitClientInstance.IMAGE_BASE_URL;
 
 public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.TrailerViewHolder> {
 
-    private final ArrayList<MovieResponse> trailers = new ArrayList<>();
+    private final ArrayList<Movie> trailers = new ArrayList<>();
 
     @NonNull
     @Override
@@ -60,24 +61,24 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.TrailerV
             });
         }
 
-        public void bind(MovieResponse movieResponse){
+        public void bind(Movie movie){
             Picasso.get()
-                    .load(NetworkUtils.IMAGE_BASE_URL + movieResponse.getBackdrop_path())
+                    .load(IMAGE_BASE_URL + movie.getBackdrop_path())
                     .fit()
                     .into(poster);
-            title.setText(movieResponse.getTitle());
-            trailerName.setText(movieResponse.getResults().get(0).getName());
+            title.setText(movie.getTitle());
+            trailerName.setText(movie.getResults().get(0).getName());
         }
     }
 
-    public void addTrailers(ArrayList<MovieResponse> trailers){
+    public void addTrailers(ArrayList<Movie> trailers){
         this.trailers.addAll(trailers);
         Collections.shuffle(trailers);
         notifyDataSetChanged();
     }
 
-    public void addTrailer(MovieResponse movieResponse){
-        trailers.add(movieResponse);
+    public void addTrailer(Movie movie){
+        trailers.add(movie);
         Collections.shuffle(trailers);
         notifyDataSetChanged();
     }

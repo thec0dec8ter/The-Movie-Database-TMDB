@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
+import dev.thec0dec8ter.tmdb.models.Movie;
+
 public class SearchResponse {
 
     @SerializedName("id")
@@ -48,7 +50,7 @@ public class SearchResponse {
     private String page;
     @SerializedName("results")
     @Expose
-    private ArrayList<MovieResponse> results;
+    private ArrayList<Movie> results;
     @SerializedName("total_pages")
     @Expose
     private String total_pages;

@@ -1,5 +1,8 @@
 package dev.thec0dec8ter.tmdb.adapters;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,18 +14,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import dev.thec0dec8ter.tmdb.DetailActivity;
 import dev.thec0dec8ter.tmdb.R;
 
 public class KeywordAdapter extends RecyclerView.Adapter<KeywordAdapter.KeywordViewHolder> {
 
     private final ArrayList<String> texts = new ArrayList<>();
 
+    private boolean clickable = false;
+
     public KeywordAdapter(){
 
     }
 
-    public KeywordAdapter(List<String> texts){
+    public KeywordAdapter(boolean clickable,List<String> texts){
         this.texts.addAll(texts);
+        this.clickable = clickable;
     }
 
     @NonNull
@@ -47,7 +54,25 @@ public class KeywordAdapter extends RecyclerView.Adapter<KeywordAdapter.KeywordV
 
         public KeywordViewHolder(@NonNull View itemView) {
             super(itemView);
-             keyword = itemView.findViewById(R.id.keyword_txt);
+            keyword = itemView.findViewById(R.id.keyword_txt);
+
+
+            Context context = itemView.getContext();
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(clickable) {
+                        if (keyword.getCurrentTextColor() != context.getResources().getColor(R.color.light_green, null)) {
+                            keyword.setTextColor(context.getResources().getColorStateList(R.color.light_green, null));
+                            keyword.setBackgroundTintList(context.getResources().getColorStateList(R.color.dark_blue, null));
+                        } else {
+                            keyword.setTextColor(context.getResources().getColorStateList(R.color.black, null));
+                            keyword.setBackground(context.getResources().getDrawable(R.drawable.curved_corners, null));
+                            keyword.setBackgroundTintList(null);
+                        }
+                    }
+                }
+            });
         }
 
         public void bind(String text){
@@ -58,5 +83,9 @@ public class KeywordAdapter extends RecyclerView.Adapter<KeywordAdapter.KeywordV
     public void addTexts(List<String> texts){
         this.texts.addAll(texts);
         notifyDataSetChanged();
+    }
+
+    public void setClickable(boolean clickable) {
+        this.clickable = clickable;
     }
 }

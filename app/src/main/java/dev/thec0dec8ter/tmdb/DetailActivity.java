@@ -11,28 +11,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import dev.thec0dec8ter.tmdb.adapters.CelebrityAdapter;
+import dev.thec0dec8ter.tmdb.adapters.ImageAdapter;
 import dev.thec0dec8ter.tmdb.adapters.KeywordAdapter;
-import dev.thec0dec8ter.tmdb.adapters.MediaAdapter;
 import dev.thec0dec8ter.tmdb.adapters.MovieAdapter;
 import dev.thec0dec8ter.tmdb.adapters.TvAdapter;
-import dev.thec0dec8ter.tmdb.network.CelebrityResponse;
-import dev.thec0dec8ter.tmdb.network.MovieResponse;
+import dev.thec0dec8ter.tmdb.models.Celebrity;
+import dev.thec0dec8ter.tmdb.models.Movie;
+import dev.thec0dec8ter.tmdb.models.TvShow;
 import dev.thec0dec8ter.tmdb.network.MovieService;
-import dev.thec0dec8ter.tmdb.network.NetworkUtils;
 import dev.thec0dec8ter.tmdb.network.RetrofitClientInstance;
-import dev.thec0dec8ter.tmdb.network.TvResponse;
 import dev.thec0dec8ter.tmdb.network.TvService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static dev.thec0dec8ter.tmdb.BuildConfig.KEY;
+import static dev.thec0dec8ter.tmdb.network.RetrofitClientInstance.IMAGE_BASE_URL;
+import static dev.thec0dec8ter.tmdb.network.RetrofitClientInstance.getMovieDetails;
+import static dev.thec0dec8ter.tmdb.network.RetrofitClientInstance.getTvShowDetails;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -52,7 +51,7 @@ public class DetailActivity extends AppCompatActivity {
     private RecyclerView similarRecycler;
 
     private CelebrityAdapter celebrityAdapter;
-    private MediaAdapter mediaAdapter;
+    private ImageAdapter mediaAdapter;
     private KeywordAdapter keywordAdapter;
 
     @Override
@@ -75,7 +74,7 @@ public class DetailActivity extends AppCompatActivity {
         keywordRecycler = findViewById(R.id.keyword_recycler);
         similarRecycler = findViewById(R.id.similar_recycler);
 
-        mediaAdapter = new MediaAdapter();
+        mediaAdapter = new ImageAdapter();
         mediaRecycler.setAdapter(mediaAdapter);
         keywordAdapter = new KeywordAdapter();
         keywordRecycler.setAdapter(keywordAdapter);
@@ -86,51 +85,51 @@ public class DetailActivity extends AppCompatActivity {
         String tvExtra = getIntent().getStringExtra("tv_id");
 
         if(movieExtra != null) {
-            MovieResponse movieResponse = getMovieDetails(movieExtra);
+            Movie movie = getMovieDetails(movieExtra);
             MovieAdapter movieAdapter = new MovieAdapter();
             similarRecycler.setAdapter(movieAdapter);
 
 
             MovieService movieService = RetrofitClientInstance.getRetrofitInstance().create(MovieService.class);
-            Call<MovieResponse> call = movieService.getSimilarMovies(movieResponse.getId(), BuildConfig.KEY, "1");
-            call.enqueue(new Callback<MovieResponse>() {
+            Call<Movie> call = movieService.getSimilarMovies(movie.getId(), BuildConfig.KEY, "1");
+            call.enqueue(new Callback<Movie>() {
                 @Override
-                public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                public void onResponse(Call<Movie> call, Response<Movie> response) {
                     movieAdapter.addMovies(response.body().getResults());
                 }
 
                 @Override
-                public void onFailure(Call<MovieResponse> call, Throwable t) {
+                public void onFailure(Call<Movie> call, Throwable t) {
                     Log.e("DetailActivity: ",t.getMessage());
                 }
             });
-            call = movieService.getMovieImages(movieResponse.getId(), BuildConfig.KEY);
-            call.enqueue(new Callback<MovieResponse>() {
+            call = movieService.getMovieImages(movie.getId(), BuildConfig.KEY);
+            call.enqueue(new Callback<Movie>() {
                 @Override
-                public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                public void onResponse(Call<Movie> call, Response<Movie> response) {
                     ArrayList<String> media = new ArrayList<>();
-                    for(MovieResponse movieResponse:response.body().getBackdrops()){
-                        media.add(movieResponse.getFile_path());
+                    for(Movie movie :response.body().getBackdrops()){
+                        media.add(movie.getFile_path());
                     }
-                    for(MovieResponse movieResponse:response.body().getPosters()){
-                        media.add(movieResponse.getFile_path());
+                    for(Movie movie :response.body().getPosters()){
+                        media.add(movie.getFile_path());
                     }
 
                 }
 
                 @Override
-                public void onFailure(Call<MovieResponse> call, Throwable t) {
+                public void onFailure(Call<Movie> call, Throwable t) {
                     Log.e("DetailActivity",t.getMessage());
                 }
             });
 
-            call = movieService.getMovieKeywords(movieResponse.getId(), BuildConfig.KEY);
-            call.enqueue(new Callback<MovieResponse>() {
+            call = movieService.getMovieKeywords(movie.getId(), BuildConfig.KEY);
+            call.enqueue(new Callback<Movie>() {
                 @Override
-                public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                public void onResponse(Call<Movie> call, Response<Movie> response) {
                     List<String> keywords = new ArrayList<>();
-                    for(MovieResponse movieResponse:response.body().getKeywords()){
-                        keywords.add(movieResponse.getName());
+                    for(Movie movie :response.body().getKeywords()){
+                        keywords.add(movie.getName());
                     }
                     if(keywords.size() > 0){
                         noKeyword.setVisibility(View.GONE);
@@ -139,53 +138,53 @@ public class DetailActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<MovieResponse> call, Throwable t) {
+                public void onFailure(Call<Movie> call, Throwable t) {
                     Log.e("DetailActivity: ",t.getMessage());
                 }
             });
 
-            genreName.setText(movieResponse.getGenres().get(0).getName());
+            genreName.setText(movie.getGenres().get(0).getName());
 
-            int runtimeHours = movieResponse.getRuntime() / 60;
-            int runtimeMins = movieResponse.getRuntime() % 60;
+            int runtimeHours = movie.getRuntime() / 60;
+            int runtimeMins = movie.getRuntime() % 60;
             runtime.setText(runtimeHours + "h " + runtimeMins + "m");
 
-            int ratePercent = Math.round(movieResponse.getVote_average())*10;
+            int ratePercent = Math.round(movie.getVote_average())*10;
             ratingCount.setText(String.valueOf(ratePercent));
         }else if(tvExtra != null) {
-            TvResponse tvResponse = getTvShowDetails(tvExtra);
+            TvShow tvShow = getTvShowDetails(tvExtra);
             TvAdapter tvAdapter = new TvAdapter();
             similarRecycler.setAdapter(tvAdapter);
 
             TvService tvService = RetrofitClientInstance.getRetrofitInstance().create(TvService.class);
-            Call<TvResponse> call = tvService.getTvShowImages(tvResponse.getId(), BuildConfig.KEY);
-            call.enqueue(new Callback<TvResponse>() {
+            Call<TvShow> call = tvService.getTvShowImages(tvShow.getId(), BuildConfig.KEY);
+            call.enqueue(new Callback<TvShow>() {
                 @Override
-                public void onResponse(Call<TvResponse> call, Response<TvResponse> response) {
+                public void onResponse(Call<TvShow> call, Response<TvShow> response) {
                     ArrayList<String> media = new ArrayList<>();
-                    for(TvResponse tvResponse:response.body().getBackdrops()){
-                        media.add(tvResponse.getFile_path());
+                    for(TvShow tvShow :response.body().getBackdrops()){
+                        media.add(tvShow.getFile_path());
                     }
-                    for(TvResponse tvResponse:response.body().getPosters()){
-                        media.add(tvResponse.getFile_path());
+                    for(TvShow tvShow :response.body().getPosters()){
+                        media.add(tvShow.getFile_path());
                     }
 
                 }
 
                 @Override
-                public void onFailure(Call<TvResponse> call, Throwable t) {
+                public void onFailure(Call<TvShow> call, Throwable t) {
                     Log.e("DetailActivity",t.getMessage());
                 }
             });
 
-            call = tvService.getTvShowKeywords(tvResponse.getId(), BuildConfig.KEY);
-            call.enqueue(new Callback<TvResponse>() {
+            call = tvService.getTvShowKeywords(tvShow.getId(), BuildConfig.KEY);
+            call.enqueue(new Callback<TvShow>() {
                 @Override
-                public void onResponse(Call<TvResponse> call, Response<TvResponse> response) {
+                public void onResponse(Call<TvShow> call, Response<TvShow> response) {
                     List<String> keywords = new ArrayList<>();
                     if (response.body().getKeywords() != null) {
-                        for (TvResponse tvResponse : response.body().getKeywords()) {
-                            keywords.add(tvResponse.getName());
+                        for (TvShow tvShow : response.body().getKeywords()) {
+                            keywords.add(tvShow.getName());
                         }
                     }
                     if(keywords.size() > 0){
@@ -195,117 +194,63 @@ public class DetailActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<TvResponse> call, Throwable t) {
+                public void onFailure(Call<TvShow> call, Throwable t) {
                     Log.e("DetailActivity",t.getMessage());
                 }
             });
 
-            call = tvService.getSimilarTvShows(tvResponse.getId(), BuildConfig.KEY, "1");
-            call.enqueue(new Callback<TvResponse>() {
+            call = tvService.getSimilarTvShows(tvShow.getId(), BuildConfig.KEY, "1");
+            call.enqueue(new Callback<TvShow>() {
                 @Override
-                public void onResponse(Call<TvResponse> call, Response<TvResponse> response) {
+                public void onResponse(Call<TvShow> call, Response<TvShow> response) {
                     tvAdapter.addTvShows(response.body().getResults());
                 }
 
                 @Override
-                public void onFailure(Call<TvResponse> call, Throwable t) {
+                public void onFailure(Call<TvShow> call, Throwable t) {
                     Log.e("DetailActivity",t.getMessage());
                 }
             });
 
-            Call<CelebrityResponse> creditCall = tvService.getTvShowCredits(tvResponse.getId(), BuildConfig.KEY);
-            creditCall.enqueue(new Callback<CelebrityResponse>() {
+            Call<Celebrity> creditCall = tvService.getTvShowCredits(tvShow.getId(), BuildConfig.KEY);
+            creditCall.enqueue(new Callback<Celebrity>() {
                 @Override
-                public void onResponse(Call<CelebrityResponse> call, Response<CelebrityResponse> response) {
+                public void onResponse(Call<Celebrity> call, Response<Celebrity> response) {
 
                 }
 
                 @Override
-                public void onFailure(Call<CelebrityResponse> call, Throwable t) {
+                public void onFailure(Call<Celebrity> call, Throwable t) {
                     Log.e("DetailActivity",t.getMessage());
                 }
             });
 
             Picasso.get()
-                    .load(NetworkUtils.IMAGE_BASE_URL+tvResponse.getBackdrop_path())
+                    .load(IMAGE_BASE_URL+ tvShow.getBackdrop_path())
                     .fit()
                     .into(backdrop);
-            tagLine.setText(tvResponse.getTagline());
-            title.setText(tvResponse.getName());
-            year.setText(tvResponse.getFirst_air_date().split("-")[0]);
-            genreName.setText(tvResponse.getGenres().get(0).getName());
-            if (tvResponse.getEpisode_runtime() != null) {
-                int runtimeHours = tvResponse.getEpisode_runtime()[0] / 60;
-                int runtimeMins = tvResponse.getEpisode_runtime()[0] % 60;
+            tagLine.setText(tvShow.getTagline());
+            title.setText(tvShow.getName());
+            year.setText(tvShow.getFirst_air_date().split("-")[0]);
+            genreName.setText(tvShow.getGenres().get(0).getName());
+            if (tvShow.getEpisode_runtime() != null) {
+                int runtimeHours = tvShow.getEpisode_runtime()[0] / 60;
+                int runtimeMins = tvShow.getEpisode_runtime()[0] % 60;
                 StringBuilder builder = new StringBuilder();
                 builder.append(runtimeHours).append("h ").append(runtimeMins).append("m");
                 runtime.setText(builder.toString());
             }
             Picasso.get()
-                    .load(NetworkUtils.IMAGE_BASE_URL+tvResponse.getPoster_path())
+                    .load(IMAGE_BASE_URL+ tvShow.getPoster_path())
                     .fit()
                     .into(poster);
-            overview.setText(tvResponse.getOverview());
-            int ratePercent = Math.round(tvResponse.getVote_average())*10;
+            overview.setText(tvShow.getOverview());
+            int ratePercent = Math.round(tvShow.getVote_average())*10;
             ratingCount.setText(String.valueOf(ratePercent));
         }else {
             finish();
         }
 
-    }
-
-    private static MovieResponse getMovieDetails(String id){
-        final MovieResponse movieResponse = new MovieResponse();
-
-        MovieService movieService = RetrofitClientInstance.getRetrofitInstance().create(MovieService.class);
-        Call<MovieResponse> call = movieService.getMovieDetails(id, BuildConfig.KEY);
-        call.enqueue(new Callback<MovieResponse>() {
-            @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                movieResponse.setBackdrop_path(response.body().getBackdrop_path());
-                movieResponse.setTitle(response.body().getTitle());
-                movieResponse.setTagline(response.body().getTagline());
-                if(response.body().getGenres().size() > 0){
-                    movieResponse.setGenres(response.body().getGenres());
-                }
-                movieResponse.setRelease_date(response.body().getRelease_date());
-                movieResponse.setPoster_path(response.body().getPoster_path());
-                movieResponse.setOverview(response.body().getOverview());
-                movieResponse.setRuntime(response.body().getRuntime());
-                movieResponse.setVote_average(response.body().getVote_average()*10);
-            }
-            @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
-                Log.e("DetailActivity: ",t.getMessage());
-            }
-        });
-        return  movieResponse;
-    }
-
-    private static TvResponse getTvShowDetails(String id){
-        final TvResponse tvResponse = new TvResponse();
-
-        TvService tvService = RetrofitClientInstance.getRetrofitInstance().create(TvService.class);
-        Call<TvResponse> call = tvService.getTvShowDetails(id, KEY);
-        call.enqueue(new Callback<TvResponse>() {
-            @Override
-            public void onResponse(@NotNull Call<TvResponse> call, @NotNull Response<TvResponse> response) {
-                tvResponse.setBackdrop_path(response.body().getBackdrop_path());
-                tvResponse.setTagline(response.body().getTagline());
-                tvResponse.setName(response.body().getName());
-                tvResponse.setFirst_air_date(response.body().getFirst_air_date());
-                tvResponse.setGenres(response.body().getGenres());
-                tvResponse.setEpisode_runtime(response.body().getEpisode_runtime());
-                tvResponse.setPoster_path(response.body().getPoster_path());
-                tvResponse.setVote_average(response.body().getVote_average());
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<TvResponse> call, @NotNull Throwable t) {
-                Log.e("DetailActivity",t.getMessage());
-            }
-        });
-       return tvResponse;
     }
 
 }
