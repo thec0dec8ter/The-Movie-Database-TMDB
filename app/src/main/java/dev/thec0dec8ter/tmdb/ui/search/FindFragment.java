@@ -22,9 +22,8 @@ public class FindFragment extends Fragment {
     private TextView txtTvShow;
     private TextView txtCeleb;
 
-
     private RecyclerView runtimeRecycler;
-    private RecyclerView tmdbRatingRecycler;
+    private RecyclerView ratingRecycler;
     private RecyclerView genreRecycler;
     private RecyclerView decadeRecycler;
     private RecyclerView voteRecycler;
@@ -60,7 +59,7 @@ public class FindFragment extends Fragment {
         txtTvShow = view.findViewById(R.id.txt_tv_show);
         txtCeleb = view.findViewById(R.id.txt_celeb);
         runtimeRecycler = view.findViewById(R.id.runtime_recycler);
-        tmdbRatingRecycler = view.findViewById(R.id.tmdb_rating_recycler);
+        ratingRecycler = view.findViewById(R.id.tmdb_rating_recycler);
         genreRecycler = view.findViewById(R.id.genre_recycler);
         decadeRecycler = view.findViewById(R.id.decade_recycler);
         voteRecycler = view.findViewById(R.id.vote_recycler);
@@ -73,7 +72,7 @@ public class FindFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         runtimeRecycler.setAdapter(runtimeAdapter);
-        tmdbRatingRecycler.setAdapter(ratingAdapter);
+        ratingRecycler.setAdapter(ratingAdapter);
         genreRecycler.setAdapter(genreAdapter);
         decadeRecycler.setAdapter(decadeAdapter);
         voteRecycler.setAdapter(voteAdapter);

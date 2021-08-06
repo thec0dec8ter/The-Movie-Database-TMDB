@@ -1,8 +1,6 @@
 package dev.thec0dec8ter.tmdb.adapters;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import dev.thec0dec8ter.tmdb.DetailActivity;
 import dev.thec0dec8ter.tmdb.R;
 
 public class KeywordAdapter extends RecyclerView.Adapter<KeywordAdapter.KeywordViewHolder> {

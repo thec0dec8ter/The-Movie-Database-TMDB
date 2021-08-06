@@ -18,7 +18,6 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import dev.thec0dec8ter.tmdb.adapters.MovieAdapter;
 import dev.thec0dec8ter.tmdb.adapters.SearchPagerAdapter;
 import dev.thec0dec8ter.tmdb.models.Movie;
-import dev.thec0dec8ter.tmdb.network.MovieService;
 import dev.thec0dec8ter.tmdb.network.RetrofitClientInstance;
 import dev.thec0dec8ter.tmdb.network.SearchService;
 import retrofit2.Call;
