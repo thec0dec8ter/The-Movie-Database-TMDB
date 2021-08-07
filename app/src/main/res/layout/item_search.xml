@@ -78,6 +78,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/media_type"
             android:text="Movie"
             android:textSize="12sp"
             android:layout_width="wrap_content"
@@ -86,6 +87,7 @@
             android:padding="5dp"/>
 
         <TextView
+            android:id="@+id/title"
             android:text="Title"
             android:textStyle="bold"
             android:textSize="16sp"
@@ -96,7 +98,8 @@
             android:padding="5dp"/>
 
         <TextView
-            android:text="Title"
+            android:id="@+id/year"
+            android:text="Year"
             android:textStyle="bold"
             android:textSize="16sp"
             android:layout_width="match_parent"
@@ -106,7 +109,8 @@
             android:padding="5dp"/>
 
         <TextView
-            android:text="Title"
+            android:id="@+id/genre_name"
+            android:text="Genre"
             android:textStyle="bold"
             android:textSize="16sp"
             android:layout_width="match_parent"

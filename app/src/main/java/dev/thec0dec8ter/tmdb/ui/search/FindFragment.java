@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import java.util.Arrays;
 
@@ -21,6 +23,9 @@ public class FindFragment extends Fragment {
     private TextView txtMovie;
     private TextView txtTvShow;
     private TextView txtCeleb;
+
+    private Button btnClear;
+    private Button btnSeeResult;
 
     private RecyclerView runtimeRecycler;
     private RecyclerView ratingRecycler;
@@ -49,7 +54,7 @@ public class FindFragment extends Fragment {
         genreAdapter = new KeywordAdapter(true,Arrays.asList(getResources().getStringArray(R.array.genres)));
         decadeAdapter = new KeywordAdapter(true,Arrays.asList(getResources().getStringArray(R.array.decades)));
         voteAdapter = new KeywordAdapter(true,Arrays.asList(getResources().getStringArray(R.array.total_votes)));
-        languageAdapter = new KeywordAdapter(true,Arrays.asList(getResources().getStringArray(R.array.languages)));
+        languageAdapter = new KeywordAdapter(true,Arrays.asList(getResources().getStringArray(R.array.country)));
     }
 
     @Override
@@ -58,6 +63,8 @@ public class FindFragment extends Fragment {
         txtMovie = view.findViewById(R.id.txt_movie);
         txtTvShow = view.findViewById(R.id.txt_tv_show);
         txtCeleb = view.findViewById(R.id.txt_celeb);
+        btnClear = view.findViewById(R.id.btn_clear);
+        btnSeeResult = view.findViewById(R.id.btn_see_result);
         runtimeRecycler = view.findViewById(R.id.runtime_recycler);
         ratingRecycler = view.findViewById(R.id.tmdb_rating_recycler);
         genreRecycler = view.findViewById(R.id.genre_recycler);
@@ -89,7 +96,6 @@ public class FindFragment extends Fragment {
                 }else {
                     removeTextBackground(txtMovie);
                 }
-
             }
         });
 
@@ -104,7 +110,6 @@ public class FindFragment extends Fragment {
                 }else {
                     removeTextBackground(txtTvShow);
                 }
-
             }
         });
 
@@ -115,25 +120,39 @@ public class FindFragment extends Fragment {
                     changeTextBackground(txtCeleb);
                     removeTextBackground(txtTvShow);
                     removeTextBackground(txtMovie);
+                    clearAll();
                     disableAdapters();
                 }else {
                     removeTextBackground(txtCeleb);
                     enableAdapters();
                 }
+            }
+        });
 
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearAll();
+            }
+        });
+
+        btnSeeResult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((ViewPager2) getActivity().findViewById(R.id.view_pager)).setCurrentItem(0);
             }
         });
     }
 
-    private void changeTextBackground(TextView textView){
-        textView.setTextColor(getResources().getColorStateList(R.color.light_green, null));
-        textView.setBackgroundTintList(getResources().getColorStateList(R.color.dark_blue, null));
+    private void changeTextBackground(View view){
+        ((TextView)view).setTextColor(getResources().getColorStateList(R.color.light_green, null));
+        view.setBackgroundTintList(getResources().getColorStateList(R.color.dark_blue, null));
     }
 
-    private void removeTextBackground(TextView textView){
-        textView.setTextColor(getResources().getColorStateList(R.color.black, null));
-        textView.setBackground(getResources().getDrawable(R.drawable.curved_corners,null));
-        textView.setBackgroundTintList(null);
+    private void removeTextBackground(View view){
+        ((TextView)view).setTextColor(getResources().getColorStateList(R.color.black, null));
+        view.setBackground(getResources().getDrawable(R.drawable.curved_corners,null));
+        view.setBackgroundTintList(null);
     }
 
     private void enableAdapters(){
@@ -153,5 +172,30 @@ public class FindFragment extends Fragment {
         voteAdapter.setClickable(false);
         languageAdapter.setClickable(false);
     }
+
+    private void clearSelection(RecyclerView recycler, KeywordAdapter adapter){
+        for (int i = 0; i < adapter.getItemCount(); i++){
+            removeTextBackground(recycler.getLayoutManager().findViewByPosition(i));
+        }
+    }
+
+    private void clearAll(){
+        clearSelection(runtimeRecycler,runtimeAdapter);
+        clearSelection(ratingRecycler,ratingAdapter);
+        clearSelection(genreRecycler,genreAdapter);
+        clearSelection(decadeRecycler,decadeAdapter);
+        clearSelection(voteRecycler,voteAdapter);
+        clearSelection(languageRecycler,languageAdapter);
+    }
+
+
+
+//    <item>en - US</item>
+//        <item>fr - CA</item>
+//        <item>ge - DE</item>
+//        <item>fr - FR</item>
+//        <item>ma - NZ</item>
+//        <item>en - AU</item>
+//        <item>hi - IN</item>
 
 }

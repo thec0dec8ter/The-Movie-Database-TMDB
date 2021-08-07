@@ -15,16 +15,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import dev.thec0dec8ter.tmdb.adapters.MovieAdapter;
 import dev.thec0dec8ter.tmdb.adapters.SearchPagerAdapter;
-import dev.thec0dec8ter.tmdb.models.Movie;
-import dev.thec0dec8ter.tmdb.network.RetrofitClientInstance;
-import dev.thec0dec8ter.tmdb.network.SearchService;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static dev.thec0dec8ter.tmdb.BuildConfig.KEY;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -48,10 +39,13 @@ public class SearchActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
 
+        searchPagerAdapter = new SearchPagerAdapter(this);
+        viewPager.setAdapter(searchPagerAdapter);
+        viewPager.setUserInputEnabled(false);
+
         arrowBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                navController.navigate(R.id.action_search_to_main);
                 finish();
             }
         });
@@ -60,17 +54,16 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    Bundle args = new Bundle();
+                    args.putString("query",editQuery.getText().toString());
                     viewPager.setCurrentItem(0);
-                    searchForMovies(editQuery.getText().toString());
+                    searchPagerAdapter.getCurrentFragment(0).setArguments(args);
+                    searchPagerAdapter.getCurrentFragment(0).onResume();
                     return true;
                 }
                 return false;
             }
         });
-
-        searchPagerAdapter = new SearchPagerAdapter(this);
-        viewPager.setAdapter(searchPagerAdapter);
-        viewPager.setUserInputEnabled(false);
 
         mediator = new TabLayoutMediator(tabLayout, viewPager,
                 true,false, (tab, position) -> {
@@ -83,27 +76,9 @@ public class SearchActivity extends AppCompatActivity {
                     tab.setText("Find Movies & Tv Shows");
                     break;
             }
-
         });
         mediator.attach();
 
-    }
-
-    private void searchForMovies(String query){
-        MovieAdapter movieAdapter = new MovieAdapter();
-        SearchService searchService = RetrofitClientInstance.getRetrofitInstance().create(SearchService.class);
-        Call<Movie> call = searchService.searchForMovies(KEY, query, "1");
-        call.enqueue(new Callback<Movie>() {
-            @Override
-            public void onResponse(Call<Movie> call, Response<Movie> response) {
-                movieAdapter.addMovies(response.body().getResults());
-            }
-
-            @Override
-            public void onFailure(Call<Movie> call, Throwable t) {
-
-            }
-        });
     }
 
 }

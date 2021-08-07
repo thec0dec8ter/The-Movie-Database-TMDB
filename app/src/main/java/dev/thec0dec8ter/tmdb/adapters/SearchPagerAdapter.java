@@ -14,8 +14,14 @@ public class SearchPagerAdapter extends FragmentStateAdapter {
 
     private final int NUM_PAGES = 2;
 
+    private Fragment currentFragment;
+    private RecentFragment recentFragment;
+    private FindFragment findFragment;
+
     public SearchPagerAdapter(@NonNull @org.jetbrains.annotations.NotNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
+        recentFragment = new RecentFragment();
+        findFragment = new FindFragment();
     }
 
     public SearchPagerAdapter(@NonNull @org.jetbrains.annotations.NotNull Fragment fragment) {
@@ -32,16 +38,28 @@ public class SearchPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new RecentFragment();
+                return recentFragment;
             case 1:
-                return new FindFragment();
+                return findFragment;
             default:
                 return null;
         }
     }
 
+
     @Override
     public int getItemCount() {
         return NUM_PAGES;
+    }
+
+    public Fragment getCurrentFragment(int pos){
+        switch (pos) {
+            case 0:
+                return recentFragment;
+            case 1:
+                return findFragment;
+            default:
+                return null;
+        }
     }
 }

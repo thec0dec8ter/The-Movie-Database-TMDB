@@ -163,7 +163,6 @@
 
             </LinearLayout>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -192,7 +191,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:text="Primary Language"
+                    android:text="Primary Country"
                     android:textSize="18sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -219,6 +218,7 @@
         android:background="@color/off_white">
 
         <TextView
+            android:id="@+id/btn_clear"
             android:text="Clear"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -230,6 +230,7 @@
             android:layout_margin="5dp"/>
 
         <Button
+            android:id="@+id/btn_see_result"
             android:text="See Results"
             android:textColor="@color/light_green"
             android:layout_width="0dp"

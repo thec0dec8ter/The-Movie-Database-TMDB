@@ -53,7 +53,6 @@ public class KeywordAdapter extends RecyclerView.Adapter<KeywordAdapter.KeywordV
             super(itemView);
             keyword = itemView.findViewById(R.id.keyword_txt);
 
-
             Context context = itemView.getContext();
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -85,4 +84,6 @@ public class KeywordAdapter extends RecyclerView.Adapter<KeywordAdapter.KeywordV
     public void setClickable(boolean clickable) {
         this.clickable = clickable;
     }
+
+
 }

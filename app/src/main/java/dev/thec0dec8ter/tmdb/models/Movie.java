@@ -34,9 +34,6 @@ public class Movie{
     @SerializedName("belongs_to_collection")
     @Expose
     private Movie collection;
-    @SerializedName("homepage")
-    @Expose
-    private String homepage;
     @SerializedName("genres")
     @Expose
     private ArrayList<Movie> genres;
@@ -207,14 +204,6 @@ public class Movie{
 
     public void setCollection(Movie collection) {
         this.collection = collection;
-    }
-
-    public String getHomepage() {
-        return homepage;
-    }
-
-    public void setHomepage(String homepage) {
-        this.homepage = homepage;
     }
 
     public ArrayList<Movie> getGenres() {
