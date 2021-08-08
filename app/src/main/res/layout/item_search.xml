@@ -89,7 +89,6 @@
         <TextView
             android:id="@+id/title"
             android:text="Title"
-            android:textStyle="bold"
             android:textSize="16sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,7 +99,6 @@
         <TextView
             android:id="@+id/year"
             android:text="Year"
-            android:textStyle="bold"
             android:textSize="16sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -111,7 +109,6 @@
         <TextView
             android:id="@+id/genre_name"
             android:text="Genre"
-            android:textStyle="bold"
             android:textSize="16sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

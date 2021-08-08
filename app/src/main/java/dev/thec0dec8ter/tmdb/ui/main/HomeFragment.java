@@ -261,7 +261,6 @@ public class HomeFragment extends Fragment{
             @Override
             public void onResponse(Call<Movie> call, Response<Movie> response) {
                 nowPlayingMovie.addMovies(response.body().getResults());
-
             }
 
             @Override

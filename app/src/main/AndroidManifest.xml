@@ -13,12 +13,10 @@
         android:theme="@style/Theme.TMDb">
 
             <activity android:name=".CelebDetailActivity"/>
-            <activity android:name=".ProfileActivity" />
+            <activity android:name=".SettingsActivity" />
             <activity android:name=".SearchActivity" />
-            <activity android:name=".SigninActivity" />
-            <activity android:name=".SignupActivity" />
-            <activity
-                android:name=".WelcomeActivity">
+        <activity
+                android:name=".SplashActivity">
                 <intent-filter>
                     <action android:name="android.intent.action.MAIN" />
 

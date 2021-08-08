@@ -320,7 +320,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_media"/>
+                tools:listitem="@layout/item_image"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:text="Keywords"

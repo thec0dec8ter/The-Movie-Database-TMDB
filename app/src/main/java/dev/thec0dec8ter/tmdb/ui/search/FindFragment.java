@@ -24,7 +24,7 @@ public class FindFragment extends Fragment {
     private TextView txtTvShow;
     private TextView txtCeleb;
 
-    private Button btnClear;
+    private TextView btnClear;
     private Button btnSeeResult;
 
     private RecyclerView runtimeRecycler;

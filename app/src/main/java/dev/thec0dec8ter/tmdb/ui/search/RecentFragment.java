@@ -43,8 +43,9 @@ public class RecentFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        String query = getArguments().getString("query");
-        if(query != null && !query.isEmpty()){
+
+        if(getArguments() != null){
+            String query = getArguments().getString("query");
             performSearch(query);
         }
     }
@@ -75,6 +76,7 @@ public class RecentFragment extends Fragment {
         call.enqueue(new Callback<Search>() {
             @Override
             public void onResponse(Call<Search> call, Response<Search> response) {
+                searchAdapter.clearResults();
                 searchAdapter.addResults(response.body().getResults());
             }
 

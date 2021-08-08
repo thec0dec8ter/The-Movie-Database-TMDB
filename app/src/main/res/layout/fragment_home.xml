@@ -56,21 +56,11 @@
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/getty"
-                    android:scaleType="fitXY"/>
-
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:backgroundTint="@color/dark_blue">
+                    android:background="@drawable/getty">
 
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
@@ -107,7 +97,6 @@
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-            </FrameLayout>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"

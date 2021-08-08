@@ -1,12 +1,16 @@
 package dev.thec0dec8ter.tmdb.adapters;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -14,6 +18,8 @@ import java.util.ArrayList;
 
 import dev.thec0dec8ter.tmdb.R;
 import dev.thec0dec8ter.tmdb.models.Search;
+
+import static dev.thec0dec8ter.tmdb.network.RetrofitClientInstance.IMAGE_BASE_URL;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchviewHolder>{
 
@@ -38,6 +44,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Searchview
     }
 
     public class SearchviewHolder extends RecyclerView.ViewHolder{
+        ImageView poster;
         TextView title;
         TextView ratingCount;
         TextView mediaType;
@@ -46,6 +53,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Searchview
 
         public SearchviewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
+            poster = itemView.findViewById(R.id.poster);
             title = itemView.findViewById(R.id.title);
             ratingCount = itemView.findViewById(R.id.rating_count);
             mediaType = itemView.findViewById(R.id.media_type);
@@ -61,13 +69,21 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Searchview
         }
 
         public void bind(Search search){
+            Picasso.get()
+                    .load(IMAGE_BASE_URL + search.getPoster_path())
+                    .fit()
+                    .into(poster);
             title.setTag(search.getId());
+            int ratePercent = Math.round(search.getVote_average())*10;
+            mediaType.setText(search.getMedia_type());
             if(search.getMedia_type().equals("person")){
-                title.setText(search.getName());
+                title.setText(Html.fromHtml("<b>Name: </b>" + search.getName()));
             }else if(search.getMedia_type().equals("movie")){
-                title.setText(search.getTitle());
+                title.setText(Html.fromHtml("<b>Title: </b>" + search.getTitle()));
+                ratingCount.setText(String.valueOf(ratePercent));
             }else {
-                title.setText(search.getName());
+                title.setText(Html.fromHtml("<b>Title: </b>" + search.getName()));
+                ratingCount.setText(String.valueOf(ratePercent));
             }
 
         }
@@ -80,6 +96,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Searchview
 
     public void addResults(ArrayList<Search> results){
         this.results.addAll(results);
+        notifyDataSetChanged();
+    }
+
+    public void clearResults(){
+        this.results.clear();
         notifyDataSetChanged();
     }
 }
