@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".DetailActivity">
+    tools:context=".MovieDetailActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,20 +24,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="240dp">
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <ImageView
                     android:id="@+id/img_backdrop"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/black"/>
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/tagline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|end"
                     android:layout_margin="10dp"
                     android:padding="5dp"
-                    android:text="The future ain't what it used to be knkn knknknknk"
+                    android:text=""
                     android:backgroundTint="@color/light_blue"
                     android:background="@drawable/curved_corners"
                     android:textColor="@color/white"
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/title"
                     android:text="Title"
                     android:textSize="22sp"
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <TextView
                         android:id="@+id/year"
                         android:text="2020"
                         android:layout_width="wrap_content"
@@ -75,15 +75,15 @@
                         android:padding="5dp"
                         android:layout_margin="5dp"/>
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/genre_name"
+                    <TextView
+                        android:id="@+id/genre"
                         android:text="PG-13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:layout_margin="5dp"/>
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <TextView
                         android:id="@+id/runtime"
                         android:text="1h 35m"
                         android:layout_width="wrap_content"
@@ -100,7 +100,7 @@
                 android:layout_height="1dp"
                 android:background="@color/black"/>
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -110,7 +110,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content">
 
-                    <androidx.appcompat.widget.AppCompatImageView
+                    <ImageView
                         android:id="@+id/img_poster"
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
@@ -146,7 +146,7 @@
                             android:maxLines="1"
                             android:layout_margin="5dp"/>
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <TextView
                             android:id="@+id/rating_count"
                             android:text="0"
                             android:textSize="12sp"
@@ -162,7 +162,7 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/overview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -170,7 +170,7 @@
                     android:maxLines="12"
                     android:ellipsize="end" />
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -185,7 +185,7 @@
                 android:layout_height="48dp"
                 android:background="@drawable/curved_corners"
                 android:backgroundTint="@color/dark_blue"
-                android:drawableStart="@drawable/ic_add"
+                android:drawableStart="@drawable/ic_info"
                 android:padding="10dp"
                 android:layout_margin="10dp"/>
 
@@ -207,7 +207,7 @@
                 android:background="@color/white"
                 android:gravity="center">
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:text="Top Billed Cast"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -225,7 +225,7 @@
                     app:cardBackgroundColor="@color/dark_blue"
                     app:cardCornerRadius="10dp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <TextView
                         android:text="See All"
                         android:textSize="12sp"
                         android:textColor="@color/light_green"
@@ -261,68 +261,33 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:text="Media"
+                <TextView
+                    android:text="Images &amp; Posters"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:maxLines="5"
                     android:padding="5dp"
                     android:layout_margin="5dp" />
 
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/media_tabs"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_margin="5dp"
-                    app:tabTextAppearance="@style/TextAppearance.AppCompat.Menu">
-
-                    <com.google.android.material.tabs.TabItem
-                        android:text="Posters"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <com.google.android.material.tabs.TabItem
-                        android:text="Videos"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                </com.google.android.material.tabs.TabLayout>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="100dp"
-                    android:layout_height="20dp"
-                    android:layout_margin="5dp"
-                    app:cardBackgroundColor="@color/dark_blue"
-                    app:cardCornerRadius="10dp">
-
-                    <TextView
-                        android:text="See All"
-                        android:textSize="12sp"
-                        android:textColor="@color/light_green"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"/>
-
-                </androidx.cardview.widget.CardView>
+                <include
+                    layout="@layout/button_see_all"/>
 
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/media_recycler"
+                android:id="@+id/image_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_image"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:text="Keywords"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -332,7 +297,7 @@
                 android:padding="5dp"
                 android:layout_margin="5dp" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:id="@+id/txt_no_keyword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -369,7 +334,7 @@
                 android:background="@color/white"
                 android:gravity="center">
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:text="More Like This"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -387,7 +352,7 @@
                     app:cardBackgroundColor="@color/dark_blue"
                     app:cardCornerRadius="10dp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <TextView
                         android:text="See All"
                         android:textSize="12sp"
                         android:textColor="@color/light_green"

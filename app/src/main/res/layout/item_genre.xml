@@ -7,15 +7,10 @@
     android:padding="5dp"
     android:layout_margin="5dp">
 
-    <ImageView
-        android:id="@+id/genre_poster"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
     <TextView
         android:id="@+id/genre_name"
-        android:text="Comedy"
-        android:textSize="14sp"
+        android:text=""
+        android:textSize="12sp"
         android:textColor="@color/white"
         android:textAllCaps="true"
         android:layout_width="wrap_content"

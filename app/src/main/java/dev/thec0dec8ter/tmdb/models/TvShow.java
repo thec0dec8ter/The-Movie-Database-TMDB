@@ -28,6 +28,7 @@ public class TvShow {
     @SerializedName("backdrop_path")
     @Expose
     private String backdrop_path;
+
     @SerializedName("file_path")
     @Expose
     private String file_path;
@@ -59,24 +60,12 @@ public class TvShow {
     @SerializedName("number_of_seasons")
     @Expose
     private int number_of_seasons;
-    @SerializedName("still_path")
-    @Expose
-    private String still_path;
     @SerializedName("genre_ids")
     @Expose
     private int[] genre_ids;
     @SerializedName("episode_runtime")
     @Expose
     private int[] episode_runtime;
-    @SerializedName("original_language")
-    @Expose
-    private String original_language;
-    @SerializedName("origin_country")
-    @Expose
-    private String[] original_country;
-    @SerializedName("key")
-    @Expose
-    private String key;
     @SerializedName("tagline")
     @Expose
     private String tagline;
@@ -243,14 +232,6 @@ public class TvShow {
         this.number_of_seasons = number_of_seasons;
     }
 
-    public String getStill_path() {
-        return still_path;
-    }
-
-    public void setStill_path(String still_path) {
-        this.still_path = still_path;
-    }
-
     public int[] getGenre_ids() {
         return genre_ids;
     }
@@ -265,30 +246,6 @@ public class TvShow {
 
     public void setEpisode_runtime(int[] episode_runtime) {
         this.episode_runtime = episode_runtime;
-    }
-
-    public String getOriginal_language() {
-        return original_language;
-    }
-
-    public void setOriginal_language(String original_language) {
-        this.original_language = original_language;
-    }
-
-    public String[] getOriginal_country() {
-        return original_country;
-    }
-
-    public void setOriginal_country(String[] original_country) {
-        this.original_country = original_country;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
     }
 
     public String getTagline() {

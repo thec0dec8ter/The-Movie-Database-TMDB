@@ -52,12 +52,11 @@ public class MoviesFragment extends Fragment {
         super.onCreate(savedInstanceState);
         movieService = RetrofitClientInstance.getRetrofitInstance().create(MovieService.class);
         topRatedAdapter = new MovieAdapter();
-        genreAdapter = new GenreAdapter();
+        genreAdapter = HomeFragment.movieGenreAdapter;
         popularMoviesAdapter = new MovieAdapter();
         upcomingAdapter = new MovieAdapter();
 
         getTopRatedMovies("1");
-        getMovieGenres();
         getPopularMovies("2");
         getUpcomingMovies("1");
     }
@@ -99,22 +98,7 @@ public class MoviesFragment extends Fragment {
         });
     }
 
-    private void getMovieGenres(){
-        call = movieService.getMovieGenres(BuildConfig.KEY);
-        call.enqueue(new Callback<Movie>() {
-            @Override
-            public void onResponse(Call<Movie> call, Response<Movie> response) {
-                for (Movie movie :response.body().getGenres()){
-                    genreAdapter.addGenre(movie.getId(), movie.getName());
-                }
-            }
 
-            @Override
-            public void onFailure(Call<Movie> call, Throwable t) {
-
-            }
-        });
-    }
 
     private void getPopularMovies(String page){
         call = movieService.getPopularMovies(BuildConfig.KEY, page);

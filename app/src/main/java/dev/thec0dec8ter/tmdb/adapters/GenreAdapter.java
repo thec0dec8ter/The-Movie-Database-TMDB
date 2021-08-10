@@ -3,13 +3,10 @@ package dev.thec0dec8ter.tmdb.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -17,8 +14,8 @@ import dev.thec0dec8ter.tmdb.R;
 
 public class GenreAdapter extends RecyclerView.Adapter<GenreAdapter.GenreViewHolder> {
 
-    private final ArrayList<String> genreIds = new ArrayList<>();
-    private final ArrayList<String> genreNames = new ArrayList<>();
+    public final ArrayList<String> ids = new ArrayList<>();
+    public final ArrayList<String> names = new ArrayList<>();
 
     @NonNull
     @Override
@@ -29,40 +26,43 @@ public class GenreAdapter extends RecyclerView.Adapter<GenreAdapter.GenreViewHol
 
     @Override
     public void onBindViewHolder(@NonNull GenreViewHolder holder, int position) {
-        holder.bind(genreNames.get(position));
+        holder.bind(position);
     }
 
     @Override
     public int getItemCount() {
-        if(genreNames.size() < 14){
-            return genreNames.size();
+        if(ids.size() < 14){
+            return names.size();
         }else {
             return 14;
         }
     }
 
     public class GenreViewHolder extends RecyclerView.ViewHolder{
-        ImageView genrePoster;
         TextView genreName;
 
         public GenreViewHolder(@NonNull View itemView) {
             super(itemView);
-            genrePoster = itemView.findViewById(R.id.genre_poster);
             genreName = itemView.findViewById(R.id.genre_name);
         }
 
-        public  void bind(String genre){
-            Picasso.get()
-                    .load(genre)
-                    .fit()
-                    .into(genrePoster);
-            genreName.setText(genre);
+        public  void bind(int pos){
+            genreName.setText(names.get(pos));
         }
     }
 
     public void addGenre(String id,String genreName){
-        genreIds.add(id);
-        genreNames.add(genreName);
+        ids.add(id);
+        names.add(genreName);
         notifyDataSetChanged();
+    }
+
+    public String getGenreById(int id){
+        for(int i = 0; i < ids.size(); i++){
+            if(ids.get(i).equals(String.valueOf(id))){
+                return names.get(i);
+            }
+        }
+        return null;
     }
 }

@@ -53,11 +53,10 @@ public class TvShowsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         tvService = RetrofitClientInstance.getRetrofitInstance().create(TvService.class);
         topRatedAdapter = new TvAdapter();
-        genreAdapter = new GenreAdapter();
+        genreAdapter = HomeFragment.tvGenreAdapter;
         popularTvShowsAdapter = new TvAdapter();
 
         getTopRatedTvShows("1");
-        getTvGenres();
         getPopularTvShows("1");
     }
 
@@ -109,23 +108,6 @@ public class TvShowsFragment extends Fragment {
             @Override
             public void onFailure(Call<TvShow> call, Throwable t) {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void getTvGenres(){
-        call = tvService.getTvShowGenres(BuildConfig.KEY);
-        call.enqueue(new Callback<TvShow>() {
-            @Override
-            public void onResponse(Call<TvShow> call, Response<TvShow> response) {
-                for (TvShow tvShow :response.body().getGenres()){
-                    genreAdapter.addGenre(tvShow.getId(), tvShow.getName());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<TvShow> call, Throwable t) {
-
             }
         });
     }

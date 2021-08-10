@@ -2,6 +2,7 @@ package dev.thec0dec8ter.tmdb.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,10 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import dev.thec0dec8ter.tmdb.DetailActivity;
 import dev.thec0dec8ter.tmdb.R;
+import dev.thec0dec8ter.tmdb.TvDetailActivity;
 import dev.thec0dec8ter.tmdb.models.TvShow;
+import dev.thec0dec8ter.tmdb.ui.main.HomeFragment;
 
 import static dev.thec0dec8ter.tmdb.network.RetrofitClientInstance.IMAGE_BASE_URL;
 
@@ -54,15 +56,7 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvViewHolder> {
         TextView rating;
         TextView title;
         TextView year;
-        ImageView info;
-
-        View bottomSheet;
-        ImageView bottomSheetPoster;
-        TextView bottomSheetTitle;
-        TextView bottomSheetYear;
-        TextView bottomSheetGenre;
-        TextView bottomSheetRuntime;
-        TextView bottomSheetOverview;
+        TextView genre;
 
         public TvViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -73,11 +67,12 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvViewHolder> {
             rating = itemView.findViewById(R.id.rating);
             title = itemView.findViewById(R.id.title);
             year = itemView.findViewById(R.id.year);
+            genre = itemView.findViewById(R.id.genre);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(view.getContext(), DetailActivity.class);
+                    Intent intent = new Intent(context, TvDetailActivity.class);
                     intent.putExtra("tv_id", tvList.get(getAdapterPosition()).getId());
                     view.getContext().startActivity(intent);
                 }
@@ -85,21 +80,29 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvViewHolder> {
         }
 
         public void bind(TvShow tvShow) {
-            Picasso.get().load(IMAGE_BASE_URL + tvShow.getPoster_path()).fit().into(poster);
+            Picasso.get()
+                    .load(IMAGE_BASE_URL + tvShow.getPoster_path())
+                    .fit()
+                    .into(poster);
             if(Math.round(tvShow.getVote_average()) < 1){
                 ratingCard.setVisibility(View.INVISIBLE);
             }else {
-                int ratePercent = Math.round(tvShow.getVote_average())*10;
+                int ratePercent = Math.round(tvShow.getVote_average()) *10 ;
                 rating.setText(String.valueOf(ratePercent));
             }
             title.setText(tvShow.getName());
-//            year.setText(tvShow.getFirst_air_date().split("-")[0]);
+            year.setText(tvShow.getFirst_air_date().split("-")[0]);
+            genre.setText(HomeFragment.tvGenreAdapter.getGenreById(tvShow.getGenre_ids()[0]));
 
         }
     }
 
     public void addTvShows(ArrayList<TvShow> tvList) {
-        this.tvList.addAll(tvList);
+        for(TvShow show: tvList){
+            if(show.getGenre_ids().length > 0){
+                this.tvList.add(show);
+            }
+        }
         notifyDataSetChanged();
     }
 }

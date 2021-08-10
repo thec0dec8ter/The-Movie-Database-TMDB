@@ -15,9 +15,10 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import dev.thec0dec8ter.tmdb.DetailActivity;
+import dev.thec0dec8ter.tmdb.MovieDetailActivity;
 import dev.thec0dec8ter.tmdb.R;
 import dev.thec0dec8ter.tmdb.models.Movie;
+import dev.thec0dec8ter.tmdb.ui.main.HomeFragment;
 
 import static dev.thec0dec8ter.tmdb.network.RetrofitClientInstance.IMAGE_BASE_URL;
 
@@ -48,6 +49,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         TextView rating;
         TextView title;
         TextView year;
+        TextView genre;
 
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -56,11 +58,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             rating = itemView.findViewById(R.id.rating);
             title = itemView.findViewById(R.id.title);
             year = itemView.findViewById(R.id.year);
+            genre = itemView.findViewById(R.id.genre);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(view.getContext(), DetailActivity.class);
+                    Intent intent = new Intent(view.getContext(), MovieDetailActivity.class);
                     intent.putExtra("movie_id", moviesList.get(getAdapterPosition()).getId());
                     view.getContext().startActivity(intent);
                 }
@@ -76,11 +79,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             if(Math.round(movie.getVote_average()) < 1){
                 ratingCard.setVisibility(View.INVISIBLE);
             }else {
-                int ratePercent = Math.round(movie.getVote_average())*10;
+                int ratePercent = Math.round(movie.getVote_average()) * 10;
                 rating.setText(String.valueOf(ratePercent));
             }
             title.setText(movie.getTitle());
             year.setText(movie.getRelease_date().split("-")[0]);
+            genre.setText(HomeFragment.movieGenreAdapter.getGenreById(movie.getGenre_ids()[0]));
         }
 
     }

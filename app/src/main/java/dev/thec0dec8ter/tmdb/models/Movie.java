@@ -21,7 +21,7 @@ public class Movie{
     private String original_title;
     @SerializedName("name")
     @Expose
-    private String name;
+    private String genre_name;
     @SerializedName("overview")
     @Expose
     private String overview;
@@ -31,9 +31,8 @@ public class Movie{
     @SerializedName("backdrop_path")
     @Expose
     private String backdrop_path;
-    @SerializedName("belongs_to_collection")
-    @Expose
-    private Movie collection;
+
+
     @SerializedName("genres")
     @Expose
     private ArrayList<Movie> genres;
@@ -55,18 +54,9 @@ public class Movie{
     @SerializedName("popularity")
     @Expose
     private String popularity;
-    @SerializedName("adult")
-    @Expose
-    private String adult_content;
     @SerializedName("logo_path")
     @Expose
     private String logo_path;
-    @SerializedName("production_companies")
-    @Expose
-    private ArrayList<Movie> production_companies;
-    @SerializedName("iso_3166_1")
-    @Expose
-    private String iso_3166_1;
     @SerializedName("release_date")
     @Expose
     private String release_date;
@@ -82,12 +72,7 @@ public class Movie{
     @SerializedName("english_name")
     @Expose
     private String english_name;
-    @SerializedName("iso_639_1")
-    @Expose
-    private String iso_639_1;
-    @SerializedName("status")
-    @Expose
-    private String status;
+
     @SerializedName("tagline")
     @Expose
     private String tagline;
@@ -111,12 +96,9 @@ public class Movie{
     @SerializedName("key")
     @Expose
     private String key;
-    @SerializedName("site")
-    @Expose
-    private String site;
     @SerializedName("genre_ids")
     @Expose
-    private String[] genre_ids;
+    private int[] genre_ids;
     @SerializedName("page")
     @Expose
     private String page;
@@ -166,12 +148,12 @@ public class Movie{
         this.original_title = original_title;
     }
 
-    public String getName() {
-        return name;
+    public String getGenreName() {
+        return genre_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setGenreName(String name) {
+        this.genre_name = name;
     }
 
     public String getOverview() {
@@ -196,14 +178,6 @@ public class Movie{
 
     public void setBackdrop_path(String backdrop_path) {
         this.backdrop_path = backdrop_path;
-    }
-
-    public Movie getCollection() {
-        return collection;
-    }
-
-    public void setCollection(Movie collection) {
-        this.collection = collection;
     }
 
     public ArrayList<Movie> getGenres() {
@@ -262,13 +236,6 @@ public class Movie{
         this.popularity = popularity;
     }
 
-    public String getAdult_content() {
-        return adult_content;
-    }
-
-    public void setAdult_content(String adult_content) {
-        this.adult_content = adult_content;
-    }
 
     public String getLogo_path() {
         return logo_path;
@@ -276,22 +243,6 @@ public class Movie{
 
     public void setLogo_path(String logo_path) {
         this.logo_path = logo_path;
-    }
-
-    public ArrayList<Movie> getProduction_companies() {
-        return production_companies;
-    }
-
-    public void setProduction_companies(ArrayList<Movie> production_companies) {
-        this.production_companies = production_companies;
-    }
-
-    public String getIso_3166_1() {
-        return iso_3166_1;
-    }
-
-    public void setIso_3166_1(String iso_3166_1) {
-        this.iso_3166_1 = iso_3166_1;
     }
 
     public String getRelease_date() {
@@ -334,21 +285,6 @@ public class Movie{
         this.english_name = english_name;
     }
 
-    public String getIso_639_1() {
-        return iso_639_1;
-    }
-
-    public void setIso_639_1(String iso_639_1) {
-        this.iso_639_1 = iso_639_1;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     public String getTagline() {
         return tagline;
@@ -398,19 +334,11 @@ public class Movie{
         this.key = key;
     }
 
-    public String getSite() {
-        return site;
-    }
-
-    public void setSite(String site) {
-        this.site = site;
-    }
-
-    public String[] getGenre_ids() {
+    public int[] getGenre_ids() {
         return genre_ids;
     }
 
-    public void setGenre_ids(String[] genre_ids) {
+    public void setGenre_ids(int[] genre_ids) {
         this.genre_ids = genre_ids;
     }
 

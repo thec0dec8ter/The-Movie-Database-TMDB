@@ -1,9 +1,12 @@
 package dev.thec0dec8ter.tmdb.adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +19,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+import dev.thec0dec8ter.tmdb.CelebDetailActivity;
+import dev.thec0dec8ter.tmdb.MovieDetailActivity;
 import dev.thec0dec8ter.tmdb.R;
+import dev.thec0dec8ter.tmdb.TvDetailActivity;
 import dev.thec0dec8ter.tmdb.models.Search;
 
 import static dev.thec0dec8ter.tmdb.network.RetrofitClientInstance.IMAGE_BASE_URL;
@@ -50,6 +56,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Searchview
         TextView mediaType;
         TextView year;
         TextView genreName;
+        Button details;
 
         public SearchviewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -59,11 +66,26 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Searchview
             mediaType = itemView.findViewById(R.id.media_type);
             year = itemView.findViewById(R.id.year);
             genreName = itemView.findViewById(R.id.genre_name);
+            details = itemView.findViewById(R.id.btn_details);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            details.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Context context = details.getContext();
+                    Intent intent;
+                    if(mediaType.getText().equals("person")){
+                        intent = new Intent(context, CelebDetailActivity.class);
+                        intent.putExtra("celeb_id", title.getTag().toString());
+                        v.getContext().startActivity(intent);
+                    }else if(mediaType.getText().equals("movie")){
+                        intent = new Intent(context, MovieDetailActivity.class);
+                        intent.putExtra("movie_id", title.getTag().toString());
+                        v.getContext().startActivity(intent);
+                    }else {
+                        intent = new Intent(context, TvDetailActivity.class);
+                        intent.putExtra("tv_id", title.getTag().toString());
+                        v.getContext().startActivity(intent);
+                    }
                 }
             });
         }
@@ -90,13 +112,20 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Searchview
     }
 
     public void addResult(Search result){
-        this.results.add(result);
+        if(!(result.getPopularity() < 1) || !(result.getVote_average() < 1)){
+            this.results.add(result);
+            notifyDataSetChanged();
+        }
         notifyDataSetChanged();
     }
 
     public void addResults(ArrayList<Search> results){
-        this.results.addAll(results);
-        notifyDataSetChanged();
+        for(Search result:results){
+            if(!(result.getPopularity() < 1) || !(result.getVote_average() < 1)){
+                this.results.add(result);
+                notifyDataSetChanged();
+            }
+        }
     }
 
     public void clearResults(){

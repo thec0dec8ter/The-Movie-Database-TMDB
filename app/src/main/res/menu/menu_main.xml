@@ -12,7 +12,7 @@
     <item
         android:id="@+id/profile"
         android:title="Profile"
-        android:icon="@drawable/ic_account"
+        android:icon="@drawable/ic_settings"
         app:showAsAction="ifRoom" />
 
 </menu>

@@ -33,7 +33,7 @@ public class Celebrity {
     private String place_of_birth;
     @SerializedName("cast")
     @Expose
-    private ArrayList<?> credits;
+    private ArrayList<Celebrity> credits;
 
     @SerializedName("file_path")
     @Expose
@@ -146,12 +146,11 @@ public class Celebrity {
         this.place_of_birth = place_of_birth;
     }
 
-
-    public ArrayList<?> getCredits() {
+    public ArrayList<Celebrity> getCredits() {
         return credits;
     }
 
-    public void setCredits(ArrayList<?> credits) {
+    public void setCredits(ArrayList<Celebrity> credits) {
         this.credits = credits;
     }
 }

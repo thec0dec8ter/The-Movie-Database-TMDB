@@ -17,7 +17,9 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import dev.thec0dec8ter.tmdb.BuildConfig;
 import dev.thec0dec8ter.tmdb.R;
+import dev.thec0dec8ter.tmdb.adapters.GenreAdapter;
 import dev.thec0dec8ter.tmdb.adapters.MovieAdapter;
 import dev.thec0dec8ter.tmdb.adapters.TvAdapter;
 import dev.thec0dec8ter.tmdb.models.Movie;
@@ -49,6 +51,10 @@ public class HomeFragment extends Fragment{
     private MovieAdapter nowPlayingMovie;
     private MovieAdapter trendingMovieAdapter;
 
+    public static GenreAdapter movieGenreAdapter;
+    public static GenreAdapter tvGenreAdapter;
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +65,12 @@ public class HomeFragment extends Fragment{
         popularMovieAdapter = new MovieAdapter();
         trendingMovieAdapter = new MovieAdapter();
         nowPlayingMovie = new MovieAdapter();
+
+        movieGenreAdapter = new GenreAdapter();
+        tvGenreAdapter = new GenreAdapter();
+
+        getMovieGenres();
+        getTvGenres();
 
     }
 
@@ -153,6 +165,42 @@ public class HomeFragment extends Fragment{
         getTrendingTvShows("1");
 
         return view;
+    }
+
+    private void getMovieGenres(){
+        MovieService movieService = RetrofitClientInstance.getRetrofitInstance().create(MovieService.class);
+        Call<Movie> call = movieService.getMovieGenres(BuildConfig.KEY);
+        call.enqueue(new Callback<Movie>() {
+            @Override
+            public void onResponse(Call<Movie> call, Response<Movie> response) {
+                for (Movie movie :response.body().getGenres()){
+                    movieGenreAdapter.addGenre(movie.getId(), movie.getGenreName());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Movie> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void getTvGenres(){
+        TvService tvService = RetrofitClientInstance.getRetrofitInstance().create(TvService.class);
+        Call<TvShow> call = tvService.getTvShowGenres(BuildConfig.KEY);
+        call.enqueue(new Callback<TvShow>() {
+            @Override
+            public void onResponse(Call<TvShow> call, Response<TvShow> response) {
+                for (TvShow tvShow :response.body().getGenres()){
+                    tvGenreAdapter.addGenre(tvShow.getId(), tvShow.getName());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TvShow> call, Throwable t) {
+
+            }
+        });
     }
 
     private void addSwitchListeners(FrameLayout frameLayout){
