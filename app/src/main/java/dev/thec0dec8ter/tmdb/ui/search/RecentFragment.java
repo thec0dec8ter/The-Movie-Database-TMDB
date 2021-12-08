@@ -35,22 +35,6 @@ public class RecentFragment extends Fragment {
     }
 
     @Override
-    public void onSaveInstanceState(@NonNull @NotNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-
-        if(getArguments() != null){
-            String query = getArguments().getString("query");
-            performSearch(query);
-        }
-    }
-
-    @Override
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         searchAdapter = new SearchAdapter();
@@ -66,8 +50,22 @@ public class RecentFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         searchRecycler.setAdapter(searchAdapter);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull @NotNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(getArguments() != null){
+            String query = getArguments().getString("query");
+            performSearch(query);
+        }
     }
 
     public void performSearch(String query){

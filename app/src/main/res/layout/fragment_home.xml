@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -37,11 +38,16 @@
                         android:padding="5dp"
                         android:layout_margin="5dp"/>
 
-                    <include
+                    <dev.thec0dec8ter.tmdb.custom_views.CustomSwitch
                         android:id="@+id/popular_switch"
-                        layout="@layout/switch_blue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
+
+                    <!--                    <include-->
+                    <!--                        android:id="@+id/popular_switch"-->
+                    <!--                        layout="@layout/switch_blue"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"/>-->
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -52,50 +58,50 @@
                     android:background="@color/white"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_movie"/>
+                    tools:listitem="@layout/item_show"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/dark_blue">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@color/dark_blue">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
 
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="5dp">
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:text="Now Playing"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:padding="5dp"
-                            android:text="Now Playing"
-                            android:textColor="@color/white"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-                        <include
-                            layout="@layout/switch_green"
-                            android:id="@+id/now_playing_switch"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/now_playing_recycler"
-                        android:layout_width="match_parent"
+                    <dev.thec0dec8ter.tmdb.custom_views.CustomSwitch
+                        android:id="@+id/now_playing_switch"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/item_movie"/>
+                        android:backgroundTint="@color/light_green"/>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/now_playing_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_show"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -119,9 +125,8 @@
                         android:padding="5dp"
                         android:layout_margin="5dp"/>
 
-                    <include
+                    <dev.thec0dec8ter.tmdb.custom_views.CustomSwitch
                         android:id="@+id/trending_switch"
-                        layout="@layout/switch_blue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"/>
@@ -134,7 +139,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_movie"/>
+                    tools:listitem="@layout/item_show"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

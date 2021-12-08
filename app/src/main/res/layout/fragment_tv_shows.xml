@@ -34,24 +34,10 @@
                     android:padding="5dp" />
 
 
-                <androidx.cardview.widget.CardView
+                <dev.thec0dec8ter.tmdb.custom_views.CustomButton
                     android:id="@+id/see_all_top_rated"
-                    android:layout_width="100dp"
-                    android:layout_height="20dp"
-                    android:padding="5dp"
-                    app:cardBackgroundColor="@color/dark_blue"
-                    app:cardCornerRadius="10dp">
-
-                    <TextView
-                        android:text="See All"
-                        android:textSize="12sp"
-                        android:textColor="@color/light_green"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"/>
-
-                </androidx.cardview.widget.CardView>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 
@@ -61,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_tv"/>
+                tools:listitem="@layout/item_show"/>
 
         </LinearLayout>
 
@@ -87,24 +73,10 @@
                     android:layout_weight="1"
                     android:padding="5dp" />
 
-                <androidx.cardview.widget.CardView
+                <dev.thec0dec8ter.tmdb.custom_views.CustomButton
                     android:id="@+id/see_all_genres"
-                    android:layout_width="100dp"
-                    android:layout_height="20dp"
-                    android:padding="5dp"
-                    app:cardBackgroundColor="@color/dark_blue"
-                    app:cardCornerRadius="10dp">
-
-                    <TextView
-                        android:text="See All"
-                        android:textSize="12sp"
-                        android:textColor="@color/light_green"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"/>
-
-                </androidx.cardview.widget.CardView>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 
@@ -147,24 +119,9 @@
                     android:layout_weight="1"
                     android:padding="5dp" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/see_all_popular"
-                    android:layout_width="100dp"
-                    android:layout_height="20dp"
-                    android:padding="5dp"
-                    app:cardBackgroundColor="@color/dark_blue"
-                    app:cardCornerRadius="10dp">
-
-                    <TextView
-                        android:text="See All"
-                        android:textSize="12sp"
-                        android:textColor="@color/light_green"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"/>
-
-                </androidx.cardview.widget.CardView>
+                <dev.thec0dec8ter.tmdb.custom_views.CustomButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 
@@ -174,7 +131,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_tv" />
+                tools:listitem="@layout/item_show" />
 
         </LinearLayout>
 
@@ -226,7 +183,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_tv"/>
+                tools:listitem="@layout/item_show"/>
 
         </LinearLayout>
 

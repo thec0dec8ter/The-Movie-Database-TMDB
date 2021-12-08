@@ -8,14 +8,17 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 import dev.thec0dec8ter.tmdb.BuildConfig;
 import dev.thec0dec8ter.tmdb.R;
 import dev.thec0dec8ter.tmdb.adapters.GenreAdapter;
-import dev.thec0dec8ter.tmdb.adapters.TvAdapter;
+import dev.thec0dec8ter.tmdb.adapters.ShowAdapter;
+import dev.thec0dec8ter.tmdb.custom_views.CustomButton;
+import dev.thec0dec8ter.tmdb.models.Genre;
 import dev.thec0dec8ter.tmdb.models.TvShow;
 import dev.thec0dec8ter.tmdb.network.RetrofitClientInstance;
 import dev.thec0dec8ter.tmdb.network.TvService;
@@ -23,22 +26,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 public class TvShowsFragment extends Fragment {
-
 
     private Call<TvShow> call;
 
-    private CardView seeAllTopRated;
+    private CustomButton seeAllTopRated;
     private RecyclerView topRatedRecycler;
-    private CardView seeAllGenres;
+    private CustomButton seeAllGenres;
     private RecyclerView genreRecycler;
-    private CardView seeAllPopular;
+    private CustomButton seeAllPopular;
     private RecyclerView popularTvShowsRecycler;
 
-    private TvAdapter topRatedAdapter;
+    private ShowAdapter topRatedAdapter;
     private GenreAdapter genreAdapter;
-    private TvAdapter popularTvShowsAdapter;
+    private ShowAdapter popularTvShowsAdapter;
 
     private TvService tvService;
 
@@ -52,9 +53,9 @@ public class TvShowsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         tvService = RetrofitClientInstance.getRetrofitInstance().create(TvService.class);
-        topRatedAdapter = new TvAdapter();
+        topRatedAdapter = new ShowAdapter();
         genreAdapter = HomeFragment.tvGenreAdapter;
-        popularTvShowsAdapter = new TvAdapter();
+        popularTvShowsAdapter = new ShowAdapter();
 
         getTopRatedTvShows("1");
         getPopularTvShows("1");
@@ -97,12 +98,23 @@ public class TvShowsFragment extends Fragment {
         });
     }
 
+    private void getGenres(ShowAdapter adapter, Response<TvShow> response){
+        ArrayList<Genre> genres = new ArrayList<>();
+        for(TvShow tvShow: response.body().getResults()){
+            for (int id:tvShow.getGenre_ids()){
+                genres.add(genreAdapter.getGenreById(id));
+            }
+            tvShow.setGenres(genres);
+            adapter.addTvShow(tvShow);
+        }
+    }
+
     private void getTopRatedTvShows(String page){
         call = tvService.getTopRatedTvShows(BuildConfig.KEY,page);
         call.enqueue(new Callback<TvShow>() {
             @Override
             public void onResponse(Call<TvShow> call, Response<TvShow> response) {
-                topRatedAdapter.addTvShows(response.body().getResults());
+                getGenres(topRatedAdapter, response);
             }
 
             @Override
@@ -117,7 +129,7 @@ public class TvShowsFragment extends Fragment {
         call.enqueue(new Callback<TvShow>() {
             @Override
             public void onResponse(Call<TvShow> call, Response<TvShow> response) {
-                popularTvShowsAdapter.addTvShows(response.body().getResults());
+                getGenres(popularTvShowsAdapter, response);
             }
 
             @Override

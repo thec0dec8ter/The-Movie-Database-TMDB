@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import dev.thec0dec8ter.tmdb.R;
+import dev.thec0dec8ter.tmdb.models.Genre;
 
 public class GenreAdapter extends RecyclerView.Adapter<GenreAdapter.GenreViewHolder> {
 
-    public final ArrayList<String> ids = new ArrayList<>();
-    public final ArrayList<String> names = new ArrayList<>();
+    public final ArrayList<Genre> genres = new ArrayList<>();
 
     @NonNull
     @Override
@@ -31,8 +31,8 @@ public class GenreAdapter extends RecyclerView.Adapter<GenreAdapter.GenreViewHol
 
     @Override
     public int getItemCount() {
-        if(ids.size() < 14){
-            return names.size();
+        if(genres.size() < 14){
+            return genres.size();
         }else {
             return 14;
         }
@@ -47,20 +47,19 @@ public class GenreAdapter extends RecyclerView.Adapter<GenreAdapter.GenreViewHol
         }
 
         public  void bind(int pos){
-            genreName.setText(names.get(pos));
+            genreName.setText(genres.get(pos).getName());
         }
     }
 
-    public void addGenre(String id,String genreName){
-        ids.add(id);
-        names.add(genreName);
+    public void addGenre(Genre genre){
+        genres.add(genre);
         notifyDataSetChanged();
     }
 
-    public String getGenreById(int id){
-        for(int i = 0; i < ids.size(); i++){
-            if(ids.get(i).equals(String.valueOf(id))){
-                return names.get(i);
+    public Genre getGenreById(int id){
+        for (Genre genre:genres){
+            if(id == genre.getId()){
+                return genre;
             }
         }
         return null;

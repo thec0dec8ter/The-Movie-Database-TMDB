@@ -55,7 +55,7 @@ public class SearchActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     Bundle args = new Bundle();
-                    args.putString("query",editQuery.getText().toString());
+                    args.putString("query", editQuery.getText().toString());
                     viewPager.setCurrentItem(0);
                     searchPagerAdapter.getCurrentFragment(0).setArguments(args);
                     searchPagerAdapter.getCurrentFragment(0).onResume();
@@ -69,7 +69,7 @@ public class SearchActivity extends AppCompatActivity {
                 true,false, (tab, position) -> {
             switch (position){
                 case 0:
-                    tab.setText("Recent");
+                    tab.setText("Recent searches");
                     viewPager.setCurrentItem(position);
                     break;
                 case 1:

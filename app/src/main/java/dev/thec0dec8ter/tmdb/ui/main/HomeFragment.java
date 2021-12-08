@@ -1,27 +1,27 @@
 package dev.thec0dec8ter.tmdb.ui.main;
 
-import android.animation.Animator;
-import android.animation.AnimatorInflater;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 
 import dev.thec0dec8ter.tmdb.BuildConfig;
 import dev.thec0dec8ter.tmdb.R;
 import dev.thec0dec8ter.tmdb.adapters.GenreAdapter;
-import dev.thec0dec8ter.tmdb.adapters.MovieAdapter;
-import dev.thec0dec8ter.tmdb.adapters.TvAdapter;
+import dev.thec0dec8ter.tmdb.adapters.ShowAdapter;
+import dev.thec0dec8ter.tmdb.custom_views.CustomSwitch;
+import dev.thec0dec8ter.tmdb.models.Genre;
 import dev.thec0dec8ter.tmdb.models.Movie;
 import dev.thec0dec8ter.tmdb.models.TvShow;
 import dev.thec0dec8ter.tmdb.network.MovieService;
@@ -35,21 +35,19 @@ import static dev.thec0dec8ter.tmdb.BuildConfig.KEY;
 
 public class HomeFragment extends Fragment{
 
-    private FrameLayout popularSwitch;
+    private CustomSwitch popularSwitch;
+    private CustomSwitch nowPlayingSwitch;
+    private CustomSwitch trendingSwitch;
     private RecyclerView popularRecycler;
-    private FrameLayout nowPlayingSwitch;
     private RecyclerView nowPlayingRecycler;
-    private FrameLayout trendingSwitch;
     private RecyclerView trendingRecycler;
 
-    private Animator animator;
-
-    private TvAdapter popularTvAdapter;
-    private TvAdapter nowPlayingTv;
-    private TvAdapter trendingTvAdapter;
-    private MovieAdapter popularMovieAdapter;
-    private MovieAdapter nowPlayingMovie;
-    private MovieAdapter trendingMovieAdapter;
+    private ShowAdapter popularShowAdapter;
+    private ShowAdapter nowPlayingMovie;
+    private ShowAdapter trendingShowAdapter;
+    private ShowAdapter popularTvAdapter;
+    private ShowAdapter nowPlayingTv;
+    private ShowAdapter trendingTvAdapter;
 
     public static GenreAdapter movieGenreAdapter;
     public static GenreAdapter tvGenreAdapter;
@@ -59,18 +57,15 @@ public class HomeFragment extends Fragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        popularTvAdapter = new TvAdapter();
-        nowPlayingTv = new TvAdapter();
-        trendingTvAdapter = new TvAdapter();
-        popularMovieAdapter = new MovieAdapter();
-        trendingMovieAdapter = new MovieAdapter();
-        nowPlayingMovie = new MovieAdapter();
+        popularTvAdapter = new ShowAdapter();
+        nowPlayingTv = new ShowAdapter();
+        trendingTvAdapter = new ShowAdapter();
+        popularShowAdapter = new ShowAdapter();
+        trendingShowAdapter = new ShowAdapter();
+        nowPlayingMovie = new ShowAdapter();
 
         movieGenreAdapter = new GenreAdapter();
         tvGenreAdapter = new GenreAdapter();
-
-        getMovieGenres();
-        getTvGenres();
 
     }
 
@@ -83,19 +78,28 @@ public class HomeFragment extends Fragment{
         nowPlayingRecycler = view.findViewById(R.id.now_playing_recycler);
         trendingSwitch = view.findViewById(R.id.trending_switch);
         trendingRecycler = view.findViewById(R.id.trending_recycler);
+        addSwitchListeners();
+        return view;
+    }
 
-        ((TextView) popularSwitch.findViewById(R.id.thumb_text)).addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+    @Override
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+        getTvGenres();
+        getMovieGenres();
 
+
+
+    }
+
+    private void addSwitchListeners(){
+        popularSwitch.setOnCheckedChangeListener(new CustomSwitch.OnCheckedChangeListener() {
             @Override
-            public void afterTextChanged(Editable editable) {
-                if(editable.toString().equals("In Theaters")){
-                    popularRecycler.setAdapter(popularMovieAdapter);
-                    if(popularMovieAdapter.getItemCount() < 1){
+            public void onCheckedChanged(TextView thumbText, boolean isChecked) {
+                if(thumbText.getText().toString().equals("In Theaters")){
+                    popularRecycler.setAdapter(popularShowAdapter);
+                    if(popularShowAdapter.getItemCount() < 1){
                         getPopularMovies("1");
                     }
                 }else{
@@ -103,21 +107,18 @@ public class HomeFragment extends Fragment{
                     if(popularTvAdapter.getItemCount()  < 1){
                         getPopularTvShows("1");
                     }
-
                 }
+
             }
         });
 
-        ((TextView) nowPlayingSwitch.findViewById(R.id.thumb_text)).addTextChangedListener(new TextWatcher() {
+        nowPlayingSwitch.setThumbColor(R.color.light_green);
+        nowPlayingSwitch.setThumbTextColor(R.color.dark_blue);
+        nowPlayingSwitch.setTrackTextColor(R.color.white);
+        nowPlayingSwitch.setOnCheckedChangeListener(new CustomSwitch.OnCheckedChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if(editable.toString().equals("In Theaters")){
+            public void onCheckedChanged(TextView thumbText, boolean isChecked) {
+                if(thumbText.getText().toString().equals("In Theaters")){
                     nowPlayingRecycler.setAdapter(nowPlayingMovie);
                     if(nowPlayingMovie.getItemCount() < 1){
                         getNowPlayingMovies("2");
@@ -127,23 +128,17 @@ public class HomeFragment extends Fragment{
                     if(nowPlayingTv.getItemCount()  < 1){
                         getTvShowAiringToday("2");
                     }
-
                 }
+
             }
         });
 
-        ((TextView) trendingSwitch.findViewById(R.id.thumb_text)).addTextChangedListener(new TextWatcher() {
+        trendingSwitch.setOnCheckedChangeListener(new CustomSwitch.OnCheckedChangeListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if(editable.toString().equals("In Theaters")){
-                    trendingRecycler.setAdapter(trendingMovieAdapter);
-                    if(trendingMovieAdapter.getItemCount() < 1){
+            public void onCheckedChanged(TextView thumbText, boolean isChecked) {
+                if(thumbText.getText().toString().equals("In Theaters")){
+                    trendingRecycler.setAdapter(trendingShowAdapter);
+                    if(trendingShowAdapter.getItemCount() < 1){
                         getTrendingMovies("1");
                     }
                 }else{
@@ -151,86 +146,10 @@ public class HomeFragment extends Fragment{
                     if(trendingTvAdapter.getItemCount()  < 1){
                         getTrendingTvShows("1");
                     }
-
                 }
-            }
-        });
-
-        addSwitchListeners(popularSwitch);
-        addSwitchListeners(nowPlayingSwitch);
-        addSwitchListeners(trendingSwitch);
-
-        getPopularTvShows("1");
-        getTvShowAiringToday("2");
-        getTrendingTvShows("1");
-
-        return view;
-    }
-
-    private void getMovieGenres(){
-        MovieService movieService = RetrofitClientInstance.getRetrofitInstance().create(MovieService.class);
-        Call<Movie> call = movieService.getMovieGenres(BuildConfig.KEY);
-        call.enqueue(new Callback<Movie>() {
-            @Override
-            public void onResponse(Call<Movie> call, Response<Movie> response) {
-                for (Movie movie :response.body().getGenres()){
-                    movieGenreAdapter.addGenre(movie.getId(), movie.getGenreName());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Movie> call, Throwable t) {
 
             }
         });
-    }
-
-    private void getTvGenres(){
-        TvService tvService = RetrofitClientInstance.getRetrofitInstance().create(TvService.class);
-        Call<TvShow> call = tvService.getTvShowGenres(BuildConfig.KEY);
-        call.enqueue(new Callback<TvShow>() {
-            @Override
-            public void onResponse(Call<TvShow> call, Response<TvShow> response) {
-                for (TvShow tvShow :response.body().getGenres()){
-                    tvGenreAdapter.addGenre(tvShow.getId(), tvShow.getName());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<TvShow> call, Throwable t) {
-
-            }
-        });
-    }
-
-    private void addSwitchListeners(FrameLayout frameLayout){
-        TextView leftTrack = frameLayout.findViewById(R.id.left_track);
-        TextView rightTrack = frameLayout.findViewById(R.id.right_track);
-        TextView thumbText = frameLayout.findViewById(R.id.thumb_text);
-        CardView thumb = frameLayout.findViewById(R.id.thumb);
-
-        leftTrack.setOnClickListener(view -> {
-            String thumb_text = thumbText.getText().toString();
-            String left_text = leftTrack.getText().toString();
-            if (!thumb_text.equals(left_text)) {
-                animator = AnimatorInflater.loadAnimator(view.getContext(), R.animator.switch_slide_left);
-                animator.setTarget(thumb);
-                animator.start();
-                thumbText.setText(leftTrack.getText());
-            }
-        });
-
-        rightTrack.setOnClickListener(view -> {
-            String thumb_text = thumbText.getText().toString();
-            String right_text = rightTrack.getText().toString();
-            if (!thumb_text.equals(right_text)) {
-                animator = AnimatorInflater.loadAnimator(view.getContext(),R.animator.switch_slide_right);
-                animator.setTarget(thumb);
-                animator.start();
-                thumbText.setText(rightTrack.getText());
-            }
-        });
-
     }
 
     private void getPopularTvShows(String page){
@@ -240,7 +159,14 @@ public class HomeFragment extends Fragment{
         call.enqueue(new Callback<TvShow>() {
             @Override
             public void onResponse(Call<TvShow> call, Response<TvShow> response) {
-                popularTvAdapter.addTvShows(response.body().getResults());
+                ArrayList<Genre> genres = new ArrayList<>();
+                for(TvShow tvShow: response.body().getResults()){
+                    for (int id:tvShow.getGenre_ids()){
+                        genres.add(tvGenreAdapter.getGenreById(id));
+                    }
+                    tvShow.setGenres(genres);
+                    popularTvAdapter.addTvShow(tvShow);
+                }
             }
 
             @Override
@@ -257,7 +183,14 @@ public class HomeFragment extends Fragment{
         call.enqueue(new Callback<TvShow>() {
             @Override
             public void onResponse(Call<TvShow> call, Response<TvShow> response) {
-                nowPlayingTv.addTvShows(response.body().getResults());
+                ArrayList<Genre> genres = new ArrayList<>();
+                for(TvShow tvShow: response.body().getResults()){
+                    for (int id:tvShow.getGenre_ids()){
+                        genres.add(tvGenreAdapter.getGenreById(id));
+                    }
+                    tvShow.setGenres(genres);
+                    nowPlayingTv.addTvShow(tvShow);
+                }
             }
 
             @Override
@@ -274,7 +207,14 @@ public class HomeFragment extends Fragment{
         call.enqueue(new Callback<TvShow>() {
             @Override
             public void onResponse(Call<TvShow> call, Response<TvShow> response) {
-                trendingTvAdapter.addTvShows(response.body().getResults());
+                ArrayList<Genre> genres = new ArrayList<>();
+                for(TvShow tvShow: response.body().getResults()){
+                    for (int id:tvShow.getGenre_ids()){
+                        genres.add(tvGenreAdapter.getGenreById(id));
+                    }
+                    tvShow.setGenres(genres);
+                    trendingTvAdapter.addTvShow(tvShow);
+                }
             }
 
             @Override
@@ -284,14 +224,42 @@ public class HomeFragment extends Fragment{
         });
     }
 
+    private void getTvGenres(){
+        TvService tvService = RetrofitClientInstance.getRetrofitInstance().create(TvService.class);
+        Call<Genre> call = tvService.getTvShowGenres(BuildConfig.KEY);
+        call.enqueue(new Callback<Genre>() {
+            @Override
+            public void onResponse(Call<Genre> call, Response<Genre> response) {
+                for (Genre genre :response.body().getGenres()){
+                    tvGenreAdapter.addGenre(genre);
+                }
+                getPopularTvShows("1");
+                getTvShowAiringToday("1");
+                getTrendingTvShows("2");
+            }
+
+            @Override
+            public void onFailure(Call<Genre> call, Throwable t) {
+
+            }
+        });
+    }
+
     private void getPopularMovies(String page){
-        popularRecycler.setAdapter(popularMovieAdapter);
+        popularRecycler.setAdapter(popularShowAdapter);
         MovieService movieService = RetrofitClientInstance.getRetrofitInstance().create(MovieService.class);
         Call<Movie>call = movieService.getPopularMovies(KEY, page);
         call.enqueue(new Callback<Movie>() {
             @Override
             public void onResponse(Call<Movie> call, Response<Movie> response) {
-                popularMovieAdapter.addMovies(response.body().getResults());
+                ArrayList<Genre> genres = new ArrayList<>();
+                for(Movie movie: response.body().getResults()){
+                    for (int id:movie.getGenre_ids()){
+                        genres.add(movieGenreAdapter.getGenreById(id));
+                    }
+                    movie.setGenres(genres);
+                    popularShowAdapter.addMovie(movie);
+                }
             }
 
             @Override
@@ -308,7 +276,14 @@ public class HomeFragment extends Fragment{
         call.enqueue(new Callback<Movie>() {
             @Override
             public void onResponse(Call<Movie> call, Response<Movie> response) {
-                nowPlayingMovie.addMovies(response.body().getResults());
+                ArrayList<Genre> genres = new ArrayList<>();
+                for(Movie movie: response.body().getResults()){
+                    for (int id:movie.getGenre_ids()){
+                        genres.add(movieGenreAdapter.getGenreById(id));
+                    }
+                    movie.setGenres(genres);
+                    nowPlayingMovie.addMovie(movie);
+                }
             }
 
             @Override
@@ -319,18 +294,42 @@ public class HomeFragment extends Fragment{
     }
 
     private void getTrendingMovies(String page){
-        trendingRecycler.setAdapter(trendingMovieAdapter);
+        trendingRecycler.setAdapter(trendingShowAdapter);
         MovieService movieService = RetrofitClientInstance.getRetrofitInstance().create(MovieService.class);
         Call<Movie>call = movieService.getMoviesTrendingThisWeek(KEY, page);
         call.enqueue(new Callback<Movie>() {
             @Override
             public void onResponse(Call<Movie> call, Response<Movie> response) {
-                trendingMovieAdapter.addMovies(response.body().getResults());
-
+                ArrayList<Genre> genres = new ArrayList<>();
+                for(Movie movie: response.body().getResults()){
+                    for (int id:movie.getGenre_ids()){
+                        genres.add(movieGenreAdapter.getGenreById(id));
+                    }
+                    movie.setGenres(genres);
+                    trendingShowAdapter.addMovie(movie);
+                }
             }
 
             @Override
             public void onFailure(Call<Movie> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void getMovieGenres(){
+        MovieService movieService = RetrofitClientInstance.getRetrofitInstance().create(MovieService.class);
+        Call<Genre> call = movieService.getMovieGenres(BuildConfig.KEY);
+        call.enqueue(new Callback<Genre>() {
+            @Override
+            public void onResponse(Call<Genre> call, Response<Genre> response) {
+                for (Genre genre :response.body().getGenres()){
+                    movieGenreAdapter.addGenre(genre);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Genre> call, Throwable t) {
 
             }
         });

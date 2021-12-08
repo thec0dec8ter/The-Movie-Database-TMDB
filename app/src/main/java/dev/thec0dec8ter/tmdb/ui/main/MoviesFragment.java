@@ -9,14 +9,17 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 import dev.thec0dec8ter.tmdb.BuildConfig;
 import dev.thec0dec8ter.tmdb.R;
 import dev.thec0dec8ter.tmdb.adapters.GenreAdapter;
-import dev.thec0dec8ter.tmdb.adapters.MovieAdapter;
+import dev.thec0dec8ter.tmdb.adapters.ShowAdapter;
+import dev.thec0dec8ter.tmdb.custom_views.CustomButton;
+import dev.thec0dec8ter.tmdb.models.Genre;
 import dev.thec0dec8ter.tmdb.models.Movie;
 import dev.thec0dec8ter.tmdb.network.MovieService;
 import dev.thec0dec8ter.tmdb.network.RetrofitClientInstance;
@@ -26,18 +29,18 @@ import retrofit2.Response;
 
 public class MoviesFragment extends Fragment {
 
-    private CardView seeAllTopRated;
+    private CustomButton seeAllTopRated;
     private RecyclerView topRatedRecycler;
-    private CardView seeAllGenres;
+    private CustomButton seeAllGenres;
     private RecyclerView genreRecycler;
-    private CardView seeAllPopular;
+    private CustomButton seeAllPopular;
     private RecyclerView popularMoviesRecycler;
     private RecyclerView upcomingRecycler;
 
-    private MovieAdapter topRatedAdapter;
+    private ShowAdapter topRatedAdapter;
     private GenreAdapter genreAdapter;
-    private MovieAdapter popularMoviesAdapter;
-    private MovieAdapter upcomingAdapter;
+    private ShowAdapter popularMoviesAdapter;
+    private ShowAdapter upcomingAdapter;
 
     private MovieService movieService;
     private Call<Movie> call;
@@ -51,10 +54,10 @@ public class MoviesFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         movieService = RetrofitClientInstance.getRetrofitInstance().create(MovieService.class);
-        topRatedAdapter = new MovieAdapter();
+        topRatedAdapter = new ShowAdapter();
         genreAdapter = HomeFragment.movieGenreAdapter;
-        popularMoviesAdapter = new MovieAdapter();
-        upcomingAdapter = new MovieAdapter();
+        popularMoviesAdapter = new ShowAdapter();
+        upcomingAdapter = new ShowAdapter();
 
         getTopRatedMovies("1");
         getPopularMovies("2");
@@ -88,7 +91,14 @@ public class MoviesFragment extends Fragment {
         call.enqueue(new Callback<Movie>() {
             @Override
             public void onResponse(Call<Movie> call, Response<Movie> response) {
-                topRatedAdapter.addMovies(response.body().getResults());
+                ArrayList<Genre> genres = new ArrayList<>();
+                for(Movie movie: response.body().getResults()){
+                    for (int id:movie.getGenre_ids()){
+                        genres.add(genreAdapter.getGenreById(id));
+                    }
+                    movie.setGenres(genres);
+                    topRatedAdapter.addMovie(movie);
+                }
             }
 
             @Override
@@ -98,14 +108,19 @@ public class MoviesFragment extends Fragment {
         });
     }
 
-
-
     private void getPopularMovies(String page){
         call = movieService.getPopularMovies(BuildConfig.KEY, page);
         call.enqueue(new Callback<Movie>() {
             @Override
             public void onResponse(Call<Movie> call, Response<Movie> response) {
-                popularMoviesAdapter.addMovies(response.body().getResults());
+                ArrayList<Genre> genres = new ArrayList<>();
+                for(Movie movie: response.body().getResults()){
+                    for (int id:movie.getGenre_ids()){
+                        genres.add(genreAdapter.getGenreById(id));
+                    }
+                    movie.setGenres(genres);
+                    popularMoviesAdapter.addMovie(movie);
+                }
             }
 
             @Override
@@ -120,7 +135,14 @@ public class MoviesFragment extends Fragment {
         call.enqueue(new Callback<Movie>() {
             @Override
             public void onResponse(Call<Movie> call, Response<Movie> response) {
-                upcomingAdapter.addMovies(response.body().getResults());
+                ArrayList<Genre> genres = new ArrayList<>();
+                for(Movie movie: response.body().getResults()){
+                    for (int id:movie.getGenre_ids()){
+                        genres.add(genreAdapter.getGenreById(id));
+                    }
+                    movie.setGenres(genres);
+                    upcomingAdapter.addMovie(movie);
+                }
             }
 
             @Override

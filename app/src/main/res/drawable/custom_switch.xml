@@ -12,8 +12,4 @@
     <solid
         android:color="@android:color/transparent"/>
 
-    <size
-        android:width="160dp"
-        android:height="32dp"/>
-
 </shape>

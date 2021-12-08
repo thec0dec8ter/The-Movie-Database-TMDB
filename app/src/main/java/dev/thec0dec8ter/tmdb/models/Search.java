@@ -10,12 +10,22 @@ public class Search {
     @SerializedName("id")
     @Expose
     private String id;
+
     @SerializedName("poster_path")
     @Expose
     private String poster_path;
+
     @SerializedName("media_type")
     @Expose
     private String media_type;
+
+    @SerializedName("adult")
+    @Expose
+    private boolean isAdultContent;
+    @SerializedName("overview")
+    @Expose
+    private String overview;
+
 
     //movie
     @SerializedName("title")
@@ -49,6 +59,11 @@ public class Search {
     @SerializedName("place_of_birth")
     @Expose
     private String place_of_birth;
+
+    @SerializedName("known_for")
+    @Expose
+    private
+    ArrayList<Search> celebShows;
 
     @SerializedName("page")
     @Expose
@@ -189,5 +204,29 @@ public class Search {
 
     public void setTotal_results(String total_results) {
         this.total_results = total_results;
+    }
+
+    public boolean isAdultContent() {
+        return isAdultContent;
+    }
+
+    public void setAdultContent(boolean adultContent) {
+        isAdultContent = adultContent;
+    }
+
+    public String getOverview() {
+        return overview;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
+
+    public ArrayList<Search> getCelebShows() {
+        return celebShows;
+    }
+
+    public void setCelebShows(ArrayList<Search> celebShows) {
+        this.celebShows = celebShows;
     }
 }

@@ -5,8 +5,7 @@
     android:layout_width="160dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/curved_corners"
-    android:backgroundTint="@color/white"
+    android:background="@color/white"
     android:padding="5dp"
     android:layout_margin="5dp"
     android:elevation="10dp">
@@ -46,7 +45,11 @@
             <ProgressBar
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:indeterminate="false" />
+                android:indeterminate="false"
+                android:max="100"
+                android:progress="100"
+                android:progressDrawable="@drawable/circular_progress_bar"
+                style="?android:attr/progressBarStyleHorizontal"/>
 
             <TextView
                 android:text="%"
@@ -58,7 +61,7 @@
                 android:gravity="center"
                 android:maxLength="1"
                 android:maxLines="1"
-                android:layout_margin="5dp"/>
+                android:layout_margin="8dp"/>
 
             <TextView
                 android:id="@+id/rating"
@@ -67,6 +70,7 @@
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:maxLength="3"

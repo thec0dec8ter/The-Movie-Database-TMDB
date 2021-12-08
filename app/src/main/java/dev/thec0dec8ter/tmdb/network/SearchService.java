@@ -9,7 +9,9 @@ import retrofit2.http.Query;
 public interface SearchService {
 
     @GET("search/movie")
-    Call<Movie> searchForMovies(@Query("api_key") String apiKey, @Query("query") String query, @Query("page") String page);
+    Call<Movie> searchForMovies(@Query("api_key") String apiKey,
+                                @Query("query") String query,
+                                @Query("page") String page);
 
     @GET("search/multi")
     Call<Search> multiSearch(@Query("api_key") String apiKey,

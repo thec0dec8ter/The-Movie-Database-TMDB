@@ -38,14 +38,22 @@
 
                     <EditText
                         android:id="@+id/edit_query"
-                        android:hint="Search TMDb"
-                        android:inputType="text"
-                        android:textColor="@color/white"
-                        android:textColorHint="@android:color/darker_gray"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="Search TMDB..."
+                        android:inputType="text"
+                        android:textColor="@color/white"
+                        android:textColorHint="@android:color/darker_gray"
                         android:imeOptions="actionSearch"/>
+
+                    <ImageView
+                        android:src="@drawable/ic_mic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:layout_margin="4dp"/>
 
                 </LinearLayout>
 

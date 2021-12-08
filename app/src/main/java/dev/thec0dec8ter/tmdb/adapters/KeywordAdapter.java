@@ -1,6 +1,5 @@
 package dev.thec0dec8ter.tmdb.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,74 +17,47 @@ import dev.thec0dec8ter.tmdb.R;
 
 public class KeywordAdapter extends RecyclerView.Adapter<KeywordAdapter.KeywordViewHolder> {
 
-    private final ArrayList<String> texts = new ArrayList<>();
-
-    private boolean clickable = false;
+    private final ArrayList<String> keywords = new ArrayList<>();
 
     public KeywordAdapter(){
 
     }
 
-    public KeywordAdapter(boolean clickable,List<String> texts){
-        this.texts.addAll(texts);
-        this.clickable = clickable;
+    public KeywordAdapter(boolean jk, List<String> h){
+
     }
 
     @NonNull
+    @NotNull
     @Override
-    public KeywordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public KeywordViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_keyword, parent, false);
         return new KeywordViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull KeywordViewHolder holder, int position) {
-        holder.bind(texts.get(position));
+    public void onBindViewHolder(@NonNull @NotNull KeywordAdapter.KeywordViewHolder holder, int position) {
+
     }
 
     @Override
     public int getItemCount() {
-        return texts.size();
+        return 14;
     }
 
     public class KeywordViewHolder extends RecyclerView.ViewHolder{
         TextView keyword;
 
-        public KeywordViewHolder(@NonNull View itemView) {
+        public KeywordViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-            keyword = itemView.findViewById(R.id.keyword_txt);
+            keyword = itemView.findViewById(R.id.txt_keyword);
 
-            Context context = itemView.getContext();
-            itemView.setOnClickListener(new View.OnClickListener() {
+            keyword.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    if(clickable) {
-                        if (keyword.getCurrentTextColor() != context.getResources().getColor(R.color.light_green, null)) {
-                            keyword.setTextColor(context.getResources().getColorStateList(R.color.light_green, null));
-                            keyword.setBackgroundTintList(context.getResources().getColorStateList(R.color.dark_blue, null));
-                        } else {
-                            keyword.setTextColor(context.getResources().getColorStateList(R.color.black, null));
-                            keyword.setBackground(context.getResources().getDrawable(R.drawable.curved_corners, null));
-                            keyword.setBackgroundTintList(null);
-                        }
-                    }
+                public void onClick(View v) {
+
                 }
             });
         }
-
-        public void bind(String text){
-            keyword.setText(text);
-        }
     }
-
-    public void addTexts(List<String> texts){
-        this.texts.addAll(texts);
-        notifyDataSetChanged();
-    }
-
-    public void setClickable(boolean clickable) {
-        this.clickable = clickable;
-    }
-
-
 }

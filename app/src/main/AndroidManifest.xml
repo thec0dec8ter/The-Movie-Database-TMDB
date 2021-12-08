@@ -10,10 +10,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TMDb">
-        <activity android:name=".TvDetailActivity"></activity>
+        android:theme="@style/Theme.TMDB">
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/Theme.TMDB.Light.DarkActionBar"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".CelebDetailActivity" />
-        <activity android:name=".SettingsActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
@@ -22,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MovieDetailActivity" />
+        <activity android:name=".DetailActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" />

@@ -3,7 +3,7 @@
 
     <objectAnimator
         android:propertyName="translationX"
-        android:valueFrom="78dp"
+        android:valueFrom="80dp"
         android:valueTo="0dp"
         android:duration="100" />
 

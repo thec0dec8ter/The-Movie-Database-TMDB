@@ -49,12 +49,13 @@ public class FindFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         runtimeAdapter = new KeywordAdapter(true,Arrays.asList(getResources().getStringArray(R.array.runtime)));
         ratingAdapter = new KeywordAdapter(true,Arrays.asList(getResources().getStringArray(R.array.tmdb_rating)));
         genreAdapter = new KeywordAdapter(true,Arrays.asList(getResources().getStringArray(R.array.genres)));
         decadeAdapter = new KeywordAdapter(true,Arrays.asList(getResources().getStringArray(R.array.decades)));
         voteAdapter = new KeywordAdapter(true,Arrays.asList(getResources().getStringArray(R.array.total_votes)));
-        languageAdapter = new KeywordAdapter(true,Arrays.asList(getResources().getStringArray(R.array.country)));
+        languageAdapter = new KeywordAdapter(true, Arrays.asList(getResources().getStringArray(R.array.country)));
     }
 
     @Override
@@ -156,36 +157,36 @@ public class FindFragment extends Fragment {
     }
 
     private void enableAdapters(){
-        runtimeAdapter.setClickable(true);
-        ratingAdapter.setClickable(true);
-        genreAdapter.setClickable(true);
-        decadeAdapter.setClickable(true);
-        voteAdapter.setClickable(true);
-        languageAdapter.setClickable(true);
+//        runtimeAdapter.setClickable(true);
+//        ratingAdapter.setClickable(true);
+//        genreAdapter.setClickable(true);
+//        decadeAdapter.setClickable(true);
+//        voteAdapter.setClickable(true);
+//        languageAdapter.setClickable(true);
     }
 
     private void disableAdapters(){
-        runtimeAdapter.setClickable(false);
-        ratingAdapter.setClickable(false);
-        genreAdapter.setClickable(false);
-        decadeAdapter.setClickable(false);
-        voteAdapter.setClickable(false);
-        languageAdapter.setClickable(false);
+//        runtimeAdapter.setClickable(false);
+//        ratingAdapter.setClickable(false);
+//        genreAdapter.setClickable(false);
+//        decadeAdapter.setClickable(false);
+//        voteAdapter.setClickable(false);
+//        languageAdapter.setClickable(false);
     }
 
-    private void clearSelection(RecyclerView recycler, KeywordAdapter adapter){
-        for (int i = 0; i < adapter.getItemCount(); i++){
-            removeTextBackground(recycler.getLayoutManager().findViewByPosition(i));
-        }
-    }
+//    private void clearSelection(RecyclerView recycler, KeywordAdapter adapter){
+//        for (int i = 0; i < adapter.getItemCount(); i++){
+//            removeTextBackground(recycler.getLayoutManager().findViewByPosition(i));
+//        }
+//    }
 
     private void clearAll(){
-        clearSelection(runtimeRecycler,runtimeAdapter);
-        clearSelection(ratingRecycler,ratingAdapter);
-        clearSelection(genreRecycler,genreAdapter);
-        clearSelection(decadeRecycler,decadeAdapter);
-        clearSelection(voteRecycler,voteAdapter);
-        clearSelection(languageRecycler,languageAdapter);
+//        clearSelection(runtimeRecycler,runtimeAdapter);
+//        clearSelection(ratingRecycler,ratingAdapter);
+//        clearSelection(genreRecycler,genreAdapter);
+//        clearSelection(decadeRecycler,decadeAdapter);
+//        clearSelection(voteRecycler,voteAdapter);
+//        clearSelection(languageRecycler,languageAdapter);
     }
 
 

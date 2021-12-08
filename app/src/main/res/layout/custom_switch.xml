@@ -4,7 +4,6 @@
     android:layout_width="160dp"
     android:layout_height="30dp"
     android:layout_margin="5dp"
-    android:padding="2dp"
     android:background="@drawable/custom_switch">
 
     <TextView
@@ -33,9 +32,9 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/thumb"
-        android:layout_width="78dp"
+        android:layout_width="80dp"
         android:layout_height="28dp"
-        android:background="@android:color/transparent"
+        android:layout_gravity="center_vertical"
         app:cardCornerRadius="14dp"
         app:cardBackgroundColor="@color/dark_blue">
 
@@ -45,11 +44,11 @@
             android:textSize="12sp"
             android:textColor="@color/light_green"
             android:textStyle="bold"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:maxLines="1"
-            android:gravity="center"
-            android:padding="5dp" />
+            android:gravity="center" />
 
     </androidx.cardview.widget.CardView>
 

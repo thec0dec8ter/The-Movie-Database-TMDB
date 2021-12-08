@@ -4,7 +4,7 @@
     <objectAnimator
         android:propertyName="translationX"
         android:valueFrom="0dp"
-        android:valueTo="78dp"
+        android:valueTo="80dp"
         android:duration="100"/>
 
 </set>

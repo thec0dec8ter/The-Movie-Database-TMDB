@@ -3,6 +3,7 @@ package dev.thec0dec8ter.tmdb.network;
 import com.google.gson.annotations.SerializedName;
 
 import dev.thec0dec8ter.tmdb.models.Celebrity;
+import dev.thec0dec8ter.tmdb.models.Genre;
 import dev.thec0dec8ter.tmdb.models.Movie;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -31,7 +32,7 @@ public interface MovieService {
 
     @GET("genre/movie/list")
     @SerializedName("genres")
-    Call<Movie> getMovieGenres(@Query("api_key") String apiKey);
+    Call<Genre> getMovieGenres(@Query("api_key") String apiKey);
 
     @GET("movie/{movie_id}")
     Call<Movie> getMovieDetails(@Path("movie_id")String movieId, @Query("api_key") String apiKey);

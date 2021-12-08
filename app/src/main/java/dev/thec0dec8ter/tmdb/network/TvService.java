@@ -1,6 +1,7 @@
 package dev.thec0dec8ter.tmdb.network;
 
 import dev.thec0dec8ter.tmdb.models.Celebrity;
+import dev.thec0dec8ter.tmdb.models.Genre;
 import dev.thec0dec8ter.tmdb.models.TvShow;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -28,7 +29,7 @@ public interface TvService {
     Call<TvShow> getTvShowsTrendingThisWeek(@Query("api_key") String apiKey, @Query("page") String page);
 
     @GET("genre/tv/list")
-    Call<TvShow> getTvShowGenres(@Query("api_key") String apiKey);
+    Call<Genre> getTvShowGenres(@Query("api_key") String apiKey);
 
     @GET("tv/{tv_id}")
     Call<TvShow> getTvShowDetails(@Path("tv_id")String tvId, @Query("api_key") String apiKey);

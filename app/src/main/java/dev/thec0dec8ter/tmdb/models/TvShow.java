@@ -11,12 +11,11 @@ public class TvShow {
     @SerializedName("id")
     @Expose
     private String id;
+
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("original_name")
-    @Expose
-    private String original_name;
+
     @SerializedName("overview")
     @Expose
     private String overview;
@@ -60,9 +59,7 @@ public class TvShow {
     @SerializedName("number_of_seasons")
     @Expose
     private int number_of_seasons;
-    @SerializedName("genre_ids")
-    @Expose
-    private int[] genre_ids;
+
     @SerializedName("episode_runtime")
     @Expose
     private int[] episode_runtime;
@@ -89,15 +86,19 @@ public class TvShow {
     @SerializedName("backdrops")
     @Expose
     private ArrayList<TvShow> backdrops;
+
+    @SerializedName("genre_ids")
+    @Expose
+    private ArrayList<Integer> genre_ids;
+
     @SerializedName("genres")
     @Expose
-    private ArrayList<TvShow> genres;
-    @SerializedName("keywords")
-    @Expose
-    private ArrayList<TvShow> keywords;
+    private ArrayList<Genre> genres;
     @SerializedName("seasons")
     @Expose
     private ArrayList<TvShow> seasons;
+
+
 
     @SerializedName("page")
     @Expose
@@ -128,13 +129,6 @@ public class TvShow {
         this.name = name;
     }
 
-    public String getOriginal_name() {
-        return original_name;
-    }
-
-    public void setOriginal_name(String original_name) {
-        this.original_name = original_name;
-    }
 
     public String getOverview() {
         return overview;
@@ -232,11 +226,11 @@ public class TvShow {
         this.number_of_seasons = number_of_seasons;
     }
 
-    public int[] getGenre_ids() {
+    public ArrayList<Integer> getGenre_ids() {
         return genre_ids;
     }
 
-    public void setGenre_ids(int[] genre_ids) {
+    public void setGenre_ids(ArrayList<Integer> genre_ids) {
         this.genre_ids = genre_ids;
     }
 
@@ -304,14 +298,6 @@ public class TvShow {
         this.posters = posters;
     }
 
-    public ArrayList<TvShow> getGenres() {
-        return genres;
-    }
-
-    public void setGenres(ArrayList<TvShow> genres) {
-        this.genres = genres;
-    }
-
     public ArrayList<TvShow> getSeasons() {
         return seasons;
     }
@@ -360,14 +346,13 @@ public class TvShow {
         this.file_path = file_path;
     }
 
-    public ArrayList<TvShow> getKeywords() {
-        return keywords;
+    public ArrayList<Genre> getGenres() {
+        return genres;
     }
 
-    public void setKeywords(ArrayList<TvShow> keywords) {
-        this.keywords = keywords;
+    public void setGenres(ArrayList<Genre> genres) {
+        this.genres = genres;
     }
-
 
     public static class SortByYear implements Comparator<TvShow> {
 
