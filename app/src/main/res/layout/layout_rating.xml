@@ -6,18 +6,14 @@
     android:layout_width="4dp"
     android:layout_height="44dp"
     android:background="@android:color/transparent"
-    android:layout_margin="5dp"
+    android:layout_margin="4dp"
     app:cardCornerRadius="22dp"
     app:cardBackgroundColor="@color/black">
 
-    <ProgressBar
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:indeterminate="false"
-        android:max="100"
-        android:progress="100"
-        android:progressDrawable="@drawable/circular_progress_bar"
-        style="?android:attr/progressBarStyleHorizontal"/>
+        android:src="@drawable/circle"/>
 
     <TextView
         android:text="%"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="runtime">
-        <item>30mins</item>
+        <item>30 mins</item>
         <item>1+ hours</item>
         <item>2+ hours</item>
         <item>3+ hours</item>
@@ -9,16 +9,16 @@
     </string-array>
 
     <string-array name="tmdb_rating">
-        <item>9+</item>
-        <item>8+</item>
-        <item>7+</item>
-        <item>6+</item>
-        <item>5+</item>
-        <item>4+</item>
-        <item>3+</item>
+        <item>90+</item>
+        <item>80+</item>
+        <item>70+</item>
+        <item>60+</item>
+        <item>50+</item>
+        <item>40+</item>
+        <item>30+</item>
     </string-array>
 
-    <string-array name="genres">
+    <string-array name="popular_genres">
         <item>Action</item>
         <item>Adventure</item>
         <item>Comedy</item>
@@ -38,13 +38,6 @@
         <item>1980s</item>
     </string-array>
 
-    <string-array name="keywords">
-        <item>1,000+</item>
-        <item>10,000+</item>
-        <item>100,000+</item>
-        <item>1,000,000+</item>
-    </string-array>
-
     <string-array name="total_votes">
         <item>1,000+</item>
         <item>10,000+</item>
@@ -53,24 +46,14 @@
     </string-array>
 
     <string-array name="country">
-        <item>United States</item>
-        <item>Canada</item>
-        <item>Germany</item>
-        <item>France</item>
+        <item>English</item>
+        <item>French</item>
+        <item>Spanish</item>
+        <item>German</item>
         <item>New Zealand</item>
         <item>Australia</item>
         <item>India</item>
         <item>United Kingdom</item>
-    </string-array>
-    <!-- Reply Preference -->
-    <string-array name="reply_entries">
-        <item>Reply</item>
-        <item>Reply to all</item>
-    </string-array>
-
-    <string-array name="reply_values">
-        <item>reply</item>
-        <item>reply_all</item>
     </string-array>
 
 </resources>

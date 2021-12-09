@@ -14,7 +14,6 @@ public class SearchPagerAdapter extends FragmentStateAdapter {
 
     private final int NUM_PAGES = 2;
 
-    private Fragment currentFragment;
     private RecentFragment recentFragment;
     private FindFragment findFragment;
 

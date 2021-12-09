@@ -57,6 +57,7 @@ public class SearchActivity extends AppCompatActivity {
                     Bundle args = new Bundle();
                     args.putString("query", editQuery.getText().toString());
                     viewPager.setCurrentItem(0);
+
                     searchPagerAdapter.getCurrentFragment(0).setArguments(args);
                     searchPagerAdapter.getCurrentFragment(0).onResume();
                     return true;

@@ -27,7 +27,7 @@ public class CelebrityAdapter extends RecyclerView.Adapter<CelebrityAdapter.Cele
     @NonNull
     @Override
     public CelebrityViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_celebrity, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_show, parent, false);
         return new CelebrityViewHolder(view);
     }
 
@@ -44,13 +44,11 @@ public class CelebrityAdapter extends RecyclerView.Adapter<CelebrityAdapter.Cele
     public class CelebrityViewHolder extends RecyclerView.ViewHolder{
         ImageView poster;
         TextView celebName;
-        TextView knownFor;
-        TextView characterName;
 
         public CelebrityViewHolder(@NonNull View itemView) {
             super(itemView);
             poster = itemView.findViewById(R.id.poster);
-            celebName = itemView.findViewById(R.id.celeb_name);
+            celebName = itemView.findViewById(R.id.title);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
