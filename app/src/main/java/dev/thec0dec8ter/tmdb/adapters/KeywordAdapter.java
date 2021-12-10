@@ -19,13 +19,19 @@ import dev.thec0dec8ter.tmdb.R;
 public class KeywordAdapter extends RecyclerView.Adapter<KeywordAdapter.KeywordViewHolder> {
 
     private final ArrayList<String> keywords = new ArrayList<>();
+    private final ArrayList<String> values = new ArrayList<>();
+
+    private String tag;
+    private String[] queryParameter = null;
 
     public KeywordAdapter(){
 
     }
 
-    public KeywordAdapter(String[] keyword_array){
+    public KeywordAdapter(String[] keyword_array,String[] values_array, String tag){
         keywords.addAll(Arrays.asList(keyword_array));
+        values.addAll(Arrays.asList(values_array));
+        this.tag = tag;
     }
 
     @NonNull
@@ -39,8 +45,6 @@ public class KeywordAdapter extends RecyclerView.Adapter<KeywordAdapter.KeywordV
     @Override
     public void onBindViewHolder(@NonNull @NotNull KeywordAdapter.KeywordViewHolder holder, int position) {
         holder.bind(keywords.get(position));
-
-
     }
 
     @Override
@@ -61,6 +65,7 @@ public class KeywordAdapter extends RecyclerView.Adapter<KeywordAdapter.KeywordV
                     int color = v.getContext().getColor(R.color.dark_blue);
                     if(txtKeyword.getBackgroundTintList() != ColorStateList.valueOf(color)){
                         changeTextBackground(txtKeyword);
+                        setQueryParameter(values.get(getAdapterPosition()));
                     }else {
                         removeTextBackground(txtKeyword);
                     }
@@ -84,5 +89,20 @@ public class KeywordAdapter extends RecyclerView.Adapter<KeywordAdapter.KeywordV
         textView.setBackgroundTintList(null);
     }
 
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public String[] getQueryParameter(){
+        return queryParameter;
+    }
+
+    public void setQueryParameter(String value){
+        queryParameter = new String[]{tag, value};
+    }
 
 }

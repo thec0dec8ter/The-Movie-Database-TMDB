@@ -8,6 +8,14 @@
         <item>4+ hours</item>
     </string-array>
 
+    <string-array name="runtime_tag">
+        <item>30</item>
+        <item>60</item>
+        <item>120</item>
+        <item>180</item>
+        <item>240</item>
+    </string-array>
+
     <string-array name="tmdb_rating">
         <item>90+</item>
         <item>80+</item>
@@ -16,6 +24,18 @@
         <item>50+</item>
         <item>40+</item>
         <item>30+</item>
+    </string-array>
+
+    <string-array name="tmdb_rating_tag">
+        <item>90</item>
+        <item>80</item>
+        <item>70</item>
+        <item>60</item>
+        <item>50</item>
+        <item>40</item>
+        <item>30</item>
+        <item>20</item>
+        <item>10</item>
     </string-array>
 
     <string-array name="popular_genres">
@@ -30,12 +50,14 @@
         <item>Romance</item>
     </string-array>
 
-    <string-array name="decades">
-        <item>2020s</item>
-        <item>2010s</item>
-        <item>2000s</item>
-        <item>1990s</item>
-        <item>1980s</item>
+    <string-array name="release_year">
+        <item>2021</item>
+        <item>2020</item>
+        <item>2019</item>
+        <item>2018</item>
+        <item>2017</item>
+        <item>2016</item>
+        <item>2015</item>
     </string-array>
 
     <string-array name="total_votes">
@@ -45,7 +67,7 @@
         <item>1,000,000+</item>
     </string-array>
 
-    <string-array name="country">
+    <string-array name="language">
         <item>English</item>
         <item>French</item>
         <item>Spanish</item>

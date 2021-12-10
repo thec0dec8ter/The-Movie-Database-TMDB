@@ -1,6 +1,7 @@
 package dev.thec0dec8ter.tmdb.ui.search;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,8 +64,14 @@ public class RecentFragment extends Fragment {
         super.onResume();
 
         if(getArguments() != null){
-            String query = getArguments().getString("query");
-            performSearch(query);
+            if(getArguments().getString("query") != null){
+                String query = getArguments().getString("query");
+                performSearch(query);
+            }else if(getArguments().getString("discover") != null){
+                String baseUrl = getArguments().getString("discover");
+                discoverShows(baseUrl);
+            }
+
         }
     }
 
@@ -84,4 +91,30 @@ public class RecentFragment extends Fragment {
             }
         });
     }
+
+    public void discoverShows(String baseUrl){
+        String type = "movie";
+        if(baseUrl.contains("tv")){
+           type = "tv";
+        }
+        SearchService searchService = RetrofitClientInstance.getRetrofitInstance().create(SearchService.class);
+        Call<Search> call = searchService.discoverShows(baseUrl);
+        String finalType = type;
+        call.enqueue(new Callback<Search>() {
+            @Override
+            public void onResponse(Call<Search> call, Response<Search> response) {
+                searchAdapter.clearResults();
+                for(Search search:response.body().getResults()){
+                    search.setMedia_type(finalType);
+                    searchAdapter.addResult(search);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Search> call, Throwable t) {
+                Log.e("KKK" , t.getMessage());
+            }
+        });
+    }
+
 }

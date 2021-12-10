@@ -32,8 +32,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Searchview
     @NotNull
     @Override
     public SearchviewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-       View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search, parent, false);
-       return new SearchviewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search, parent, false);
+        return new SearchviewHolder(view);
     }
 
     @Override
@@ -91,6 +91,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Searchview
                     .fit()
                     .into(poster);
             title.setTag(search.getId());
+
             switch (search.getMedia_type()) {
                 case "movie": {
                     title.setText(search.getTitle());
@@ -117,6 +118,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Searchview
                     ratingCount.setText(String.valueOf(ratePercent));
                     break;
                 }
+
             }
         }
     }

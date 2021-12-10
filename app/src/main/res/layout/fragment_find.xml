@@ -21,22 +21,37 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:text="Title Type"
-                    android:textSize="18sp"
-                    android:layout_width="match_parent"
+                    android:id="@+id/txt_movie"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"/>
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:background="@drawable/curved_corners"
+                    android:textColor="@color/dark_blue"
+                    android:layout_margin="8dp"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:paddingEnd="16dp"
+                    android:text="Movies"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/type_recycler"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/txt_tvshow"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_keyword"/>
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:background="@drawable/curved_corners"
+                    android:textColor="@color/dark_blue"
+                    android:layout_margin="8dp"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:paddingEnd="16dp"
+                    android:text="Tv Shows"/>
 
             </LinearLayout>
 
@@ -112,14 +127,14 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:text="Release year"
+                    android:text="Release Year"
                     android:textSize="18sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/decade_recycler"
+                    android:id="@+id/year_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -134,7 +149,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:text="Total votes"
+                    android:text="Total Votes"
                     android:textSize="18sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

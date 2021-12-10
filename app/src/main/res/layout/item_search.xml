@@ -81,6 +81,7 @@
                 android:background="@drawable/curved_corners"
                 android:backgroundTint="@color/light_blue"
                 android:text="Movie"
+                android:textSize="12sp"
                 android:textColor="@color/white"
                 android:textStyle="bold|italic"/>
 
@@ -90,7 +91,8 @@
                 android:layout_height="wrap_content"
                 android:padding="4dp"
                 android:text="Action | Romance"
-                android:textColor="@color/dark_blue"/>
+                android:textColor="@color/dark_blue"
+                android:maxLines="1"/>
 
         </LinearLayout>
 
