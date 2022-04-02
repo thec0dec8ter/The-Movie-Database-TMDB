@@ -25,7 +25,7 @@ import retrofit2.Response;
 public class CelebritiesFragment extends Fragment {
 
     private RecyclerView popularRecycler;
-    private RecyclerView birthdayRecycler;
+
 
     private CelebrityAdapter celebrityAdapter;
 
@@ -49,7 +49,6 @@ public class CelebritiesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_celebrities, container, false);
         popularRecycler = view.findViewById(R.id.popular_recycler);
-        birthdayRecycler = view.findViewById(R.id.birthday_recycler);
         return view;
     }
 
@@ -58,7 +57,6 @@ public class CelebritiesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         popularRecycler.setAdapter(celebrityAdapter);
-        birthdayRecycler.setAdapter(celebrityAdapter);
     }
 
     private void getPopularCelebrities(String page){

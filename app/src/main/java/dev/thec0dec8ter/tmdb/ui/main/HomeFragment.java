@@ -88,9 +88,6 @@ public class HomeFragment extends Fragment{
 
         getTvGenres();
         getMovieGenres();
-
-
-
     }
 
     private void addSwitchListeners(){

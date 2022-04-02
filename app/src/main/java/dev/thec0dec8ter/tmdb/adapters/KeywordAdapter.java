@@ -11,26 +11,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import dev.thec0dec8ter.tmdb.R;
 
 public class KeywordAdapter extends RecyclerView.Adapter<KeywordAdapter.KeywordViewHolder> {
 
-    private final ArrayList<String> keywords = new ArrayList<>();
-    private final ArrayList<String> values = new ArrayList<>();
+    private String[] keywords;
+    private String[] values;
 
     private String tag;
-    private String[] queryParameter = null;
+    private String queryParameter = "";
 
-    public KeywordAdapter(){
-
-    }
-
-    public KeywordAdapter(String[] keyword_array,String[] values_array, String tag){
-        keywords.addAll(Arrays.asList(keyword_array));
-        values.addAll(Arrays.asList(values_array));
+    public KeywordAdapter(String tag, String[] keywords, String[] values){
+        this.keywords = keywords;
+        this.values = values;
         this.tag = tag;
     }
 
@@ -44,12 +37,12 @@ public class KeywordAdapter extends RecyclerView.Adapter<KeywordAdapter.KeywordV
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull KeywordAdapter.KeywordViewHolder holder, int position) {
-        holder.bind(keywords.get(position));
+        holder.bind(keywords[position]);
     }
 
     @Override
     public int getItemCount() {
-        return keywords.size();
+        return keywords.length;
     }
 
     public class KeywordViewHolder extends RecyclerView.ViewHolder{
@@ -65,9 +58,10 @@ public class KeywordAdapter extends RecyclerView.Adapter<KeywordAdapter.KeywordV
                     int color = v.getContext().getColor(R.color.dark_blue);
                     if(txtKeyword.getBackgroundTintList() != ColorStateList.valueOf(color)){
                         changeTextBackground(txtKeyword);
-                        setQueryParameter(values.get(getAdapterPosition()));
+                        setQueryParameter(values[getAdapterPosition()]);
                     }else {
                         removeTextBackground(txtKeyword);
+                        setQueryParameter("");
                     }
                 }
             });
@@ -97,12 +91,20 @@ public class KeywordAdapter extends RecyclerView.Adapter<KeywordAdapter.KeywordV
         this.tag = tag;
     }
 
-    public String[] getQueryParameter(){
+    public void setKeywords(String[] keywords) {
+        this.keywords = keywords;
+    }
+
+    public void setValues(String[] values) {
+        this.values = values;
+    }
+
+    public String getQueryParameter(){
         return queryParameter;
     }
 
-    public void setQueryParameter(String value){
-        queryParameter = new String[]{tag, value};
+    public void setQueryParameter(String queryParameter){
+        this.queryParameter = queryParameter;
     }
 
 }

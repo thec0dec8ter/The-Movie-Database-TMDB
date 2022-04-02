@@ -2,7 +2,6 @@ package dev.thec0dec8ter.tmdb.ui.search;
 
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +15,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import dev.thec0dec8ter.tmdb.R;
 import dev.thec0dec8ter.tmdb.adapters.KeywordAdapter;
 import dev.thec0dec8ter.tmdb.adapters.SearchPagerAdapter;
-
-import static dev.thec0dec8ter.tmdb.BuildConfig.KEY;
+import dev.thec0dec8ter.tmdb.ui.main.HomeFragment;
 
 public class FindFragment extends Fragment {
 
@@ -45,6 +43,8 @@ public class FindFragment extends Fragment {
     private KeywordAdapter voteAdapter;
     private KeywordAdapter languageAdapter;
 
+    private String query = "";
+
     public FindFragment() {
         // Required empty public constructor
     }
@@ -54,29 +54,24 @@ public class FindFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         Resources res = getResources();
-        runtimeAdapter = new KeywordAdapter(
+        runtimeAdapter = new KeywordAdapter("with_runtime.gte",
                 res.getStringArray(R.array.runtime),
-                res.getStringArray(R.array.runtime_tag),
-                "with_runtime.gte");
-        ratingAdapter = new KeywordAdapter(
+                res.getStringArray(R.array.runtime_values));
+        ratingAdapter = new KeywordAdapter("vote_average.gte",
                 res.getStringArray(R.array.tmdb_rating),
-                res.getStringArray(R.array.tmdb_rating_tag),
-                "vote_average.gte");
-        genreAdapter = new KeywordAdapter(
-                res.getStringArray(R.array.popular_genres),
-                res.getStringArray(R.array.runtime_tag),
-                "with_genres");
-        yearAdapter = new KeywordAdapter(
+                res.getStringArray(R.array.tmdb_rating_values));
+        genreAdapter = new KeywordAdapter("with_genres",
+                HomeFragment.movieGenreAdapter.getGenreNames(),
+                HomeFragment.movieGenreAdapter.getGenreIds());
+        yearAdapter = new KeywordAdapter("primary_release_year",
                 res.getStringArray(R.array.release_year),
-                res.getStringArray(R.array.release_year),
-                "primary_release_year");
-        voteAdapter = new KeywordAdapter(
+                res.getStringArray(R.array.release_year));
+        voteAdapter = new KeywordAdapter("vote_count.gte",
                 res.getStringArray(R.array.total_votes),
-                res.getStringArray(R.array.runtime_tag),"vote_count.gte");
-        languageAdapter = new KeywordAdapter(
-                res.getStringArray(R.array.language),
-                res.getStringArray(R.array.runtime_tag),
-                "language");
+                res.getStringArray(R.array.total_votes_values));
+        languageAdapter = new KeywordAdapter("language",
+                res.getStringArray(R.array.languages),
+                res.getStringArray(R.array.languages));
     }
 
     @Override
@@ -114,6 +109,8 @@ public class FindFragment extends Fragment {
                 if(txtMovie.getBackgroundTintList() != ColorStateList.valueOf(color)){
                     KeywordAdapter.changeTextBackground(txtMovie);
                     KeywordAdapter.removeTextBackground(txtTvShow);
+                    genreAdapter.setKeywords(HomeFragment.movieGenreAdapter.getGenreNames());
+                    genreAdapter.setValues(HomeFragment.movieGenreAdapter.getGenreIds());
                     yearAdapter.setTag("primary_release_year");
                 }else {
                     KeywordAdapter.removeTextBackground(txtMovie);
@@ -128,6 +125,8 @@ public class FindFragment extends Fragment {
                 if(txtTvShow.getBackgroundTintList() != ColorStateList.valueOf(color)){
                     KeywordAdapter.changeTextBackground(txtTvShow);
                     KeywordAdapter.removeTextBackground(txtMovie);
+                    genreAdapter.setKeywords(HomeFragment.tvGenreAdapter.getGenreNames());
+                    genreAdapter.setValues(HomeFragment.tvGenreAdapter.getGenreIds());
                     yearAdapter.setTag("first_air_date_year");
                 }else {
                     KeywordAdapter.removeTextBackground(txtTvShow);
@@ -145,18 +144,27 @@ public class FindFragment extends Fragment {
         btnSeeResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(getQuery() != null){
-                    Bundle args = new Bundle();
-                    args.putString("discover", getQuery());
-
-                    ViewPager2 viewPager = getActivity().findViewById(R.id.view_pager);
-                    SearchPagerAdapter searchPagerAdapter = (SearchPagerAdapter) viewPager.getAdapter();
-                    viewPager.setCurrentItem(0);
-                    searchPagerAdapter.getCurrentFragment(0).setArguments(args);
-                    searchPagerAdapter.getCurrentFragment(0).onResume();
+                Bundle args = new Bundle();
+                int color = v.getContext().getColor(R.color.dark_blue);
+                if(txtMovie.getBackgroundTintList() == ColorStateList.valueOf(color)){
+                    args.putSerializable("discover_movie", getQueryMap());
+                }else if (txtTvShow.getBackgroundTintList() == ColorStateList.valueOf(color)) {
+                    args.putSerializable("discover_tv", getQueryMap());
+                }else {
+                   //TODO: Error
+                    return;
                 }
+                ViewPager2 viewPager = getActivity().findViewById(R.id.view_pager);
+                SearchPagerAdapter searchPagerAdapter = (SearchPagerAdapter) viewPager.getAdapter();
+                viewPager.setCurrentItem(0);
+                searchPagerAdapter.getCurrentFragment(0).setArguments(args);
+                searchPagerAdapter.getCurrentFragment(0).onResume();
             }
         });
+    }
+
+    private KeywordAdapter[] getAdapters(){
+        return new KeywordAdapter[]{runtimeAdapter, ratingAdapter, genreAdapter, yearAdapter, voteAdapter, languageAdapter};
     }
 
     private void clearSelection(RecyclerView recycler){
@@ -173,50 +181,17 @@ public class FindFragment extends Fragment {
         clearSelection(languageRecycler);
     }
 
-    private String getQuery(){
-        String baseUrl = "";
-        int color = getContext().getColor(R.color.dark_blue);
-        if(txtTvShow.getBackgroundTintList() == ColorStateList.valueOf(color)){
-            baseUrl = "https://api.themoviedb.org/3/discover/tv";
-        }else if(txtMovie.getBackgroundTintList() == ColorStateList.valueOf(color)) {
-            baseUrl = "https://api.themoviedb.org/3/discover/movie";
-        }else {
-            return null;
-        }
-        Uri.Builder builder = Uri.parse(baseUrl).buildUpon();
-        builder.appendQueryParameter("api_key", KEY);
-        for (KeywordAdapter adapter: getAdapters()) {
-            if(adapter.getQueryParameter() != null) {
-                String[] map = adapter.getQueryParameter();
-                builder.appendQueryParameter(map[0], map[1]);
+    private HashMap<String, String> getQueryMap(){
+        HashMap<String, String> queryMap = new HashMap<>();
+
+        for(KeywordAdapter adapter: getAdapters()){
+            if(!adapter.getQueryParameter().isEmpty()){
+                queryMap.put(adapter.getTag(), adapter.getQueryParameter());
             }
         }
-        Uri builtUri = builder.build();
-        return builtUri.toString();
-
+        return queryMap;
     }
 
-    public ArrayList<KeywordAdapter> getAdapters() {
-        ArrayList<KeywordAdapter> adapters = new ArrayList<>();
-        adapters.add(runtimeAdapter);
-        adapters.add(ratingAdapter);
-        adapters.add(genreAdapter);
-        adapters.add(yearAdapter);
-        adapters.add(voteAdapter);
-        adapters.add(languageAdapter);
-        return adapters;
-    }
+
 }
-
-
-
-
-
-//    <item>en - US</item>
-//        <item>fr - CA</item>
-//        <item>ge - DE</item>
-//        <item>fr - FR</item>
-//        <item>ma - NZ</item>
-//        <item>en - AU</item>
-//        <item>hi - IN</item>
 

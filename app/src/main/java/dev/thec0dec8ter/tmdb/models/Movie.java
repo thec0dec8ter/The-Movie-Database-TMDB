@@ -73,7 +73,12 @@ public class Movie{
 
     @SerializedName("genres")
     @Expose
-    private ArrayList<Genre> genres;
+    private ArrayList<Genre> genres = new ArrayList<>();
+
+
+    @SerializedName("cast")
+    @Expose
+    private ArrayList<Movie> casts;
 
     @SerializedName("page")
     @Expose
@@ -262,5 +267,13 @@ public class Movie{
 
     public void setPosters(ArrayList<Movie> posters) {
         this.posters = posters;
+    }
+
+    public ArrayList<Movie> getCasts() {
+        return casts;
+    }
+
+    public void setCasts(ArrayList<Movie> casts) {
+        this.casts = casts;
     }
 }

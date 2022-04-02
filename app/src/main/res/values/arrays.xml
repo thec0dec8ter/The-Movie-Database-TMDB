@@ -8,7 +8,7 @@
         <item>4+ hours</item>
     </string-array>
 
-    <string-array name="runtime_tag">
+    <string-array name="runtime_values">
         <item>30</item>
         <item>60</item>
         <item>120</item>
@@ -24,9 +24,11 @@
         <item>50+</item>
         <item>40+</item>
         <item>30+</item>
+        <item>20+</item>
+        <item>10+</item>
     </string-array>
 
-    <string-array name="tmdb_rating_tag">
+    <string-array name="tmdb_rating_values">
         <item>90</item>
         <item>80</item>
         <item>70</item>
@@ -36,18 +38,6 @@
         <item>30</item>
         <item>20</item>
         <item>10</item>
-    </string-array>
-
-    <string-array name="popular_genres">
-        <item>Action</item>
-        <item>Adventure</item>
-        <item>Comedy</item>
-        <item>Crime</item>
-        <item>Documentary</item>
-        <item>Drama</item>
-        <item>Fantasy</item>
-        <item>Horror</item>
-        <item>Romance</item>
     </string-array>
 
     <string-array name="release_year">
@@ -67,15 +57,27 @@
         <item>1,000,000+</item>
     </string-array>
 
-    <string-array name="language">
+    <string-array name="total_votes_values">
+        <item>1000</item>
+        <item>10000</item>
+        <item>100000+</item>
+        <item>1000000+</item>
+    </string-array>
+
+    <string-array name="languages">
         <item>English</item>
         <item>French</item>
         <item>Spanish</item>
         <item>German</item>
-        <item>New Zealand</item>
-        <item>Australia</item>
-        <item>India</item>
-        <item>United Kingdom</item>
+        <item>Russian</item>
+    </string-array>
+
+    <string-array name="languages_values">
+        <item>en-US</item>
+        <item>fr-FR</item>
+        <item>es-ES</item>
+        <item>de-DE</item>
+        <item>ru-RU</item>
     </string-array>
 
 </resources>

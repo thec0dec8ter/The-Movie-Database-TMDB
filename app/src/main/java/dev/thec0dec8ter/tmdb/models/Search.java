@@ -25,6 +25,9 @@ public class Search {
     @SerializedName("overview")
     @Expose
     private String overview;
+    @SerializedName("genre_ids")
+    @Expose
+    private int[] genreIds;
 
 
     //movie
@@ -228,5 +231,13 @@ public class Search {
 
     public void setCelebShows(ArrayList<Search> celebShows) {
         this.celebShows = celebShows;
+    }
+
+    public int[] getGenreIds() {
+        return genreIds;
+    }
+
+    public void setGenreIds(int[] genreIds) {
+        this.genreIds = genreIds;
     }
 }

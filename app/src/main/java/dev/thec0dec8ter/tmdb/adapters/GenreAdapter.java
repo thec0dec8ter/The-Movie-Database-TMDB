@@ -64,4 +64,20 @@ public class GenreAdapter extends RecyclerView.Adapter<GenreAdapter.GenreViewHol
         }
         return null;
     }
+
+    public String[] getGenreNames(){
+        String[] genreNames = new String[genres.size()];
+        for(int i = 0; i < genres.size(); i++){
+            genreNames[i] = genres.get(i).getName();
+        }
+        return genreNames;
+    }
+
+    public String[] getGenreIds(){
+        String[] genreIds = new String[genres.size()];
+        for(int i = 0; i < genres.size(); i++){
+            genreIds[i] = String.valueOf(genres.get(i).getId());
+        }
+        return genreIds;
+    }
 }

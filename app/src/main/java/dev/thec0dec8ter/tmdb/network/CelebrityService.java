@@ -1,6 +1,8 @@
 package dev.thec0dec8ter.tmdb.network;
 
 import dev.thec0dec8ter.tmdb.models.Celebrity;
+import dev.thec0dec8ter.tmdb.models.Movie;
+import dev.thec0dec8ter.tmdb.models.TvShow;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -15,10 +17,10 @@ public interface CelebrityService {
     Call<Celebrity> getCelebDetails(@Path("person_id")String personId, @Query("api_key") String apiKey);
 
     @GET("person/{person_id}/movie_credits")
-    Call<Celebrity> getMovieCredits(@Path("person_id")String personId, @Query("api_key") String apiKey);
+    Call<Movie> getMovieCredits(@Path("person_id")String personId, @Query("api_key") String apiKey);
 
     @GET("person/{person_id}/tv_credits")
-    Call<Celebrity> getTvCredits(@Path("person_id")String personId, @Query("api_key") String apiKey);
+    Call<TvShow> getTvCredits(@Path("person_id")String personId, @Query("api_key") String apiKey);
 
     @GET("person/{person_id}/tagged_images")
     Call<Celebrity> getTaggedImages(@Path("person_id")String personId, @Query("api_key") String apiKey);

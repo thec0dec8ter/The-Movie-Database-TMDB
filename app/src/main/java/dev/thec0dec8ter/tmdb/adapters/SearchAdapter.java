@@ -21,6 +21,7 @@ import dev.thec0dec8ter.tmdb.CelebDetailActivity;
 import dev.thec0dec8ter.tmdb.DetailActivity;
 import dev.thec0dec8ter.tmdb.R;
 import dev.thec0dec8ter.tmdb.models.Search;
+import dev.thec0dec8ter.tmdb.ui.main.HomeFragment;
 
 import static dev.thec0dec8ter.tmdb.network.RetrofitClientInstance.IMAGE_BASE_URL;
 
@@ -51,6 +52,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Searchview
         TextView title;
         TextView release_info;
         TextView mediaType;
+        TextView genres;
         TextView ratingCount;
         TextView synopsis;
 
@@ -61,6 +63,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Searchview
             title = itemView.findViewById(R.id.title);
             release_info = itemView.findViewById(R.id.release_info);
             mediaType = itemView.findViewById(R.id.media_type);
+            genres = itemView.findViewById(R.id.genres);
             synopsis = itemView.findViewById(R.id.synopsis);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +94,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Searchview
                     .fit()
                     .into(poster);
             title.setTag(search.getId());
-
             switch (search.getMedia_type()) {
                 case "movie": {
                     title.setText(search.getTitle());
@@ -100,6 +102,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Searchview
                     synopsis.setText(search.getOverview());
                     int ratePercent = Math.round(search.getVote_average()) * 10;
                     ratingCount.setText(String.valueOf(ratePercent));
+                    String firstGenre = HomeFragment.movieGenreAdapter.getGenreById(search.getGenreIds()[0]).getName();
+                    String secondGenre = HomeFragment.movieGenreAdapter.getGenreById(search.getGenreIds()[1]).getName();
+                    genres.setText(firstGenre + " | " + secondGenre);
                     break;
                 }
                 case "tv": {
@@ -109,6 +114,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Searchview
                     synopsis.setText(search.getOverview());
                     int ratePercent = Math.round(search.getVote_average()) * 10;
                     ratingCount.setText(String.valueOf(ratePercent));
+                    String firstGenre = HomeFragment.tvGenreAdapter.getGenreById(search.getGenreIds()[0]).getName();
+                    String secondGenre = HomeFragment.tvGenreAdapter.getGenreById(search.getGenreIds()[1]).getName();
+                    genres.setText(firstGenre + " | " + secondGenre);
                     break;
                 }
                 case "person": {

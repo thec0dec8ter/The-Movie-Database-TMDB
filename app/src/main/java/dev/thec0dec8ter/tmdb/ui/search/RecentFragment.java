@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+
 import dev.thec0dec8ter.tmdb.R;
 import dev.thec0dec8ter.tmdb.adapters.SearchAdapter;
 import dev.thec0dec8ter.tmdb.models.Search;
@@ -49,12 +51,6 @@ public class RecentFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        searchRecycler.setAdapter(searchAdapter);
-    }
-
-    @Override
     public void onSaveInstanceState(@NonNull @NotNull Bundle outState) {
         super.onSaveInstanceState(outState);
     }
@@ -67,11 +63,12 @@ public class RecentFragment extends Fragment {
             if(getArguments().getString("query") != null){
                 String query = getArguments().getString("query");
                 performSearch(query);
-            }else if(getArguments().getString("discover") != null){
-                String baseUrl = getArguments().getString("discover");
-                discoverShows(baseUrl);
+            }else if(getArguments().getSerializable("discover_movie") != null){
+                discoverMovies((HashMap<String, String>) getArguments().getSerializable("discover_movie"));
+            }else if(getArguments().getSerializable("discover_tv") != null){
+                discoverTvShows((HashMap<String, String>) getArguments().getSerializable("discover_tv"));
             }
-
+            searchRecycler.setAdapter(searchAdapter);
         }
     }
 
@@ -82,6 +79,7 @@ public class RecentFragment extends Fragment {
             @Override
             public void onResponse(Call<Search> call, Response<Search> response) {
                 searchAdapter.clearResults();
+
                 searchAdapter.addResults(response.body().getResults());
             }
 
@@ -92,29 +90,43 @@ public class RecentFragment extends Fragment {
         });
     }
 
-    public void discoverShows(String baseUrl){
-        String type = "movie";
-        if(baseUrl.contains("tv")){
-           type = "tv";
-        }
-        SearchService searchService = RetrofitClientInstance.getRetrofitInstance().create(SearchService.class);
-        Call<Search> call = searchService.discoverShows(baseUrl);
-        String finalType = type;
-        call.enqueue(new Callback<Search>() {
+    private void discoverMovies(HashMap<String, String> optionalParams){
+        SearchService movieService = RetrofitClientInstance.getRetrofitInstance().create(SearchService.class);
+        Call<Search> movieCall = movieService.discoverMovies(KEY, "1", optionalParams);
+        movieCall.enqueue(new Callback<Search>() {
             @Override
             public void onResponse(Call<Search> call, Response<Search> response) {
                 searchAdapter.clearResults();
-                for(Search search:response.body().getResults()){
-                    search.setMedia_type(finalType);
-                    searchAdapter.addResult(search);
+                for(Search searchResult: response.body().getResults()){
+                    searchResult.setMedia_type("movie");
+                    searchAdapter.addResult(searchResult);
                 }
             }
 
             @Override
             public void onFailure(Call<Search> call, Throwable t) {
-                Log.e("KKK" , t.getMessage());
+
             }
         });
     }
 
+    private void discoverTvShows(HashMap<String, String> optionalParams){
+        SearchService tvShowService = RetrofitClientInstance.getRetrofitInstance().create(SearchService.class);
+        Call<Search> tvCall = tvShowService.discoverTvShows(KEY, "1", optionalParams);
+        tvCall.enqueue(new Callback<Search>() {
+            @Override
+            public void onResponse(Call<Search> call, Response<Search> response) {
+                searchAdapter.clearResults();
+                for(Search searchResult: response.body().getResults()){
+                    searchResult.setMedia_type("tv");
+                    searchAdapter.addResult(searchResult);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Search> call, Throwable t) {
+
+            }
+        });
+    }
 }

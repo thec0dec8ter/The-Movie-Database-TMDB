@@ -93,12 +93,16 @@ public class TvShow {
 
     @SerializedName("genres")
     @Expose
-    private ArrayList<Genre> genres;
+    private ArrayList<Genre> genres = new ArrayList<>();
     @SerializedName("seasons")
     @Expose
-    private ArrayList<TvShow> seasons;
+    private ArrayList<TvShow> seasons = new ArrayList<>();
 
 
+
+    @SerializedName("cast")
+    @Expose
+    private ArrayList<TvShow> casts;
 
     @SerializedName("page")
     @Expose
@@ -352,6 +356,14 @@ public class TvShow {
 
     public void setGenres(ArrayList<Genre> genres) {
         this.genres = genres;
+    }
+
+    public ArrayList<TvShow> getCasts() {
+        return casts;
+    }
+
+    public void setCasts(ArrayList<TvShow> casts) {
+        this.casts = casts;
     }
 
     public static class SortByYear implements Comparator<TvShow> {

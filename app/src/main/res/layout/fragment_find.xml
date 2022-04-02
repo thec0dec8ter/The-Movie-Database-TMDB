@@ -65,7 +65,7 @@
                     android:textSize="18sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"/>
+                    android:layout_margin="8dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/runtime_recycler"
@@ -87,7 +87,7 @@
                     android:textSize="18sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"/>
+                    android:layout_margin="8dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/tmdb_rating_recycler"
@@ -109,7 +109,7 @@
                     android:textSize="18sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"/>
+                    android:layout_margin="8dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/genre_recycler"
@@ -131,7 +131,7 @@
                     android:textSize="18sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"/>
+                    android:layout_margin="8dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/year_recycler"
@@ -153,7 +153,7 @@
                     android:textSize="18sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"/>
+                    android:layout_margin="8dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/vote_recycler"
@@ -175,7 +175,7 @@
                     android:textSize="18sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"/>
+                    android:layout_margin="8dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/language_recycler"

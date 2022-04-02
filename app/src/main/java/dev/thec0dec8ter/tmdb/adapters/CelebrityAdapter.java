@@ -27,7 +27,7 @@ public class CelebrityAdapter extends RecyclerView.Adapter<CelebrityAdapter.Cele
     @NonNull
     @Override
     public CelebrityViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_show, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_celebrity, parent, false);
         return new CelebrityViewHolder(view);
     }
 
