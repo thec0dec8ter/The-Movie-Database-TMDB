@@ -43,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
-        getFragmentManager()
+        getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.view_pager, new SeeAllFragment())
+                .add(R.id.biography, new SeeAllFragment())
                 .commit();
 
         tabLayout = findViewById(R.id.tab_layout);
