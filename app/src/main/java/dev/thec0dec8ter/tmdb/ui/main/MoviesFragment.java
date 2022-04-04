@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import dev.thec0dec8ter.tmdb.BuildConfig;
 import dev.thec0dec8ter.tmdb.R;
+import dev.thec0dec8ter.tmdb.SeeAllFragment;
 import dev.thec0dec8ter.tmdb.adapters.GenreAdapter;
 import dev.thec0dec8ter.tmdb.adapters.ShowAdapter;
 import dev.thec0dec8ter.tmdb.custom_views.CustomButton;
@@ -84,6 +85,38 @@ public class MoviesFragment extends Fragment {
         genreRecycler.setAdapter(genreAdapter);
         popularMoviesRecycler.setAdapter(popularMoviesAdapter);
         upcomingRecycler.setAdapter(upcomingAdapter);
+
+        seeAllTopRated.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.fragment_see_all, new SeeAllFragment())
+                        .commit();
+            }
+        });
+
+        seeAllGenres.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.fragment_see_all, new SeeAllFragment())
+                        .commit();
+            }
+        });
+
+        seeAllPopular.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.fragment_see_all, new SeeAllFragment())
+                        .commit();
+            }
+        });
+
+
     }
 
     private void getTopRatedMovies(String page){

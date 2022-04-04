@@ -4,7 +4,6 @@ import java.util.Map;
 
 import dev.thec0dec8ter.tmdb.models.Search;
 import retrofit2.Call;
-import retrofit2.http.FieldMap;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;

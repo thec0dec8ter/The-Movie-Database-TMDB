@@ -1,5 +1,7 @@
 package dev.thec0dec8ter.tmdb.adapters;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +11,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import dev.thec0dec8ter.tmdb.R;
+import dev.thec0dec8ter.tmdb.SearchActivity;
 import dev.thec0dec8ter.tmdb.models.Genre;
 
 public class GenreAdapter extends RecyclerView.Adapter<GenreAdapter.GenreViewHolder> {
 
+    public final String type;
     public final ArrayList<Genre> genres = new ArrayList<>();
+
+    public GenreAdapter(String type){
+        this.type = type;
+    }
 
     @NonNull
     @Override
@@ -44,9 +53,29 @@ public class GenreAdapter extends RecyclerView.Adapter<GenreAdapter.GenreViewHol
         public GenreViewHolder(@NonNull View itemView) {
             super(itemView);
             genreName = itemView.findViewById(R.id.genre_name);
+
+            genreName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    HashMap<String, String> queryMap = new HashMap<>();
+                    queryMap.put("with_genres", String.valueOf(genreName.getTag()));
+
+                    Bundle args = new Bundle();
+                    Intent intent = new Intent(v.getContext(), SearchActivity.class);
+                    if(type.equalsIgnoreCase("movie")){
+                        args.putSerializable("discover_movie", queryMap);
+                    }else{
+                        args.putSerializable("discover_tv", queryMap);
+                    }
+
+                    intent.putExtras(args);
+                    v.getContext().startActivity(intent);
+                }
+            });
         }
 
         public  void bind(int pos){
+            genreName.setTag(genres.get(pos).getId());
             genreName.setText(genres.get(pos).getName());
         }
     }

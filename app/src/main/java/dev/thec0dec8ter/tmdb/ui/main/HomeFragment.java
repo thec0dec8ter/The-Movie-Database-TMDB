@@ -64,8 +64,8 @@ public class HomeFragment extends Fragment{
         trendingShowAdapter = new ShowAdapter();
         nowPlayingMovie = new ShowAdapter();
 
-        movieGenreAdapter = new GenreAdapter();
-        tvGenreAdapter = new GenreAdapter();
+        movieGenreAdapter = new GenreAdapter("movie");
+        tvGenreAdapter = new GenreAdapter("tv");
 
     }
 

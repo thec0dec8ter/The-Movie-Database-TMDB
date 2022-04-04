@@ -43,6 +43,11 @@ public class SearchActivity extends AppCompatActivity {
         viewPager.setAdapter(searchPagerAdapter);
         viewPager.setUserInputEnabled(false);
 
+        if(getIntent() != null){
+            searchPagerAdapter.getCurrentFragment(0).setArguments(getIntent().getExtras());
+            searchPagerAdapter.getCurrentFragment(0).onResume();
+        }
+
         arrowBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,7 +84,6 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
         mediator.attach();
-
     }
 
 }

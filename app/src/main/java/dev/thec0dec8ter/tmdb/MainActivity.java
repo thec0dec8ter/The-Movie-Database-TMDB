@@ -14,15 +14,10 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import dev.thec0dec8ter.tmdb.adapters.ViewPagerAdapter;
-import dev.thec0dec8ter.tmdb.ui.main.HomeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    //TODO: Implement disable "See All" button
-    //TODO: Create see All fragment
     //TODO: Add progress bar to search fragment
-    //TODO: Add icons to settings
     //TODO; Make genres clickable
     //TODO: change app icon
 
@@ -43,10 +38,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.biography, new SeeAllFragment())
-                .commit();
 
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);

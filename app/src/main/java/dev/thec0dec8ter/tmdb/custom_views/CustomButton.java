@@ -41,9 +41,5 @@ public class CustomButton extends FrameLayout {
     private void initViews(Context context){
         buttonView = LayoutInflater.from(context).inflate(R.layout.custom_button, this, false);
         this.addView(buttonView);
-//        leftTrack = switchView.findViewById(R.id.left_track);
-//        rightTrack = switchView.findViewById(R.id.right_track);
-//        thumbText = switchView.findViewById(R.id.thumb_text);
-//        thumb = switchView.findViewById(R.id.thumb);
     }
 }
