@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import dev.thec0dec8ter.tmdb.BuildConfig;
 import dev.thec0dec8ter.tmdb.R;
+import dev.thec0dec8ter.tmdb.SeeAllFragment;
 import dev.thec0dec8ter.tmdb.adapters.GenreAdapter;
 import dev.thec0dec8ter.tmdb.adapters.ShowAdapter;
 import dev.thec0dec8ter.tmdb.custom_views.CustomButton;
@@ -28,8 +29,6 @@ import retrofit2.Response;
 
 public class TvShowsFragment extends Fragment {
 
-    private Call<TvShow> call;
-
     private CustomButton seeAllTopRated;
     private RecyclerView topRatedRecycler;
     private CustomButton seeAllGenres;
@@ -42,7 +41,7 @@ public class TvShowsFragment extends Fragment {
     private ShowAdapter popularTvShowsAdapter;
 
     private TvService tvService;
-
+    private Call<TvShow> call;
 
     public TvShowsFragment() {
         // Required empty public constructor
@@ -80,6 +79,36 @@ public class TvShowsFragment extends Fragment {
         topRatedRecycler.setAdapter(topRatedAdapter);
         genreRecycler.setAdapter(genreAdapter);
         popularTvShowsRecycler.setAdapter(popularTvShowsAdapter);
+
+        seeAllTopRated.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.activity_main, new SeeAllFragment("Top rated Tv Shows", topRatedAdapter))
+                        .commit();
+            }
+        });
+
+        seeAllGenres.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.activity_main, new SeeAllFragment("Popular Genres", genreAdapter))
+                        .commit();
+            }
+        });
+
+        seeAllPopular.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.activity_main, new SeeAllFragment("Popular Tv Shows", popularTvShowsAdapter))
+                        .commit();
+            }
+        });
 
     }
 

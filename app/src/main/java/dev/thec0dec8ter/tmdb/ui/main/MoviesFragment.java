@@ -91,7 +91,7 @@ public class MoviesFragment extends Fragment {
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
-                        .add(R.id.fragment_see_all, new SeeAllFragment())
+                        .add(R.id.activity_main, new SeeAllFragment("Top rated movies", topRatedAdapter))
                         .commit();
             }
         });
@@ -101,7 +101,7 @@ public class MoviesFragment extends Fragment {
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
-                        .add(R.id.fragment_see_all, new SeeAllFragment())
+                        .add(R.id.activity_main, new SeeAllFragment("Popular Genres", genreAdapter))
                         .commit();
             }
         });
@@ -111,7 +111,7 @@ public class MoviesFragment extends Fragment {
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
-                        .add(R.id.fragment_see_all, new SeeAllFragment())
+                        .add(R.id.activity_main, new SeeAllFragment("Popular Movies", popularMoviesAdapter))
                         .commit();
             }
         });

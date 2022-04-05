@@ -120,6 +120,7 @@
                     android:padding="5dp" />
 
                 <dev.thec0dec8ter.tmdb.custom_views.CustomButton
+                    android:id="@+id/see_all_popular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 

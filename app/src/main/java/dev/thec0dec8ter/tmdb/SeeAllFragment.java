@@ -61,10 +61,17 @@ public class SeeAllFragment extends Fragment {
         imgArrowBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .remove(SeeAllFragment.this);
+                closeFragment();
             }
         });
     }
+
+    public void closeFragment(){
+        getActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .remove(SeeAllFragment.this)
+                .commit();
+    }
+
 }
